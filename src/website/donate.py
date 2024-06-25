@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, flash
+from . import db 
 
 donate = Blueprint('donate', __name__)
 
