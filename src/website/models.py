@@ -9,7 +9,7 @@ class RawData(db.Model):
     # the submission id
     id = db.Column(db.Integer, primary_key=True)
     # should this be the donated data as zip?
-    donation = db.Column(db.Blob, nullable=False)
+    donation = db.Column(db.String(10000), nullable=False)
     # the hash checksum of the donation zip file, for example SHA-256
     # could also be SHA-3
     # Compute SHA-256 hash
@@ -31,7 +31,7 @@ class RawData(db.Model):
     # the type of emails: formal, informal, etc. as categories
     email_type = db.Column(db.Integer, nullable=True)
     # set up the relationship with the processed data
-    emails = db.relationship("ProcessedData")
+    # emails = db.relationship("ProcessedData")
 
 
 class ProcessedData(db.Model):
@@ -46,4 +46,4 @@ class ProcessedData(db.Model):
     # the language of the email
     language = db.Column(db.String(10), nullable=False)
     # the original donation id, one to many relationship
-    donation_id = db.Column(db.Integer, db.ForeignKey("rawdata.id"), nullable=False)
+    # donation_id = db.Column(db.Integer, db.ForeignKey("rawdata.id"), nullable=False)
