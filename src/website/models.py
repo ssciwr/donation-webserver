@@ -1,20 +1,29 @@
-from . import db
 from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase
-from sqlalchemy import Integer, String, DateTime, ForeignKey
+from sqlalchemy import Integer, String, DateTime, ForeignKey, Table, Column
+
 # import hashlib
 from sqlalchemy.sql import func
 import datetime
 from typing import List
 
+
 class Base(DeclarativeBase):
     pass
+
+
+donation_donor = Table(
+    "donation_donor",
+    Base.metadata,
+    Column("donor_id", Integer, ForeignKey("rawdata.donor_id")),
+    Column("donation_id", Integer, ForeignKey("processeddata.id")),
+)
 
 
 # the raw data model
 class RawData(Base):
     __tablename__ = "rawdata"
     # the submission id
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    donor_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     # should this be the donated data as zip?
     donation: Mapped[str] = mapped_column(String, nullable=False)
     # the hash checksum of the donation zip file, for example SHA-256
@@ -24,8 +33,9 @@ class RawData(Base):
     checksum: Mapped[str] = mapped_column(String, nullable=False)
     # Now the metadata
     # the date of the donation
-    date: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=True), 
-                                                    server_default=func.now(), nullable=False)
+    date: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
     # the email of the donor
     email: Mapped[str] = mapped_column(String, nullable=True)
     # the age group of the donor in categories
@@ -52,8 +62,12 @@ class ProcessedData(Base):
     # the processed pseudonymized email text
     processed_email: Mapped[str] = mapped_column(String, nullable=False)
     # the date of the processing
-    date: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=True), default=func.now(), nullable=False)
+    date: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), default=func.now(), nullable=False
+    )
     # the language of the email
     language: Mapped[str] = mapped_column(String, nullable=False)
     # the original donation id, one to many relationship
-    donation_id: Mapped[int] = mapped_column(ForeignKey("rawdata.id"), nullable=True)
+    donation_id: Mapped[int] = mapped_column(
+        ForeignKey("rawdata.donor_id"), nullable=True
+    )
