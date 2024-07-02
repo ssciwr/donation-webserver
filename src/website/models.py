@@ -37,8 +37,6 @@ class RawData(db.Model):
     # the type of emails: formal, informal, etc. as categories
     email_type: Mapped[int] = mapped_column(Integer, nullable=True)
     # set up the relationship with the processed data
-    # emails: Mapped[int] = relationship("ProcessedData", backref="RawData", lazy=True)
-    # emails: Mapped[List["ProcessedData"]] = relationship()
     children: Mapped[List["ProcessedData"]] = relationship()
 
 
@@ -57,8 +55,3 @@ class ProcessedData(db.Model):
     language: Mapped[str] = mapped_column(String, nullable=False)
     # the original donation id, one to many relationship
     donation_id: Mapped[int] = mapped_column(ForeignKey("raw_data.donor_id"))
-
-
-#     donation_id: Mapped[int] = mapped_column(
-#         ForeignKey("rawdata.donor_id"), nullable=True
-#     )
