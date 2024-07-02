@@ -9,7 +9,6 @@ from . import db
 
 # the raw data model
 class RawData(db.Model):
-    # __tablename__ = "raw_data"
     # the submission id
     donor_id: Mapped[int] = mapped_column(primary_key=True)
     # should this be the donated data as zip?
@@ -41,21 +40,20 @@ class RawData(db.Model):
     # emails: Mapped[List["ProcessedData"]] = relationship()
 
 
-# class ProcessedData(Base):
-#     __tablename__ = "processeddata"
-#     # the submission id
-#     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-#     # the raw email text
-#     raw_email: Mapped[str] = mapped_column(String, nullable=False)
-#     # the processed pseudonymized email text
-#     processed_email: Mapped[str] = mapped_column(String, nullable=False)
-#     # the date of the processing
-#     date: Mapped[datetime.datetime] = mapped_column(
-#         DateTime(timezone=True), default=func.now(), nullable=False
-#     )
-#     # the language of the email
-#     language: Mapped[str] = mapped_column(String, nullable=False)
-#     # the original donation id, one to many relationship
+class ProcessedData(db.Model):
+     # the submission id
+     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+     # the raw email text
+     raw_email: Mapped[str] = mapped_column(String, nullable=False)
+     # the processed pseudonymized email text
+     processed_email: Mapped[str] = mapped_column(String, nullable=False)
+     # the date of the processing
+     date: Mapped[datetime.datetime] = mapped_column(
+         DateTime(timezone=True), default=func.now(), nullable=False
+     )
+     # the language of the email
+     language: Mapped[str] = mapped_column(String, nullable=False)
+     # the original donation id, one to many relationship
 #     donation_id: Mapped[int] = mapped_column(
 #         ForeignKey("rawdata.donor_id"), nullable=True
 #     )
