@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase
-from sqlalchemy import Integer, String, DateTime, ForeignKey, Table, Column
+from sqlalchemy import Integer, String, DateTime, ForeignKey
 
 # import hashlib
 from sqlalchemy.sql import func
@@ -11,19 +11,11 @@ class Base(DeclarativeBase):
     pass
 
 
-donation_donor = Table(
-    "donation_donor",
-    Base.metadata,
-    Column("donor_id", Integer, ForeignKey("rawdata.donor_id")),
-    Column("donation_id", Integer, ForeignKey("processeddata.id")),
-)
-
-
 # the raw data model
 class RawData(Base):
     __tablename__ = "rawdata"
     # the submission id
-    donor_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    donor_id: Mapped[int] = mapped_column(primary_key=True)
     # should this be the donated data as zip?
     donation: Mapped[str] = mapped_column(String, nullable=False)
     # the hash checksum of the donation zip file, for example SHA-256
@@ -50,24 +42,24 @@ class RawData(Base):
     email_type: Mapped[int] = mapped_column(Integer, nullable=True)
     # set up the relationship with the processed data
     # emails: Mapped[int] = relationship("ProcessedData", backref="RawData", lazy=True)
-    emails: Mapped[List["ProcessedData"]] = relationship()
+    # emails: Mapped[List["ProcessedData"]] = relationship()
 
 
-class ProcessedData(Base):
-    __tablename__ = "processeddata"
-    # the submission id
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    # the raw email text
-    raw_email: Mapped[str] = mapped_column(String, nullable=False)
-    # the processed pseudonymized email text
-    processed_email: Mapped[str] = mapped_column(String, nullable=False)
-    # the date of the processing
-    date: Mapped[datetime.datetime] = mapped_column(
-        DateTime(timezone=True), default=func.now(), nullable=False
-    )
-    # the language of the email
-    language: Mapped[str] = mapped_column(String, nullable=False)
-    # the original donation id, one to many relationship
-    donation_id: Mapped[int] = mapped_column(
-        ForeignKey("rawdata.donor_id"), nullable=True
-    )
+# class ProcessedData(Base):
+#     __tablename__ = "processeddata"
+#     # the submission id
+#     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+#     # the raw email text
+#     raw_email: Mapped[str] = mapped_column(String, nullable=False)
+#     # the processed pseudonymized email text
+#     processed_email: Mapped[str] = mapped_column(String, nullable=False)
+#     # the date of the processing
+#     date: Mapped[datetime.datetime] = mapped_column(
+#         DateTime(timezone=True), default=func.now(), nullable=False
+#     )
+#     # the language of the email
+#     language: Mapped[str] = mapped_column(String, nullable=False)
+#     # the original donation id, one to many relationship
+#     donation_id: Mapped[int] = mapped_column(
+#         ForeignKey("rawdata.donor_id"), nullable=True
+#     )
