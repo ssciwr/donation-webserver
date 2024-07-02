@@ -19,7 +19,7 @@ def donation():
             # at the moment we are generating the hash checksum for the raw text
             new_submission = RawData(
                 donation=text,
-                checksum=generate_password_hash(text, method="pbkdf2:sha256"),
+                # checksum=generate_password_hash(text, method="pbkdf2:sha256"),
             )
             # add to db
             db.session.add(new_submission)

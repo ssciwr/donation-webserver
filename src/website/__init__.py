@@ -1,22 +1,22 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import DeclarativeBase
 from os import path
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session, declarative_base
 
-db = SQLAlchemy()
-DB_NAME = "email-donations.db"
-engine = create_engine("sqlite:///{DB_NAME}", echo=True))
-db_session = scoped_session(sessionmaker(autocommit=False,
-                                         autoflush=False,
-                                         bind=engine))
+DB_NAME = "email_donations.db"
 
-Base = declarative_base()
-Base.query = db_session.query_property()
+
+class Base(DeclarativeBase):
+    pass
+
+
+db = SQLAlchemy(model_class=Base)
+
 
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "wrgeerngh npitgn rion"
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
     db.init_app(app)
 
     from .views import views
@@ -27,10 +27,15 @@ def create_app():
     app.register_blueprint(donate, url_prefix="/")
     app.register_blueprint(about, url_prefix="/")
 
+    from .models import RawData
 
-    def init_db():
-        from .models import RawData
-        Base.metadata.create_all(bind=engine)
+    with app.app_context():
+        db.create_all()
 
-    init_db()
     return app
+
+
+def create_database(app):
+    if not path.exists("website/" + DB_NAME):
+        db.create_all(app=app)
+        print("Created Database!")
