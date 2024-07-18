@@ -31,7 +31,7 @@ jobs:
       env:
         FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
       run: |
-        cd src
+        cd src/app
         python -m pytest -svv --cov=. --cov-report=xml
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v4

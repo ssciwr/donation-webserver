@@ -28,7 +28,7 @@ def create_app():
     app.register_blueprint(donate, url_prefix="/")
     app.register_blueprint(about, url_prefix="/")
 
-    from .models import RawData
+    from .models import RawData  # noqa
 
     with app.app_context():
         db.create_all()
