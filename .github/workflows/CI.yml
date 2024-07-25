@@ -38,6 +38,7 @@ jobs:
         python -m pip install -r requirements.txt
     - name: run base tests
       env:
+        MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
         FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
       run: |
         cd src/app
