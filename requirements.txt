@@ -1,6 +1,7 @@
 flask
 flask-sqlalchemy
 sqlalchemy
+mysqlclient
 gunicorn
 pytest
 pytest-cov
