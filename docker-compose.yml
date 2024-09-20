@@ -19,6 +19,7 @@ services:
     restart: always
     env_file:
       - db.env
+    command: --pid-file /var/lib/mysql/mysqld.pid
     ports:
       - '3306:3306'
     expose:

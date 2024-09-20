@@ -19,7 +19,6 @@ def create_app():
     # reads the key from FLASK_SECRET_KEY env var
     # app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://donor:{PASSWD}@localhost/{DB_NAME}'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://donor:{PASSWD}@127.0.0.1/{DB_NAME}'
-    print(app.config)
     db.init_app(app)
 
     from .views import views
