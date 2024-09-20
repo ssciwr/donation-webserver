@@ -1,6 +1,9 @@
 flask
 flask-sqlalchemy
 sqlalchemy
+sqlalchemy-utils
+cryptography
+mysqlclient
 gunicorn
 pytest
 pytest-cov

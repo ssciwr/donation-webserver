@@ -23,12 +23,22 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Shutdown Ubuntu MySQL (SUDO)
+      run: sudo service mysql stop
+    - name: set up mysql
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql version: '9.0.1'
+        mysql database: 'email_donations'
+        mysql user: 'donor'
+        mysql password: ${{ secrets.MYSQL_PASSWORD }} 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
     - name: run base tests
       env:
+        MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
         FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
       run: |
         cd src/app
