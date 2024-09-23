@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 import os
@@ -21,16 +21,8 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://donor:{PASSWD}@127.0.0.1/{DB_NAME}'
     db.init_app(app)
 
-    from .views import views
-    from .donate import donate
-    from .about import about
-
-    app.register_blueprint(views, url_prefix="/")
-    app.register_blueprint(donate, url_prefix="/")
-    app.register_blueprint(about, url_prefix="/")
-
     from .models import RawData  # noqa
-
+    
     with app.app_context():
         db.create_all()
 
