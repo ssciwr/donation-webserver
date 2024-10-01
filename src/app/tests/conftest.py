@@ -1,5 +1,5 @@
 import pytest
-from website import create_app
+from backend import create_app
 
 
 @pytest.fixture()
