@@ -25,9 +25,4 @@ def create_app():
         db.create_all()
 
 
-    @app.route("/")
-    def home():
-        return "Hello, world!"
-
-
     return app
