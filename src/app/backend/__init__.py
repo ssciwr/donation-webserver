@@ -20,11 +20,14 @@ def create_app():
     # app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://donor:{PASSWD}@localhost/{DB_NAME}'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://donor:{PASSWD}@127.0.0.1/{DB_NAME}'
     db.init_app(app)
-
-    from .models import RawData  # noqa
     
     with app.app_context():
         db.create_all()
 
-    return app
 
+    @app.route("/")
+    def home():
+        return "Hello, world!"
+
+
+    return app
