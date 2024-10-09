@@ -1,0 +1,11 @@
+body {
+    background-image: url("background.png");
+    background-size: contain;
+   }
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #065f46;
+}
