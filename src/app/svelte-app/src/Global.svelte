@@ -2,9 +2,9 @@
 
 <style>
     :global(h3) {
-        color: #505f06;
+        color: #ffffff;
     }
     :global(legend) {
-        color: #5e065f;
+        color: #ffffff;
     }
 </style>

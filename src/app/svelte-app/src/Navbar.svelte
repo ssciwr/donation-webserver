@@ -1,5 +1,7 @@
 <script>
     import { Navbar, NavBrand, NavHamburger, NavUl, NavLi } from 'flowbite-svelte';
+    import Home from "./routes/Home.svelte";
+    import Impressum from "./routes/Impressum.svelte";
 </script>
 
 <Navbar>
@@ -9,12 +11,8 @@
     </NavBrand>
     <NavHamburger />
     <NavUl >
-        fluid=true
-    
       <NavLi href="/">Home</NavLi>
-      <NavLi href="/about">About</NavLi>
-      <NavLi href="/donate">Donate</NavLi>
-      <NavLi href="/src/routes/Impressum">Impressum</NavLi>
+      <NavLi href="/routes/impressum">Impressum</NavLi>
     </NavUl>
   </Navbar>
 
