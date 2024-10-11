@@ -1,12 +1,8 @@
-Impressum
 <script>
-	import Navbar from '../Navbar.svelte';
-	import './global.css';
 </script>
 
-<Navbar />
-
 <main>
+	<h1>Impressum</h1>
 	<p>Prof. Dr. Sybille Grosse, Laura Gaertner
         Romanisches Seminar, Universität Heidelberg, Seminarstraße 3, 69117 Heidelberg</p>
 </main>
