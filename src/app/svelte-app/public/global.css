@@ -1,6 +1,6 @@
 body {
     background-image: url("background.png");
-    background-size: contain;
+    background-size: auto;
     color: #ffffff;
     margin: 0;
 	padding: 8px;
