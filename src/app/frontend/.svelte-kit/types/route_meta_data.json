@@ -1,0 +1,26 @@
+{
+	"/": [
+		"src/routes/+layout.js",
+		"src/routes/+layout.js"
+	],
+	"/about": [
+		"src/routes/+layout.js"
+	],
+	"/blog": [
+		"src/routes/+layout.js"
+	],
+	"/contact": [
+		"src/routes/contact/+page.server.ts",
+		"src/routes/+layout.js"
+	],
+	"/donation": [
+		"src/routes/+layout.js"
+	],
+	"/impressum": [
+		"src/routes/+layout.js"
+	],
+	"/test": [
+		"src/routes/test/+page.server.ts",
+		"src/routes/+layout.js"
+	]
+}

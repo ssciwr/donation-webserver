@@ -3,25 +3,27 @@
   import { Navbar, NavBrand, NavLi, NavUl, NavHamburger,  Footer, FooterBrand, FooterCopyright, FooterLinkGroup, FooterLink, Hr } from 'flowbite-svelte'
 </script>
 
-<Navbar let:hidden let:toggle>
+<Navbar>
   <NavBrand href="/">
     <img
       src="/images/logo.png"
-      class="mr-3 h-8 sm:h-9"
+      class="max-w-md h-14"
       alt="Mailcom Logo"
     />
     <span class="self-center whitespace-nowrap text-xl dark:text-white">
       Mailcom
     </span>
   </NavBrand>
-  <NavHamburger on:click={toggle} />
-  <NavUl {hidden}>
-    <NavLi href="/" active={true}>Home</NavLi>
+  <NavHamburger/>
+  <NavUl>
+    <NavLi href="/">Home</NavLi>
     <NavLi href="/blog">Blog</NavLi>
     <NavLi href="/about">About</NavLi>
-    <NavLi href="/about">About</NavLi>
+    <NavLi href="/donation">Donation</NavLi>
+    <NavLi href="/test">Test</NavLi>
   </NavUl>
 </Navbar>
+
 <main class='p-8 h-auto'>
   <slot />
 </main>

@@ -1,9 +1,10 @@
+// @ts-nocheck
 import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 
-export const actions: Actions = {
-	default: async ({ request }) => {
+export const actions = {
+	default: async ({ request }: import('./$types').RequestEvent) => {
 		const form = await request.formData();
 		const email = form.get('email');
 		const message = form.get('message');
@@ -27,3 +28,4 @@ export const actions: Actions = {
 	}
 };
 
+;null as any as Actions;
