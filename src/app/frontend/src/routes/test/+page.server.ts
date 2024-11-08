@@ -1,5 +1,5 @@
 import type { Actions } from './$types';
-
+export const prerender = false;
 export const actions = {
     default: async (event) => {
         try {

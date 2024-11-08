@@ -5,10 +5,10 @@
 
 <Heading tag="h1" customSize="text-5xl">Mailcom project website</Heading>
 
-<ImagePlaceholder class='my-4'/>
-<Button on:click={() => defaultModal = true} class='mb-4'>Default modal</Button>
+<ImagePlaceholder divClass='my-4'/>
+<Button color="primary" on:click={() => defaultModal = true} class='mb-4'>Default modal</Button>
 
-<TextPlaceholder class='pb-8' size='xxl'/>
+<TextPlaceholder divClass='pb-8' size='xxl'/>
 
 
 <Modal title="Terms of Service" bind:open={defaultModal} autoclose>

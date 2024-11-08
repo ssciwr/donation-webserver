@@ -43,6 +43,6 @@
       <FooterLink href="/impressum">Impressum</FooterLink>
     </FooterLinkGroup>
   </div>
-  <Hr class="my-6" height="h-px" />
+  <Hr class="my-6" />
   <FooterCopyright href="/" by="UHEI™" />
 </Footer>

@@ -28,9 +28,8 @@
 
 <form method="POST" action="?/contact">
 	{#if form?.missing}<p class="error">The email field is required</p>{/if}
-	{#if form?.incorrect}<p class="error">Invalid credentials!</p>{/if}
 	<Label for="email" class="block mb-2">Your email address</Label>
-	<Input id="email" type="email" maxLength="15" placeholder="xxx@xxx.xxx" required bind:value={email}/>
+	<Input id="email" type="email" placeholder="xxx@xxx.xxx" required bind:value={email}/>
 	<Label for="message" class="block mb-2">Your message</Label>
 	<Input id="message" type="text" placeholder="Your message" required bind:value={message}/>
 	<Button on:click={() => defaultModal = true} class='mb-4'>Send</Button>
