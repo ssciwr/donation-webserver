@@ -1,37 +1,33 @@
 <script lang="ts">
-	import { Heading, Button, Modal, Label, Input} from 'flowbite-svelte'
+	import { Button, Modal, Label, Input} from 'flowbite-svelte'
+  import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
 
-	export let form : ActionData;
-	export let defaultModal = false;
-	export let email = '';
-	export let message = '';
-	$: console.log(email, message);
+	let { form }: { form: ActionData } = $props();
+  let defaultModal: boolean = $state(false);
 </script>
 
-
-<Modal title="Your message" bind:open={defaultModal} autoclose>
-  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-    Your email address: {email}
-  </p>
-  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-   Your message: {message}
-  </p>
-  <svelte:fragment slot='footer'>
-    <Button on:click={() => alert('Your message has been sent')}>Send message</Button>
-    <Button color="alternative">Cancel</Button>
-  </svelte:fragment>
+<Modal title="Your message has been sent." bind:open={defaultModal} autoclose={true}>
+  {#if form?.success}
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Your email address: {form.email}
+    </p>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+     Your message: {form.message}
+    </p>
+    <Button>Ok</Button>
+  {:else}
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      There was an error sending your message.
+    </p>
+    <Button type="button" color="alternative" on:click={() => defaultModal = false}>Cancel</Button>
+  {/if}
 </Modal>
 
-<main>
-<Heading tag="h1" customSize="text-5xl">Contact</Heading>
-
-<form method="POST" action="?/contact">
-	{#if form?.missing}<p class="error">The email field is required</p>{/if}
-	<Label for="email" class="block mb-2">Your email address</Label>
-	<Input id="email" type="email" placeholder="xxx@xxx.xxx" required bind:value={email}/>
+<form method="POST" action="?/contact" class="flex flex-col space-y-6" use:enhance>
+  <Label for="email" class="block mb-2">Your email address</Label>
+	<Input id="email" type="email" placeholder="xx@xxxx.xxx" name="email" required/>
 	<Label for="message" class="block mb-2">Your message</Label>
-	<Input id="message" type="text" placeholder="Your message" required bind:value={message}/>
-	<Button on:click={() => defaultModal = true} class='mb-4'>Send</Button>
+	<Input type="text" placeholder="Your message" name="message" required/>
+  <Button on:click={() => defaultModal = true} type="submit" class='mb-4'>Send message</Button>
 </form>
-</main>
