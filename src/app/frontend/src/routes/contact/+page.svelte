@@ -2,7 +2,7 @@
 	import { Button, Modal, Label, Input} from 'flowbite-svelte'
   import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
-
+  import { EnvelopeSolid } from 'flowbite-svelte-icons';
 	let { form }: { form: ActionData } = $props();
   let defaultModal: boolean = $state(false);
 </script>
@@ -24,10 +24,15 @@
   {/if}
 </Modal>
 
-<form method="POST" action="?/contact" class="flex flex-col space-y-6" use:enhance>
-  <Label for="email" class="block mb-2">Your email address</Label>
-	<Input id="email" type="email" placeholder="xx@xxxx.xxx" name="email" required/>
-	<Label for="message" class="block mb-2">Your message</Label>
-	<Input type="text" placeholder="Your message" name="message" required/>
+<form method="POST" action="?/contact" use:enhance>
+  <div class="mb-6">
+  <Label for="email" class="block mb-2 text-gray-100">Your email address</Label>
+	<Input id="email" type="email" name="email" required placeholder="name@email.com" class="w-200 center">
+    <EnvelopeSolid slot="left" class="w-4 h-4" />
+  </Input>  
+</div>
+	<Label for="message" class="block mb-2 text-gray-100">Your message</Label>
+	<Input type="text" placeholder="Your message" name="message" required class="w-80"/>
   <Button on:click={() => defaultModal = true} type="submit" class='mb-4'>Send message</Button>
 </form>
+

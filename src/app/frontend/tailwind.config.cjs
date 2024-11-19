@@ -8,13 +8,14 @@ const config = {
   theme: {
     extend: {
       colors: {
-        primary: colors.blue,
+        primary: colors.stone,
+        secondary: colors.blue,
       },
     },
   },
   plugins: [
     require('flowbite/plugin')
   ],
-  darkMode: 'class',
+  darkMode: 'selector',
 };
 module.exports = config;

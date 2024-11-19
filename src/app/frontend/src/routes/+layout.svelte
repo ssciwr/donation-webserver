@@ -1,26 +1,32 @@
 <script lang='ts'>
   import "../app.postcss"
-  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger,  Footer, FooterBrand, FooterCopyright, FooterLinkGroup, FooterLink, Hr } from 'flowbite-svelte'
+  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger,  Footer, FooterBrand, FooterCopyright, FooterLinkGroup, FooterLink, Hr, Button } from 'flowbite-svelte'
+
+  import { goto } from '$app/navigation';
+  import './global.css';
+  function gotoDonate() {
+    goto('/donation');
+  }
 </script>
 
-<Navbar>
+<Navbar fluid>
   <NavBrand href="/">
     <img
-      src="/images/logo.png"
+      src="/images/Logo_oben_links.svg"
       class="max-w-md h-14"
       alt="Mailcom Logo"
     />
-    <span class="self-center whitespace-nowrap text-xl dark:text-white">
-      Mailcom
-    </span>
+
   </NavBrand>
-  <NavHamburger/>
+  <div class="flex md:order-2">
+    <Button size="sm" on:click={gotoDonate} >Datenspende</Button>
+    <NavHamburger />
+  </div>
   <NavUl>
     <NavLi href="/">Home</NavLi>
+    <NavLi href="/tutorial">Tutoriel</NavLi>
+    <NavLi href="/about">Informations</NavLi>
     <NavLi href="/blog">Blog</NavLi>
-    <NavLi href="/about">About</NavLi>
-    <NavLi href="/donation">Donation</NavLi>
-    <NavLi href="/test">Test</NavLi>
   </NavUl>
 </Navbar>
 
@@ -31,10 +37,10 @@
 <Footer footerType="logo" class='p-8'>
   <div class="sm:flex sm:items-center sm:justify-between">
     <FooterBrand
-      href="https://flowbite-svelte.com"
-      src="https://flowbite-svelte.com/images/flowbite-svelte-icon-logo.svg"
-      alt="Romanistisches Seminar Logo"
-      name="Romanistisches Seminar"
+      href="https://www.uni-heidelberg.de/en"
+      src="/images/Logoleiste_SSC_4c.png"
+      alt="Romanisches Seminar Logo"
+      name="Romanisches Seminar"
     />
     <FooterLinkGroup ulClass="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
       <FooterLink href="/">About</FooterLink>
