@@ -2,18 +2,22 @@ services:
   nginx:
     image: nginx
     ports:
-      - "8080:80"
-      - "8443:443"
+      - '8080:80'
+      - '8443:443'
     volumes:
       - ./src/nginx/conf/:/etc/nginx/conf.d/:ro
       - ./src/nginx/keys/:/etc/nginx/ssl/:ro
-  webapp:
+    depends_on:
+      - mailcom
+  mailcom:
     build: .
-    env_file:
-      - flask.env
-    command: gunicorn --bind 0.0.0.0:8000 wsgi:app
+    command: pnpm run start
+    ports:
+      - '3000:3000'
     expose:
-      - "8000"
+      - '3000'
+    volumes:
+      - ./src/app/frontend:/app
   db: 
     image: mysql:9.0.1
     restart: always
