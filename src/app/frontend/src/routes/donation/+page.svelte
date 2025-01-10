@@ -64,10 +64,3 @@
     <Button type="submit" class="w-full1" on:click={() => alert('Datenspende erfolgreich')}>Submit</Button>
   </form>
 </Modal>
-
-
-<map name="workmap">
-  <area shape="circle" coords="337,300,44" alt="country" href="coffee.htm" onclick={clickCountry}>
-  <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
-  <area shape="circle" coords="337,300,44" alt="Coffee" href="coffee.htm">
-</map>

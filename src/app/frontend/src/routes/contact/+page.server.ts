@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
+import type { Actions, RequestEvent } from '@sveltejs/kit';
 export const prerender = false;
 import { sendMessage } from '../../lib/server/contact';
 type Data = {
@@ -8,8 +9,8 @@ type Data = {
 	message: string
 	errors: Record<string, string>
   }
-export const actions = {
-	contact: async ({ request }) => {
+export const actions: Actions = {
+	contact: async ({ request }: RequestEvent ) => {
 		console.log('Contact action triggered');
 		console.log('request:', request); // Log the event for debugging
 		const formData = await request.formData();

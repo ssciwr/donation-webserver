@@ -17,7 +17,7 @@
 
   <div class="grid grid-cols-3 gap-4">
     <div>
-      <Card href="/cards">
+      <Card>
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
       <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
     </Card>
@@ -32,7 +32,7 @@
     </Card>
   </div>
     <div>
-      <Card href="/cards" color="primary">
+      <Card color="primary">
         <Img src="/images/background.png" 
           alt="sample 1" class="rounded-lg" 
           captionClass="absolute bottom-6 px-4 text-lg text-white" 
