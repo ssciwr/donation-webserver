@@ -1,14 +1,11 @@
 <script lang="ts">
   import { Button, Modal, Label, Input, Checkbox, Img} from 'flowbite-svelte'
+  import Map from '$lib/Map2.svelte'
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
+  let forwardEmailModal: boolean = $state(false);
   let emailModal: boolean = $state(false);
-
-  function clickCountry() {
-    alert("You clicked country!");
-  }
 </script>
-
 
 <Button on:click={() => (formModal = true)}>Datenspende</Button>
 
@@ -45,21 +42,40 @@
   <form class="flex flex-col space-y-6" action="#">
     <Label class="space-y-2">
       <span>Wo haben Sie die meisten Nachrichten verfasst?</span>
-      <Input type="text" name="text" placeholder="•••••" required />
     </Label>
-    <Img src="/images/europe.svg" alt="Europe map" class="w-full" usemap="#workmap"/>
+    <Map />
+    <Button type="submit" class="w-full1" on:click={() => (forwardEmailModal = true)}>Weiter</Button>
+  </form>
+</Modal>
+
+<Modal bind:open={forwardEmailModal} size="xs" autoclose={true} class="w-full">
+  <form class="flex flex-col space-y-6" action="#">
+  <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Um Ihre Emails zu spenden,
+    leiten Sie diese bitte an folgende Adresse weiter: <br>
+    mailcom-donation@rose.uni-heidelberg.de
+  </h3>
+    <Label class="space-y-2">
+        <span>Ihre Email Adresse von der Sie spenden:</span>
+      <Input type="email" name="email" placeholder="name@company.com" required />
+    </Label>
+    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Falls Sie Ihre Spende zu 
+      einem späteren Zeitpunkt widerrufen möchten,
+      nutzen Sie bitte die ID, die Sie in der Bestätigungsemail erhalten haben.
+    </h3>
     <Button type="submit" class="w-full1" on:click={() => (emailModal = true)}>Weiter</Button>
   </form>
 </Modal>
 
+
 <Modal bind:open={emailModal} size="xs" autoclose={true} class="w-full">
   <form class="flex flex-col space-y-6" action="#">
     <Label class="space-y-2">
-        <span>Ihre Email Adresse</span>
+        <span>Falls Sie unseren Newsletter und Projektneuigkeiten erhalten möchten, 
+          geben Sie bitte Ihre Email Adresse an:</span>
       <Input type="email" name="email" placeholder="name@company.com" required />
     </Label>
     <div class="flex items-start">
-      <Checkbox>Subscribe to newsletter and updates</Checkbox>
+      <Checkbox>Ich möchte den Newsletter und Projektmitteilungen erhalten.</Checkbox>
     </div>
     <Button type="submit" class="w-full1" on:click={() => alert('Datenspende erfolgreich')}>Submit</Button>
   </form>
