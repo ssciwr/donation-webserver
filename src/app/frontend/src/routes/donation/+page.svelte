@@ -5,6 +5,7 @@
   let countryModal: boolean = $state(false);
   let forwardEmailModal: boolean = $state(false);
   let emailModal: boolean = $state(false);
+  let disclosureModal: boolean = $state(false);
 </script>
 
 <Button on:click={() => (formModal = true)}>Datenspende</Button>
@@ -77,6 +78,42 @@
     <div class="flex items-start">
       <Checkbox>Ich möchte den Newsletter und Projektmitteilungen erhalten.</Checkbox>
     </div>
-    <Button type="submit" class="w-full1" on:click={() => alert('Datenspende erfolgreich')}>Submit</Button>
+    <Button type="submit" class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
   </form>
+</Modal>
+
+
+<Modal bind:open={disclosureModal} size="xs" autoclose={true} class="w-full">
+  <h1 class="text-base leading-relaxed text-black">Information und Einwilligungserklärung zum wissenschaftlichen Forschungsvorhaben 
+      "Schreiben nach der Briefkultur: MailCom"</h1>
+    <h3 class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Information zum wissenschaftlichen Forschungsvorhaben:</h3>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">...</p>
+    <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Datenschutz:</h3>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Mir ist bekannt, dass bei dieser Studie personenbezogene Daten verarbeitet werden sollen. 
+      Ich wurde darüber aufgeklärt und stimme freiwillig zu, dass meine in der Studie erhobenen Daten, 
+      insbesondere Angaben über meine Gesundheit, meine ethnische Herkunft zu den in der Informationsschrift 
+      beschriebenen Zwecken in pseudonymisierter Form aufgezeichnet und ausgewertet werden können. 
+      Die Verarbeitung der Daten erfolgt nach gesetzlichen Bestimmungen und setzt gemäß Art. 6 Abs. 1 lit. a 
+      der Datenschutz-Grundverordnung folgende Einwilligungs-erklärung voraus:</p>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Ich wurde darüber aufgeklärt und stimme freiwillig zu, dass meine in der Studie erhobenen Daten, zu den 
+      in der Informationsschrift beschriebenen Zwecken in pseudonymisierter Form aufgezeichnet und ausgewertet 
+      werden können. Bei der Veröffentlichung von Ergebnissen der Studie wird mein Name ebenfalls nicht genannt. 
+      Die personenbezogenen Daten werden anonymisiert. Mir ist bekannt, dass diese Einwilligung jederzeit 
+      schriftlich oder mündlich ohne Angabe von Gründen widerrufen werden kann, ohne dass mir dadurch 
+      Nachteile entstehen. Die Rechtmäßigkeit, der bis zum Widerruf erfolgten Datenverarbeitung wird 
+      davon nicht berührt. In diesem Fall kann ich entscheiden, ob die von mir erhobenen Daten gelöscht 
+      werden sollen oder weiterhin für die Zwecke der Studie verwendet werden dürfen.</p>
+      <form class="flex flex-col space-y-6" action="#">
+      <div class="flex items-start">
+        <Checkbox required>
+          Ich habe die Informationen zum Datenschutz gelesen und stimme der Aufzeichnung und Verarbeitung meiner Daten zu. </Checkbox>
+          <!-- Ich habe die <a href="/about" class="text-blue-600 dark:text-blue-500 hover:underline">Informationen zum Datenschutz</a> gelesen und stimme der Aufzeichnung und Verarbeitung meiner Daten zu. </Checkbox> -->
+      </div>
+      </form>
+    <svelte:fragment slot="footer">
+      <Button on:click={() => alert('Datenspende erfolgreich')}>Ich akzeptiere und reiche meine Daten ein</Button>
+      <Button color="alternative">Ablehnen</Button>
+    </svelte:fragment>
 </Modal>
