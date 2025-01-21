@@ -24,8 +24,9 @@
   </div>
   <NavUl>
     <NavLi href="/">Home</NavLi>
-    <NavLi href="/tutorial">Tutoriel</NavLi>
-    <NavLi href="/about">Informations</NavLi>
+    <NavLi href="/tutorial">Tutorial</NavLi>
+    <NavLi href="/about">Information</NavLi>
+    <NavLi href="/faq">FAQ</NavLi>
     <NavLi href="/blog">Blog</NavLi>
   </NavUl>
 </Navbar>
