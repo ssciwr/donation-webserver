@@ -137,5 +137,5 @@ inactiveClass="text-gray-100 dark:text-gray-400 hover:bg-red-400 dark:hover:bg-g
   </span>
     <p class="mb-2 text-gray-100 dark:text-gray-400"> ...
     </p>
-</AccordionItem>
+</AccordionItem> 
 </Accordion>
