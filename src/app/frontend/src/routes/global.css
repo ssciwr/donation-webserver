@@ -1,5 +1,16 @@
 body {
     background-image: url("/images/Alle_Hintergrundbilder.svg");
-    background-size: contain;
+    background-size: 80%;
+    background-repeat: repeat;
     background-color: #590d08;
    }
+html {
+    overflow-y:scroll;
+    scroll-behavior: smooth;
+  }
+
+@media screen and (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
