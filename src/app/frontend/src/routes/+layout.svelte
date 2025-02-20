@@ -4,10 +4,13 @@
 
   import { goto } from '$app/navigation';
   import './global.css';
+	import { fade } from 'svelte/transition';
   function gotoDonate() {
     goto('/donation');
   }
+  export let data: { pathname: string };
 </script>
+
 
 <Navbar fluid>
   <NavBrand href="/">
@@ -32,7 +35,11 @@
 </Navbar>
 
 <main class='p-8 h-auto'>
-  <slot />
+  {#key data.pathname}
+	<div in:fade={{ duration: 300, delay: 400 }} out:fade={{ duration: 300 }}>
+		<slot />
+	</div>
+{/key}
 </main>
 
 <Footer footerType="logo" class='p-8'>
@@ -43,6 +50,7 @@
       alt="Romanisches Seminar Logo"
       name="Romanisches Seminar"
     />
+
     <FooterLinkGroup ulClass="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
       <FooterLink href="/">About</FooterLink>
       <FooterLink href="/">Privacy Policy</FooterLink>
