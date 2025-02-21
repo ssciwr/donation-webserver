@@ -1,6 +1,5 @@
 <script>
-  import "../app.css"
-  import "../app.postcss"
+  import './global.css';
   import { goto } from '$app/navigation';
 
   function gotoDonate() {

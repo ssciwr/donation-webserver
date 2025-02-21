@@ -1,6 +1,5 @@
 <script lang='ts'>
-  import "../app.css"
-  import "../app.postcss"
+  import "./global.css"
   import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Footer, FooterBrand, FooterCopyright, FooterLinkGroup, FooterLink, Button } from 'flowbite-svelte'
   import { goto } from '$app/navigation';
   function gotoDonate() {
