@@ -1,14 +1,12 @@
 <script lang='ts'>
+  import "../app.css"
   import "../app.postcss"
-  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger,  Footer, FooterBrand, FooterCopyright, FooterLinkGroup, FooterLink, Hr, Button } from 'flowbite-svelte'
-
+  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Footer, FooterBrand, FooterCopyright, FooterLinkGroup, FooterLink, Button } from 'flowbite-svelte'
   import { goto } from '$app/navigation';
-  import './global.css';
-	import { fade } from 'svelte/transition';
   function gotoDonate() {
     goto('/donation');
   }
-  export let data: { pathname: string };
+  let { children } = $props();
 </script>
 
 
@@ -19,28 +17,22 @@
       class="max-w-md h-14"
       alt="Mailcom Logo"
     />
-
   </NavBrand>
+  <NavHamburger  />
   <div class="flex md:order-2">
     <Button size="sm" on:click={gotoDonate} >Datenspende</Button>
-    <NavHamburger />
   </div>
   <NavUl>
     <NavLi href="/">Home</NavLi>
-    <NavLi href="/tutorial">Tutorial</NavLi>
-    <NavLi href="/about">Information</NavLi>
-    <NavLi href="/faq">FAQ</NavLi>
-    <NavLi href="/blog">Blog</NavLi>
+    <!-- <NavLi href="/tutorial">Tutorial</NavLi> -->
+    <!-- <NavLi href="/about">Information</NavLi> -->
+    <!-- <NavLi href="/faq">FAQ</NavLi> -->
+    <!-- <NavLi href="/blog">Blog</NavLi> -->
   </NavUl>
 </Navbar>
 
-<main class='p-8 h-auto'>
-  {#key data.pathname}
-	<div in:fade={{ duration: 300, delay: 400 }} out:fade={{ duration: 300 }}>
-		<slot />
-	</div>
-{/key}
-</main>
+
+  {@render children()}
 
 <Footer footerType="logo" class='p-8'>
   <div class="sm:flex sm:items-center sm:justify-between">
@@ -58,6 +50,7 @@
       <FooterLink href="/impressum">Impressum</FooterLink>
     </FooterLinkGroup>
   </div>
-  <Hr class="my-6" />
+  <hr class="my-6" />
   <FooterCopyright href="/" by="UHEI™" />
 </Footer>
+
