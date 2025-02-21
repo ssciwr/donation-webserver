@@ -23,10 +23,10 @@
   </div>
   <NavUl>
     <NavLi href="/">Home</NavLi>
-    <!-- <NavLi href="/tutorial">Tutorial</NavLi> -->
-    <!-- <NavLi href="/about">Information</NavLi> -->
-    <!-- <NavLi href="/faq">FAQ</NavLi> -->
-    <!-- <NavLi href="/blog">Blog</NavLi> -->
+    <NavLi href="/tutorial">Tutorial</NavLi>
+    <NavLi href="/about">Information</NavLi>
+    <NavLi href="/faq">FAQ</NavLi>
+    <NavLi href="/blog">Blog</NavLi>
   </NavUl>
 </Navbar>
 
