@@ -1,15 +1,14 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
 	export let data: PageData;
 
 	const ids = data.id;
 </script>
 
-<form method="POST">
+<!-- <form method="POST">
 	<input required type="int" name="id" />
 	<button>Add id</button>
-</form>
+</form> -->
 
 {#each ids as id}
 	<div>
