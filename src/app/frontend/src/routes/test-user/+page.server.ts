@@ -6,9 +6,15 @@ export const prerender = false;
 
 
 
+export const load: PageServerLoad = async () => {
+    const users = await db.select().from(donationsTable);
+    console.log('Getting all users from the database: ', users);
 
-const users = await db.select().from(donationsTable);
-console.log('Getting all users from the database: ', users)
+    return {
+        users
+    };
+};
+
 
 // export const actions: Actions = {
 // 	default: async ({ request }) => {
