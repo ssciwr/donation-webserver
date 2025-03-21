@@ -40,15 +40,12 @@ jobs:
             pnpm install
             pnpm run test:unit
 
-        - name: Install Playwright Browsers
+        - name: Install Playwright Browsers and run tests
           run: |
             cd src/app/frontend
-            pwd
             pnpm install playwright
             pnpm exec playwright install --with-deps
-          
-        - name: Run Playwright tests
-          run: pnpm test
+            pnpm test
         - uses: actions/upload-artifact@v4
           if: ${{ !cancelled() }}
           with:
