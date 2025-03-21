@@ -1,5 +1,4 @@
 import { db } from '$lib/server/db';
-import { asc } from 'drizzle-orm';
 import type { Actions, PageServerLoad } from './$types';
 import { donationsTable } from '$lib/server/schema';
 export const prerender = false;
