@@ -34,9 +34,20 @@ jobs:
           run: |
             cd src/app/frontend 
             pnpm install
-
         - name: run basic tests typescript
           run: |
             cd src/app/frontend
             pnpm install
             pnpm run test:unit
+
+        - name: Install Playwright Browsers
+          run: pnpm exec playwright install --with-deps
+          
+        - name: Run Playwright tests
+          run: pnpm test
+        - uses: actions/upload-artifact@v4
+          if: ${{ !cancelled() }}
+          with:
+            name: playwright-report
+            path: playwright-report/
+            retention-days: 30
