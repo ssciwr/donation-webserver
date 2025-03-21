@@ -37,7 +37,7 @@ jobs:
         mysql database: 'email_donations'
         mysql user: 'donor'
         mysql password: ${{ secrets.MYSQL_PASSWORD }} 
-    - name: Install dependencies
+    - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
@@ -48,12 +48,24 @@ jobs:
       run: |
         cd src/app
         python -m pytest -svv --cov=. --cov-report=xml
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v4
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    - name: install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+          version: 10
+          run_install: false
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+          node-version: 22
+          cache: 'pnpm'
+    - name: Install frontend dependencies
+      run: pnpm install
     - name: run basic tests typescript
       run: |
         cd src/app/frontend
         pnpm install
         pnpm run test:unit
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
