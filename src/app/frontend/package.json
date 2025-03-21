@@ -75,7 +75,6 @@
 			"@sveltejs/kit",
 			"esbuild",
 			"node",
-			"dotenvx",
 			"svelte-preprocess"
 		]
 	}
