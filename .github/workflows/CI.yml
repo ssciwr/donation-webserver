@@ -41,7 +41,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
-    - name: run base tests
+    - name: run basic tests python
       env:
         MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
         FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
@@ -52,3 +52,8 @@ jobs:
       uses: codecov/codecov-action@v4
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    - name: run basic tests typescript
+      run: |
+        cd src/app/frontend
+        pnpm install
+        pnpm run test:unit

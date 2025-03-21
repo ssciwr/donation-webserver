@@ -10,5 +10,10 @@ export default defineConfig({
 		fs: {
 			allow: ['src', 'static']
 		}
-	}
+	},
+	resolve: process.env.VITEST
+	? {
+			conditions: ['browser']
+		}
+	: undefined
 });

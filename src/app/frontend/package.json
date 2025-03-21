@@ -11,7 +11,9 @@
 		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test:unit": "vitest",
+		"coverage": "vitest run --coverage",
+		"test:unit": "vitest run",
+		"test:unit:watch": "vitest watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"gh-pages": "npm run build && npx gh-pages -d build"
