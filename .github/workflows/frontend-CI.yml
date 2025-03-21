@@ -43,8 +43,8 @@ jobs:
         - name: Install Playwright Browsers and run tests
           run: |
             cd src/app/frontend
-            pnpm install playwright
-            pnpm exec playwright install --with-deps
+            # pnpm install playwright
+            # pnpm exec playwright install --with-deps
             pnpm test
         - uses: actions/upload-artifact@v4
           if: ${{ !cancelled() }}
