@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Modal, Label, Input, Checkbox, Img} from 'flowbite-svelte'
+  import { Button, Modal, Label, Radio, Input, Checkbox, Img} from 'flowbite-svelte'
   import Map from '$lib/Map2.svelte'
   let testModal: boolean = $state(false);
   let formModal: boolean = $state(false);
@@ -9,6 +9,7 @@
   let disclosureModal: boolean = $state(false);
 	const { data } = $props();
 	const ids = data.users;
+	const listi = data.listi;
 </script>
 
 <form method="POST">
@@ -21,34 +22,31 @@
 		<h1>ID: {id.id}</h1>
 	</div>
 {/each}
-
-
-
-<form class="max-w-sm mx-auto">
-  <div class="mb-5">
-    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-    <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
-  </div>
-  <div class="mb-5">
-    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-  </div>
-  <div class="flex items-start mb-5">
-    <div class="flex items-center h-5">
-      <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
-    </div>
-    <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-  </div>
-  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-</form>
+<h1>m: {data.listi}</h1>
 
 <!-- <Button on:click={() => (formModal = true)}>Datenspende</Button> -->
 <Button on:click={() => (testModal = true)}>Datenspende</Button>
 
 <Modal bind:open={testModal} size="xs" autoclose={false} class="w-full">
-  <form method="POST">
+  <form method="POST" class="flex flex-col space-y-6" action="#">
     <input required type="int" name="id" />
-    <button>Add id</button>
+
+    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Collect metadata</h3>
+    <p class="mb-4 font-semibold text-gray-900 dark:text-white">Geschlecht</p>
+        <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
+          <li class="flex items-center"><Checkbox class="p-3">m</Checkbox></li>
+          <li class="flex items-center"><Checkbox class="p-3">f</Checkbox></li>
+          <li class="flex items-center"><Checkbox class="p-3">d</Checkbox></li>
+          <li class="flex items-center"><Checkbox class="p-3">Keine Angabe</Checkbox></li>
+        </ul>
+    <Radio name="m">male</Radio>
+    <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+      <div class="flex items-center ps-3">
+          <input id="listi" type="radio" value=1 name="listi">
+          <label for="listi" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">m</label>
+      </div>
+  </li>
+    <Button type="submit" class="w-full1">submit</Button>
   </form>
 </Modal>
 
@@ -56,8 +54,6 @@
 <Modal bind:open={formModal} size="xs" autoclose={true} class="w-full">
   <form class="flex flex-col space-y-6" action="#" method="POST">
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Collect metadata</h3>
-    <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your id</label>
-    <input required type="int" name="id" />
     <p class="mb-4 font-semibold text-gray-900 dark:text-white">Geschlecht</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
           <li class="flex items-center"><Checkbox class="p-3">m</Checkbox></li>

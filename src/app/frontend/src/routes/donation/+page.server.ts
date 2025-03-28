@@ -19,6 +19,8 @@ export const actions: Actions = {
     default: async ({ request }) => {
         const data = await request.formData();
         const id = Number(data.get('id'));
+        const listi = Number(data.get('listi'));
+        console.log('Getting listi ', listi);
         await db.insert(donationsTable).values({
             id
         });
