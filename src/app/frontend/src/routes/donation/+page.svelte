@@ -9,7 +9,7 @@
   let disclosureModal: boolean = $state(false);
 	const { data } = $props();
 	const ids = data.users;
-	const listi = data.listi;
+  let gender: number = $state(0);
 </script>
 
 <form method="POST">
@@ -20,9 +20,9 @@
 {#each ids as id}
 	<div>
 		<h1>ID: {id.id}</h1>
+		<h1>gender: {id.gender}</h1>
 	</div>
 {/each}
-<h1>m: {data.listi}</h1>
 
 <!-- <Button on:click={() => (formModal = true)}>Datenspende</Button> -->
 <Button on:click={() => (testModal = true)}>Datenspende</Button>
@@ -34,18 +34,19 @@
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Collect metadata</h3>
     <p class="mb-4 font-semibold text-gray-900 dark:text-white">Geschlecht</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
-          <li class="flex items-center"><Checkbox class="p-3">m</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">f</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">d</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">Keine Angabe</Checkbox></li>
+          <li class="flex items-center">
+            <Radio name="gender" class="p-3" bind:group={gender} value="1">m</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="gender" class="p-3" bind:group={gender} value="2">f</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="gender" class="p-3" bind:group={gender} value=3>d</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="gender" class="p-3" bind:group={gender} value=0>Keine Angabe</Radio>
+          </li>
         </ul>
-    <Radio name="m">male</Radio>
-    <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-      <div class="flex items-center ps-3">
-          <input id="listi" type="radio" value=1 name="listi">
-          <label for="listi" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">m</label>
-      </div>
-  </li>
     <Button type="submit" class="w-full1">submit</Button>
   </form>
 </Modal>

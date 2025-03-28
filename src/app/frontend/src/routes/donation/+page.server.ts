@@ -19,10 +19,11 @@ export const actions: Actions = {
     default: async ({ request }) => {
         const data = await request.formData();
         const id = Number(data.get('id'));
-        const listi = Number(data.get('listi'));
-        console.log('Getting listi ', listi);
+        const gender = Number(data.get('gender'));
+        console.log('Getting gender ', gender);
         await db.insert(donationsTable).values({
-            id
+            id,
+            gender,
         });
     }
 };
