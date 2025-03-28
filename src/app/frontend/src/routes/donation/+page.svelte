@@ -6,7 +6,20 @@
   let forwardEmailModal: boolean = $state(false);
   let emailModal: boolean = $state(false);
   let disclosureModal: boolean = $state(false);
+	const { data } = $props();
+	const ids = data.users;
 </script>
+
+<form method="POST">
+	<input required type="int" name="id" />
+	<button>Add id</button>
+</form>
+
+{#each ids as id}
+	<div>
+		<h1>ID: {id.id}</h1>
+	</div>
+{/each}
 
 <Button on:click={() => (formModal = true)}>Datenspende</Button>
 
