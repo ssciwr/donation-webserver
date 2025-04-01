@@ -1,15 +1,19 @@
 <script lang="ts">
-  import { Button, Modal, Label, Radio, Input, Checkbox, Img} from 'flowbite-svelte'
+  import { Button, Modal, Label, Radio, Input, Checkbox} from 'flowbite-svelte'
+	import type { ActionData } from './$types';
   import Map from '$lib/Map2.svelte'
-  let testModal: boolean = $state(false);
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
   let forwardEmailModal: boolean = $state(false);
   let emailModal: boolean = $state(false);
   let disclosureModal: boolean = $state(false);
 	const { data } = $props();
+
 	const ids = data.users;
+  let d_id: number = $state(0);
   let gender: number = $state(0);
+  let age: number = $state(0);
+  let lang: number = $state(0);
 </script>
 
 <form method="POST">
@@ -24,13 +28,14 @@
 	</div>
 {/each}
 
-<!-- <Button on:click={() => (formModal = true)}>Datenspende</Button> -->
-<Button on:click={() => (testModal = true)}>Datenspende</Button>
+<Button on:click={() => (formModal = true)}>Datenspende</Button>
 
-<Modal bind:open={testModal} size="xs" autoclose={false} class="w-full">
-  <form method="POST" class="flex flex-col space-y-6" action="#">
-    <input required type="int" name="id" />
-
+<Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
+  <form class="flex flex-col space-y-6" action="#" 
+  onsubmit={() => {
+    countryModal = true; // Open the next modal
+    formModal = false; // Close the current modal
+  }}>
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Collect metadata</h3>
     <p class="mb-4 font-semibold text-gray-900 dark:text-white">Geschlecht</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
@@ -47,47 +52,61 @@
             <Radio name="gender" class="p-3" bind:group={gender} value=0>Keine Angabe</Radio>
           </li>
         </ul>
-    <Button type="submit" class="w-full1">submit</Button>
-  </form>
-</Modal>
-
-
-<Modal bind:open={formModal} size="xs" autoclose={true} class="w-full">
-  <form class="flex flex-col space-y-6" action="#" method="POST">
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Collect metadata</h3>
-    <p class="mb-4 font-semibold text-gray-900 dark:text-white">Geschlecht</p>
-        <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
-          <li class="flex items-center"><Checkbox class="p-3">m</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">f</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">d</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">Keine Angabe</Checkbox></li>
-        </ul>
         <p class="mb-4 font-semibold text-gray-900 dark:text-white">Altersschritte</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
-          <li class="flex items-center"><Checkbox class="p-3">&lt;20</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">21-30</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">31-40</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">41-50</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">51-60</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">&gt;60</Checkbox></li>
+          <li class="flex items-center">
+            <Radio name="age" class="p-3" bind:group={age} value="1">&lt;20</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="age" class="p-3" bind:group={age} value="2">21-30</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="age" class="p-3" bind:group={age} value=3>31-40</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="age" class="p-3" bind:group={age} value=4>41-50</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="age" class="p-3" bind:group={age} value=5>51-60</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="age" class="p-3" bind:group={age} value=6>&gt;60</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="age" class="p-3" bind:group={age} value=0>Keine Angabe</Radio>
+          </li>
         </ul>
         <p class="mb-4 font-semibold text-gray-900 dark:text-white">Ist die Sprache, in der Sie schreiben, Ihre Muttersprache?</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
-          <li class="flex items-center"><Checkbox class="p-3">Ja</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">Nein</Checkbox></li>
-          <li class="flex items-center"><Checkbox class="p-3">?</Checkbox></li>
+          <li class="flex items-center">
+            <Radio name="lang" class="p-3" bind:group={lang} value=1>Ja</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="lang" class="p-3" bind:group={lang} value=2>Nein</Radio>
+          </li>
+          <li class="flex items-center">
+            <Radio name="lang" class="p-3" bind:group={lang} value=0>Keine Angabe</Radio>
+          </li>
         </ul>
-    <Button type="submit" class="w-full1" on:click={() => (countryModal = true)}>Weiter</Button>
+        <Button type="submit" class="w-full1">Weiter</Button>
   </form>
 </Modal>
 
-<Modal bind:open={countryModal} size="xs" autoclose={true} class="w-full">
-  <form class="flex flex-col space-y-6" action="#">
+<Modal bind:open={countryModal} size="xs" autoclose={false} class="w-full">
+  <form class="flex flex-col space-y-6" action="#" method="POST">
     <Label class="space-y-2">
       <span>Wo haben Sie die meisten Nachrichten verfasst?</span>
     </Label>
     <Map />
-    <Button type="submit" class="w-full1" on:click={() => (forwardEmailModal = true)}>Weiter</Button>
+    <input required type="int" name="id" />
+    <!-- <Button type="submit" class="w-full1" on:click={() => (forwardEmailModal = true)}>Weiter</Button> -->
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Gender: {gender}
+    </p>
+    <input type="hidden" name="gender" value={gender} />
+    <input type="hidden" name="age" value={age} />
+    <input type="hidden" name="lang" value={lang} />
+    <Button type="submit" class="w-full1" >Weiter</Button>
   </form>
 </Modal>
 

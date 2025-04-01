@@ -20,10 +20,14 @@ export const actions: Actions = {
         const data = await request.formData();
         const id = Number(data.get('id'));
         const gender = Number(data.get('gender'));
+        const age = Number(data.get('age'));
+        const lang = Number(data.get('lang'));
         console.log('Getting gender ', gender);
         await db.insert(donationsTable).values({
             id,
             gender,
+            age,
+            lang
         });
     }
 };
