@@ -10,16 +10,14 @@
 	const { data } = $props();
 
 	const ids = data.users;
-  let d_id: number = $state(0);
+  let id: number = $state(0);
   let gender: number = $state(0);
   let age: number = $state(0);
   let lang: number = $state(0);
+  let email: string = $state('');
+  let country: string = $state('');
+  let accept_disclosure: boolean = $state(false);
 </script>
-
-<form method="POST">
-	<input required type="int" name="id" />
-	<button>Add id</button>
-</form>
 
 {#each ids as id}
 	<div>
@@ -93,56 +91,47 @@
 </Modal>
 
 <Modal bind:open={countryModal} size="xs" autoclose={false} class="w-full">
-  <form class="flex flex-col space-y-6" action="#" method="POST">
+  <form class="flex flex-col space-y-6" action="#"
+    onsubmit={() => {
+    forwardEmailModal = true; // Open the next modal
+    countryModal = false; // Close the current modal
+    }}>
     <Label class="space-y-2">
       <span>Wo haben Sie die meisten Nachrichten verfasst?</span>
     </Label>
-    <Map />
-    <input required type="int" name="id" />
-    <!-- <Button type="submit" class="w-full1" on:click={() => (forwardEmailModal = true)}>Weiter</Button> -->
-    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-      Gender: {gender}
-    </p>
-    <input type="hidden" name="gender" value={gender} />
-    <input type="hidden" name="age" value={age} />
-    <input type="hidden" name="lang" value={lang} />
+    <Map /> 
+    <!-- still missing the country selection -->
     <Button type="submit" class="w-full1" >Weiter</Button>
   </form>
 </Modal>
 
-<Modal bind:open={forwardEmailModal} size="xs" autoclose={true} class="w-full">
-  <form class="flex flex-col space-y-6" action="#">
-  <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Um Ihre Emails zu spenden,
-    leiten Sie diese bitte an folgende Adresse weiter: <br>
-    mailcom-donation@rose.uni-heidelberg.de
-  </h3>
+<Modal bind:open={forwardEmailModal} size="xs" autoclose={false} class="w-full">
+  <form class="flex flex-col space-y-6" action="#" method="POST">
     <Label class="space-y-2">
         <span>Ihre Email Adresse von der Sie spenden:</span>
-      <Input type="email" name="email" placeholder="name@company.com" required />
+      <Input type="email" name="email" bind:value={email} placeholder="name@company.com" required />
     </Label>
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Falls Sie Ihre Spende zu 
+    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+      Falls Sie Ihre Spende zu 
       einem späteren Zeitpunkt widerrufen möchten,
       nutzen Sie bitte die ID, die Sie in der Bestätigungsemail erhalten haben.
     </h3>
-    <Button type="submit" class="w-full1" on:click={() => (emailModal = true)}>Weiter</Button>
+    <input required type="int" name="id" />
+    <input type="hidden" name="gender" value={gender} />
+    <input type="hidden" name="age" value={age} />
+    <input type="hidden" name="lang" value={lang} />
+    {#if accept_disclosure}
+    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+      Um Ihre Emails zu spenden,
+      leiten Sie diese bitte an folgende Adresse weiter: <br>
+      mailcom-donation@rose.uni-heidelberg.de
+    </h3>
+      <Button type="submit" class="w-full1" on:click={() => (emailModal = true)}>Einreichen</Button>
+    {:else}
+      <Button class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
+    {/if}
   </form>
 </Modal>
-
-
-<Modal bind:open={emailModal} size="xs" autoclose={true} class="w-full">
-  <form class="flex flex-col space-y-6" action="#">
-    <Label class="space-y-2">
-        <span>Falls Sie unseren Newsletter und Projektneuigkeiten erhalten möchten, 
-          geben Sie bitte Ihre Email Adresse an:</span>
-      <Input type="email" name="email" placeholder="name@company.com" required />
-    </Label>
-    <div class="flex items-start">
-      <Checkbox>Ich möchte den Newsletter und Projektmitteilungen erhalten.</Checkbox>
-    </div>
-    <Button type="submit" class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
-  </form>
-</Modal>
-
 
 <Modal bind:open={disclosureModal} size="xs" autoclose={true} class="w-full">
   <h1 class="text-base leading-relaxed text-black">Information und Einwilligungserklärung zum wissenschaftlichen Forschungsvorhaben 
@@ -168,13 +157,27 @@
       werden sollen oder weiterhin für die Zwecke der Studie verwendet werden dürfen.</p>
       <form class="flex flex-col space-y-6" action="#">
       <div class="flex items-start">
-        <Checkbox required>
+        <Checkbox required bind:checked={accept_disclosure}>
           Ich habe die Informationen zum Datenschutz gelesen und stimme der Aufzeichnung und Verarbeitung meiner Daten zu. </Checkbox>
           <!-- Ich habe die <a href="/about" class="text-blue-600 dark:text-blue-500 hover:underline">Informationen zum Datenschutz</a> gelesen und stimme der Aufzeichnung und Verarbeitung meiner Daten zu. </Checkbox> -->
       </div>
       </form>
     <svelte:fragment slot="footer">
-      <Button on:click={() => alert('Datenspende erfolgreich')}>Ich akzeptiere und reiche meine Daten ein</Button>
-      <Button color="alternative">Ablehnen</Button>
+      <Button >Ich akzeptiere und reiche meine Daten ein</Button>
+      <Button color="alternative" on:click={() => (forwardEmailModal = false)}>Ablehnen</Button>
     </svelte:fragment>
+</Modal>
+
+<Modal bind:open={emailModal} size="xs" autoclose={true} class="w-full">
+  <form class="flex flex-col space-y-6" action="#">
+    <Label class="space-y-2">
+        <span>Falls Sie unseren Newsletter und Projektneuigkeiten erhalten möchten, 
+          geben Sie bitte Ihre Email Adresse an:</span>
+      <Input type="email" name="email" placeholder="name@company.com" required />
+    </Label>
+    <div class="flex items-start">
+      <Checkbox>Ich möchte den Newsletter und Projektmitteilungen erhalten.</Checkbox>
+    </div>
+    <Button type="submit" class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
+  </form>
 </Modal>

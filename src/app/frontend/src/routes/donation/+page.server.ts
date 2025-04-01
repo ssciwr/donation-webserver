@@ -22,12 +22,14 @@ export const actions: Actions = {
         const gender = Number(data.get('gender'));
         const age = Number(data.get('age'));
         const lang = Number(data.get('lang'));
+        const email = String(data.get('email'));
         console.log('Getting gender ', gender);
         await db.insert(donationsTable).values({
             id,
             gender,
             age,
-            lang
+            lang,
+            email
         });
     }
 };
