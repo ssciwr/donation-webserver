@@ -1,10 +1,21 @@
-<script>
-    import { Button } from 'flowbite-svelte'
+<script lang="ts">
+    import { Button, Modal, Label, Input, Checkbox } from 'flowbite-svelte'
     import { goto } from '$app/navigation';
+    let emailModal: boolean = $state(false);
+    let subscribe: boolean = $state(false);
+    let email: string = $state('');
   
     function gotoDonate() {
       goto('/donation');
-    }
+    };
+
+    let check_signup = () => {
+        if (!subscribe) {
+            alert('Bitte bestaetigen Sie die Einwilligung zum Newsletter um fortzufahren.');
+            emailModal = true; 
+        }
+    };
+
   </script>
 
 <main class='p-8 h-auto'>
@@ -34,8 +45,23 @@
     <p class="text-gray-100"> Anzahl und Art der E-Mails: Es gibt keine Begrenzung. Sie können grundsätzlich so viele E-Mails spenden wie Sie möchten. 
         Die E-Mails können gerne zu den unterschiedlichsten Anlässen und in unterschiedlichsten Situationen geschrieben worden sein. 
         </p> 
-        <Button class="w-fit" on:click={gotoDonate}>
-            Emails spenden
-          </Button>
- 
+    <Button class="w-fit" on:click={gotoDonate}>
+        Emails spenden
+    </Button>
+    <Button on:click={() => (emailModal = true)}>Projektneuigkeiten erhalten</Button>
 </main>
+
+<Modal bind:open={emailModal} size="xs" autoclose={false} class="w-full">
+    <form class="flex flex-col space-y-6" action="#" method="POST">
+      <Label class="space-y-2">
+          <span>Falls Sie unseren Newsletter und Projektneuigkeiten erhalten möchten, 
+            geben Sie bitte Ihre Email Adresse an:</span>
+        <Input type="email" name="email" bind:value={email} placeholder="name@company.com" required />
+      </Label>
+      <div class="flex items-start">
+        <Checkbox bind:checked={subscribe}>Ich möchte den Newsletter und Projektmitteilungen erhalten.</Checkbox>
+      </div>
+      <Button type="submit" class="w-full1" on:click={() => check_signup()}>Projektmitteilungen erhalten</Button>
+      <Button class="w-full1">Keine Benachrichtigungen erhalten</Button>
+    </form>
+  </Modal>

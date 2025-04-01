@@ -1,11 +1,9 @@
 <script lang="ts">
   import { Button, Modal, Label, Radio, Input, Checkbox} from 'flowbite-svelte'
-	import type { ActionData } from './$types';
   import Map from '$lib/Map2.svelte'
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
   let forwardEmailModal: boolean = $state(false);
-  let emailModal: boolean = $state(false);
   let disclosureModal: boolean = $state(false);
 	const { data } = $props();
 
@@ -17,6 +15,21 @@
   let email: string = $state('');
   let country: string = $state('');
   let accept_disclosure: boolean = $state(false);
+
+  let check_disclosure = () => {
+    if (accept_disclosure) {
+      forwardEmailModal = true; // Open the next modal
+      disclosureModal = false; // Close the current modal
+    } else {
+      alert('Bitte bestaetigen Sie die Einwilligungserklaerung um fortzufahren.');
+    }
+  };
+
+  let reject_disclosure = () => {
+      alert('Sie haben die Einwilligungserklaerung abgelehnt. Ihre Daten werden nicht gespeichert.');
+      forwardEmailModal = false; // Open the next modal
+      disclosureModal = false; // Close the current modal
+  };
 </script>
 
 {#each ids as id}
@@ -126,14 +139,14 @@
       leiten Sie diese bitte an folgende Adresse weiter: <br>
       mailcom-donation@rose.uni-heidelberg.de
     </h3>
-      <Button type="submit" class="w-full1" on:click={() => (emailModal = true)}>Einreichen</Button>
+      <Button type="submit" class="w-full1">Einreichen</Button>
     {:else}
       <Button class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
     {/if}
   </form>
 </Modal>
 
-<Modal bind:open={disclosureModal} size="xs" autoclose={true} class="w-full">
+<Modal bind:open={disclosureModal} size="xs" autoclose={false} class="w-full">
   <h1 class="text-base leading-relaxed text-black">Information und Einwilligungserklärung zum wissenschaftlichen Forschungsvorhaben 
       "Schreiben nach der Briefkultur: MailCom"</h1>
     <h3 class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Information zum wissenschaftlichen Forschungsvorhaben:</h3>
@@ -163,21 +176,8 @@
       </div>
       </form>
     <svelte:fragment slot="footer">
-      <Button >Ich akzeptiere und reiche meine Daten ein</Button>
-      <Button color="alternative" on:click={() => (forwardEmailModal = false)}>Ablehnen</Button>
+      <Button on:click={() => check_disclosure()}>Ich akzeptiere und reiche meine Daten ein</Button>
+      <Button color="alternative" on:click={() => reject_disclosure()}>Ablehnen</Button>
     </svelte:fragment>
 </Modal>
 
-<Modal bind:open={emailModal} size="xs" autoclose={true} class="w-full">
-  <form class="flex flex-col space-y-6" action="#">
-    <Label class="space-y-2">
-        <span>Falls Sie unseren Newsletter und Projektneuigkeiten erhalten möchten, 
-          geben Sie bitte Ihre Email Adresse an:</span>
-      <Input type="email" name="email" placeholder="name@company.com" required />
-    </Label>
-    <div class="flex items-start">
-      <Checkbox>Ich möchte den Newsletter und Projektmitteilungen erhalten.</Checkbox>
-    </div>
-    <Button type="submit" class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
-  </form>
-</Modal>
