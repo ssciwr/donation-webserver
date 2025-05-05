@@ -7,8 +7,6 @@
   let disclosureModal: boolean = $state(false);
 	const { data } = $props();
 
-	const ids = data.users;
-  let id: number = $state(0);
   let gender: number = $state(0);
   let age: number = $state(0);
   let lang: number = $state(0);
@@ -32,17 +30,10 @@
   };
 </script>
 
-{#each ids as id}
-	<div>
-		<h1>ID: {id.id}</h1>
-		<h1>gender: {id.gender}</h1>
-	</div>
-{/each}
-
 <Button on:click={() => (formModal = true)}>Datenspende</Button>
 
 <Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
-  <form class="flex flex-col space-y-6" action="#" 
+  <form class="flex flex-col space-y-6" action="/donation" 
   onsubmit={() => {
     countryModal = true; // Open the next modal
     formModal = false; // Close the current modal
@@ -104,7 +95,7 @@
 </Modal>
 
 <Modal bind:open={countryModal} size="xs" autoclose={false} class="w-full">
-  <form class="flex flex-col space-y-6" action="#"
+  <form class="flex flex-col space-y-6" action="/donation"
     onsubmit={() => {
     forwardEmailModal = true; // Open the next modal
     countryModal = false; // Close the current modal
@@ -119,7 +110,7 @@
 </Modal>
 
 <Modal bind:open={forwardEmailModal} size="xs" autoclose={false} class="w-full">
-  <form class="flex flex-col space-y-6" action="#" method="POST">
+  <form class="flex flex-col space-y-6" action="/donation" method="POST">
     <Label class="space-y-2">
         <span>Ihre Email Adresse von der Sie spenden:</span>
       <Input type="email" name="email" bind:value={email} placeholder="name@company.com" required />
@@ -129,7 +120,6 @@
       einem späteren Zeitpunkt widerrufen möchten,
       nutzen Sie bitte die ID, die Sie in der Bestätigungsemail erhalten haben.
     </h3>
-    <input required type="int" name="id" />
     <input type="hidden" name="gender" value={gender} />
     <input type="hidden" name="age" value={age} />
     <input type="hidden" name="lang" value={lang} />
@@ -149,26 +139,148 @@
 <Modal bind:open={disclosureModal} size="xs" autoclose={false} class="w-full">
   <h1 class="text-base leading-relaxed text-black">Information und Einwilligungserklärung zum wissenschaftlichen Forschungsvorhaben 
       "Schreiben nach der Briefkultur: MailCom"</h1>
-    <h3 class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Information zum wissenschaftlichen Forschungsvorhaben:</h3>
-    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">...</p>
-    <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Datenschutz:</h3>
+    <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Information zum wissenschaftlichen Forschungsvorhaben</h3>
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-      Mir ist bekannt, dass bei dieser Studie personenbezogene Daten verarbeitet werden sollen. 
-      Ich wurde darüber aufgeklärt und stimme freiwillig zu, dass meine in der Studie erhobenen Daten, 
-      insbesondere Angaben über meine Gesundheit, meine ethnische Herkunft zu den in der Informationsschrift 
-      beschriebenen Zwecken in pseudonymisierter Form aufgezeichnet und ausgewertet werden können. 
-      Die Verarbeitung der Daten erfolgt nach gesetzlichen Bestimmungen und setzt gemäß Art. 6 Abs. 1 lit. a 
-      der Datenschutz-Grundverordnung folgende Einwilligungs-erklärung voraus:</p>
+      Liebe*r Teilnehmer*in des wissenschaftlichen Forschungsvorhabens,       
+      wir möchten Sie um Ihre Einwilligung zur Teilnahme an dem wissenschaftlichen 
+      Forschungsvorhaben MailCom und der damit verbundenen Verarbeitung Ihrer personenbezogenen 
+      Daten bitten. Hierzu erhalten Sie im Folgenden Informationen zum Inhalt und zum Ablauf 
+      des wissenschaftlichen Forschungsvorhabens sowie zur beabsichtigten Nutzung Ihrer Daten:  </p>
+    <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Worum geht es in diesem wissenschaftliche Forschungsvorhaben?</h3>
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-      Ich wurde darüber aufgeklärt und stimme freiwillig zu, dass meine in der Studie erhobenen Daten, zu den 
-      in der Informationsschrift beschriebenen Zwecken in pseudonymisierter Form aufgezeichnet und ausgewertet 
-      werden können. Bei der Veröffentlichung von Ergebnissen der Studie wird mein Name ebenfalls nicht genannt. 
-      Die personenbezogenen Daten werden anonymisiert. Mir ist bekannt, dass diese Einwilligung jederzeit 
-      schriftlich oder mündlich ohne Angabe von Gründen widerrufen werden kann, ohne dass mir dadurch 
-      Nachteile entstehen. Die Rechtmäßigkeit, der bis zum Widerruf erfolgten Datenverarbeitung wird 
-      davon nicht berührt. In diesem Fall kann ich entscheiden, ob die von mir erhobenen Daten gelöscht 
-      werden sollen oder weiterhin für die Zwecke der Studie verwendet werden dürfen.</p>
-      <form class="flex flex-col space-y-6" action="#">
+      Seit über 50 Jahren wird die E-Mail als persönliches und professionelles Kommunikationsmittel benutzt. 
+      Auf der Arbeit, unter Freunden, mit Behörden und in Vereinen werden E-Mails in vielen verschiedenen 
+      Situationen geschrieben und empfangen. In zahlreichen Bereichen hat die E-Mail den Brief als 
+      Kommunikationsform ersetzt. Ziel des Projektes MailCom, ist zu untersuchen, inwieweit sich der 
+      Sprachgebrauch in E-Mails im Unterschied zur über Jahrhunderte üblichen Briefkommunikation 
+      verändert hat. Das wissenschaftliche Forschungsvorhaben wird durchgeführt, um Standardisierungsaspekte 
+      von Text- bzw. Diskurstypen oder auch einzelnen sprachlichen Strukturen sprachwissenschaftlich zu 
+      analysieren. Die Forschungsgruppe wird vom Heidelberg Centre for Digital Humanities der Universität 
+      Heidelberg von 2024 bis 2025 gefördert.    </p>
+    <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Wie ist der genaue Ablauf des wissenschaftlichen 
+      Forschungsvorhabens und wie sollen meine Daten verwendet werden?</h3>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Ihre Teilnahme an diesem wissenschaftlichen Forschungsvorhaben wird die Zeit der E-Mail Spende 
+      und die Beantwortung eines ca. 2-minütigen Fragebogens umfassen.  
+      
+      Während dieses wissenschaftlichen Forschungsvorhabens werden Sie die Möglichkeit haben, eine von 
+      Ihnen ausgewählte Anzahl an E-Mails bzw. E-Mail-Verläufen zu spenden. In einem ersten Schritt werden 
+      Sie gebeten einen sehr kurzen Fragebogen zu Ihrer Situation als Schreiber auszufüllen. Die im 
+      Fragebogen erhobenen Informationen werden nicht auf Ihre Person zurückzuführen sein, sondern 
+      ausschließlich zusammen mit den bereits anonymisierten E-Mails gespeichert und für die 
+      sprachwissenschaftliche Analyse genutzt. Der zweite Schritt ist die Datenspende. Dabei leiten Sie 
+      die von Ihnen zur Spende ausgewählten E-Mails an eine Universitäts-E-Mail-Adresse der Universität
+      Heidelberg weiter. Die von Ihnen gespendeten E-Mails werden bei Eintreffen auf unseren Universitätsservern 
+      umgehend und automatisiert anonymisiert. Alle persönlichen Daten in den E-Mails (Namen, Adressen, 
+      Telefonnummern, Ortsbezeichnungen, Vereins- und Organisationsnamen) werden vor der Speicherung 
+      verändert, abstrahiert oder entfernt, wodurch sie als persönliche Informationen nicht mehr erkennbar 
+      sind. In einem dritten Schritt bekommen Sie von uns einen Pin-Code zugeschickt, der Ihrer Spende 
+      zugeordnet ist. Bewahren Sie diesen Code unbedingt auf. Im Falle einer von Ihnen gewünschten Löschung 
+      Ihrer Daten für das Forschungsvorhaben, ermöglicht uns einzig dieser Code auf die von Ihnen gespendeten 
+      und von uns automatisch anonymisierten Mails zuzugreifen.   </p>
+    <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Entstehen für mich Kosten durch die Teilnahme 
+      an dem wissenschaftlichen Forschungsvorhaben und wird eine Aufwandsentschädigung bezahlt?</h3>
+      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Durch die Teilnahme an diesem wissenschaftlichen Forschungsvorhaben entstehen für Sie keine zusätzlichen Kosten.  
+      Eine Aufwandsentschädigung für Ihre Teilnahme an dem wissenschaftlichen Forschungsvorhaben wird nicht gezahlt. 
+      Ansprüche auf andere Formen der Vergütung, Tantiemen oder sonstige Beteiligungen an finanziellen Vorteilen und Gewinnen, 
+      die möglicherweise auf der Basis der Forschungsergebnisse erzielt werden, sind ausgeschlossen. </p>
+      <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Wer entscheidet, ob ich aus dem wissenschaftlichen 
+        Forschungsvorhaben gegebenenfalls vorzeitig ausscheide?</h3>
+      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Die Teilnahme an diesem wissenschaftlichen Forschungsvorhaben ist freiwillig. Sie können jederzeit ohne 
+      Angabe von Gründen die Löschung Ihrer gespendeten E-Mails verlangen, ohne dass Ihnen dadurch Nachteile 
+      entstehen. Um die Löschung zu vollziehen, senden Sie uns den Pin-Code, den Sie am Ende Ihrer Spende 
+      erhalten haben in einer formlosen E-Mail an mailcom@rose.uni-heidelberg.de.   
+    </p>
+      <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Datenschutzrechtliche Information: 
+      Was passiert mit meinen Daten?</h3>
+      
+      <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Welche Daten werden in dem 
+      wissenschaftlichen Forschungsvorhaben erhoben?</h3>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      
+      Im Rahmen des wissenschaftlichen Forschungsvorhabens werden die folgenden Daten von Ihnen erhoben: 
+      Projektdaten, d.h. die im Rahmen des wissenschaftlichen Forschungsvorhabens produzierten Informationen 
+      zu Ihrer Person, wie insbesondere:  </p> 
+      <ul class="list-disc ps-5 dark:text-gray-400 text-gray-400">
+        <li>Die von Ihnen durch das Weiterleiten an die Spende-Adresse gespendeten E-Mails  
+        <li>Fragebogendaten zu Ihrer Person (Alter, Geschlecht, sprach-geographische Daten) 
+      </ul>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Die Projektdaten können auch besondere Kategorien personenbezogener Daten beinhalten wie beispielsweise 
+      personenbezogene Daten aus denen politische Meinungen, religiöse oder weltanschauliche Überzeugungen oder 
+      die Gewerkschaftszugehörigkeit hervorgehen, Daten zum Sexualleben oder der sexuellen Orientierung.</p> 
+      
+      <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Auf welche Art und Weise erfolgt die 
+        Datenverarbeitung in dem wissenschaftlichen Forschungsvorhaben?</h3>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      
+      Die produzierten Projektdaten, d.h. die E-Mails bzw. E-Mail-Verläufe und die Antworten auf den kurzen 
+      Fragebogen werden automatisch anonymisiert. Alle Angaben, die zu einer Identifizierung Ihrer Person 
+      führen könnten (z.B. Name, E-Mail-Adresse, Ortsbezeichnungen, Telefonnummern, Vereins- und Organisationsnamen) 
+      und sonstige Hinweise werden verändert, abstrahiert oder entfernt. Die Auswertung der Daten durch 
+      Projektmitarbeiter erfolgt nach der Anonymisierung der Daten. In einzelnen Fällen können weitere Textpassagen 
+      von Mitarbeitern gelöscht oder teilweise verfremdet werden, um die Anonymität der Schreiber in allen Aspekten 
+      zu gewährleisten.  
+      
+      In wissenschaftlichen Veröffentlichungen, wie in Publikationen oder auf Tagungen und Konferenzen, werden 
+      keine personenbezogenen Daten von Ihnen genannt, d.h. die Forschungsergebnisse werden ohne Bezug zu Ihrer 
+      Person veröffentlicht. Die anonymisierten E-Mails werden nur in Ausschnitten zitiert, um gegenüber Dritten 
+      sicherzustellen, dass der entstehende Gesamtzusammenhang von Ereignissen nicht zu einer Identifizierung 
+      Ihrer Person führen kann. </p>
+      
+      <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Wer erhält Kenntnis von den Daten und 
+        welche Personen und Institutionen haben Zugang zu den Daten?</h3>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      
+      Zugang zu Ihren gespendeten Emails und Daten haben nur Mitarbeiter*innen des wissenschaftlichen 
+      Forschungsvorhabens. Diese Personen sind auf Beachtung der datenschutzrechtlichen Anforderungen verpflichtet. 
+      Die Daten sind vor fremden Zugriffen geschützt. 
+    </p>
+      <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Welche Rechte stehen den von der 
+        Datenverarbeitung Betroffenen zu?</h3>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      
+      Die Teilnahme an dem wissenschaftlichen Forschungsvorhaben ist freiwillig; sollten Sie nicht teilnehmen, 
+      entstehen Ihnen keine Nachteile. Sie haben jederzeit die Möglichkeit die folgenden Rechte geltend zu machen:</p> 
+      <ul class="list-disc ps-5 dark:text-gray-400 text-gray-400">
+        <li>Recht auf Auskunft über die von Ihnen verarbeiteten personenbezogenen Daten (Art. 15 DSGVO), 
+      
+        <li>Recht auf Berichtigung Sie betreffender unrichtiger personenbezogener Daten (Art. 16 DSGVO), 
+      
+        <li>Recht auf Löschung Sie betreffender personenbezogener Daten (Art. 17 DSGVO), 
+      
+        <li>Recht auf Einschränkung der Verarbeitung Sie betreffender personenbezogener Daten (Art. 18 DSGVO), 
+      
+        <li>Recht auf Widerspruch gegen die Verarbeitung Sie betreffender personenbezogener Daten (Art. 21 DSGVO), 
+      </ul>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer 
+      personenbezogenen Daten durch uns zu beschweren (Art. 77 DSGVO), 
+      
+      Sofern Sie in die Verarbeitung Ihrer Daten eingewilligt haben, besteht die Möglichkeit diese jederzeit 
+      für die Zukunft zu widerrufen (Art. 7 Absatz 3 DSGVO). In diesem Fall müssen alle personenbezogenen Daten 
+      entweder gelöscht oder anonymisiert werden. 
+      
+      Ihre Rechte sind grundsätzlich schriftlich bei dem zur Datenverarbeitung Verantwortlichen geltend zu machen. 
+      <h3 class="text-base leading-relaxed text-black dark:text-gray-400">
+      Wer ist für das wissenschaftliche Forschungsvorhaben und der damit verbundenen Datenverarbeitung verantwortlich? 
+      An wen kann ich mich bei weiteren Fragen wenden? </h3>
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      Das wissenschaftliche Forschungsvorhaben wird vom Romanischen Seminar der Universität Heidelberg, Seminarstr. 3, 
+      69117 Heidelberg, durchgeführt. Für die Datenverarbeitung verantwortlich ist Prof. Dr. Sybille Große, 
+      Leiterin des Projekts MailCom, Universität Heidelberg. 
+      
+      Für datenschutzrechtliche Fragen wenden Sie sich bitte an die*den Datenschutzbeauftragte*n, Seminarstraße 2, 
+      69117 Heidelberg, datenschutz@uni-heidelberg.de.  
+      
+      Sollten Sie weitere Fragen bezüglich des wissenschaftlichen Forschungsvorhabens haben, wenden Sie sich 
+      bitte an die Leiterin des Projektes MailCom, Prof. Dr. Sybille Große, Universität Heidelberg, 
+      mailcom@rose.uni-heidelberg.de.
+    </p>
+      
+      <form class="flex flex-col space-y-6" action="/donation">
       <div class="flex items-start">
         <Checkbox required bind:checked={accept_disclosure}>
           Ich habe die Informationen zum Datenschutz gelesen und stimme der Aufzeichnung und Verarbeitung meiner Daten zu. </Checkbox>
