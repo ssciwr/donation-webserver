@@ -11,7 +11,7 @@ RUN yes | pnpm install --prod --frozen-lockfile
 
 FROM base AS build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN pnpm run build
+RUN BUILD_MODE=true pnpm run build
 
 FROM base
 COPY --from=prod-deps /app/node_modules /app/node_modules
