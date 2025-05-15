@@ -166,17 +166,17 @@
       Ihnen ausgewählte Anzahl an E-Mails bzw. E-Mail-Verläufen zu spenden. In einem ersten Schritt werden 
       Sie gebeten einen sehr kurzen Fragebogen zu Ihrer Situation als Schreiber auszufüllen. Die im 
       Fragebogen erhobenen Informationen werden nicht auf Ihre Person zurückzuführen sein, sondern 
-      ausschließlich zusammen mit den bereits anonymisierten E-Mails gespeichert und für die 
+      ausschließlich zusammen mit den bereits pseudonymisierten E-Mails gespeichert und für die 
       sprachwissenschaftliche Analyse genutzt. Der zweite Schritt ist die Datenspende. Dabei leiten Sie 
       die von Ihnen zur Spende ausgewählten E-Mails an eine Universitäts-E-Mail-Adresse der Universität
       Heidelberg weiter. Die von Ihnen gespendeten E-Mails werden bei Eintreffen auf unseren Universitätsservern 
-      umgehend und automatisiert anonymisiert. Alle persönlichen Daten in den E-Mails (Namen, Adressen, 
+      umgehend und automatisiert pseudonymisiert. Alle persönlichen Daten in den E-Mails (Namen, Adressen, 
       Telefonnummern, Ortsbezeichnungen, Vereins- und Organisationsnamen) werden vor der Speicherung 
       verändert, abstrahiert oder entfernt, wodurch sie als persönliche Informationen nicht mehr erkennbar 
       sind. In einem dritten Schritt bekommen Sie von uns einen Pin-Code zugeschickt, der Ihrer Spende 
       zugeordnet ist. Bewahren Sie diesen Code unbedingt auf. Im Falle einer von Ihnen gewünschten Löschung 
       Ihrer Daten für das Forschungsvorhaben, ermöglicht uns einzig dieser Code auf die von Ihnen gespendeten 
-      und von uns automatisch anonymisierten Mails zuzugreifen.   </p>
+      und von uns automatisch pseudonymisierten Mails zuzugreifen.   </p>
     <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Entstehen für mich Kosten durch die Teilnahme 
       an dem wissenschaftlichen Forschungsvorhaben und wird eine Aufwandsentschädigung bezahlt?</h3>
       <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
@@ -216,7 +216,7 @@
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
       
       Die produzierten Projektdaten, d.h. die E-Mails bzw. E-Mail-Verläufe und die Antworten auf den kurzen 
-      Fragebogen werden automatisch anonymisiert. Alle Angaben, die zu einer Identifizierung Ihrer Person 
+      Fragebogen werden automatisch pseudonymisiert. Alle Angaben, die zu einer Identifizierung Ihrer Person 
       führen könnten (z.B. Name, E-Mail-Adresse, Ortsbezeichnungen, Telefonnummern, Vereins- und Organisationsnamen) 
       und sonstige Hinweise werden verändert, abstrahiert oder entfernt. Die Auswertung der Daten durch 
       Projektmitarbeiter erfolgt nach der Anonymisierung der Daten. In einzelnen Fällen können weitere Textpassagen 
@@ -225,7 +225,7 @@
       
       In wissenschaftlichen Veröffentlichungen, wie in Publikationen oder auf Tagungen und Konferenzen, werden 
       keine personenbezogenen Daten von Ihnen genannt, d.h. die Forschungsergebnisse werden ohne Bezug zu Ihrer 
-      Person veröffentlicht. Die anonymisierten E-Mails werden nur in Ausschnitten zitiert, um gegenüber Dritten 
+      Person veröffentlicht. Die pseudonymisierten E-Mails werden nur in Ausschnitten zitiert, um gegenüber Dritten 
       sicherzustellen, dass der entstehende Gesamtzusammenhang von Ereignissen nicht zu einer Identifizierung 
       Ihrer Person führen kann. </p>
       
@@ -260,7 +260,7 @@
       
       Sofern Sie in die Verarbeitung Ihrer Daten eingewilligt haben, besteht die Möglichkeit diese jederzeit 
       für die Zukunft zu widerrufen (Art. 7 Absatz 3 DSGVO). In diesem Fall müssen alle personenbezogenen Daten 
-      entweder gelöscht oder anonymisiert werden. 
+      entweder gelöscht oder pseudonymisiert werden. 
       
       Ihre Rechte sind grundsätzlich schriftlich bei dem zur Datenverarbeitung Verantwortlichen geltend zu machen. 
       <h3 class="text-base leading-relaxed text-black dark:text-gray-400">
