@@ -19,22 +19,22 @@
         zur Analyse zur Verfügung stellen könnten.  Wir sind demzufolge auf E-Mail-Spenden angewiesen.
         </p>
         <br>
-    <p class="text-gray-100">Mit den gespendeten E-Mails, die selbstverständlich von uns komplett anonymisiert werden, hätten wir die Möglichkeit, 
+    <p class="text-gray-100">Mit den gespendeten E-Mails, die selbstverständlich von uns komplett pseudonymisiert werden, hätten wir die Möglichkeit, 
         verschiedene linguistische Fragestellungen zu bearbeiten oder auch die Frage zu beantworten, ob und warum wir E-Mails anders 
         schreiben als Briefe.
     </p>
     <br>
     <h3 class="text-gray-100 text-xl">
-        Umgang mit den Daten/Anonymisierung
+        Umgang mit den Daten/Pseudonymisierung
     </h3>
     <p class="text-gray-100"> Hinweise an die Spendenden: Bitte spenden Sie ausschließlich E-Mails, die Sie selbst gesendet haben oder bei denen 
         Sie die Zustimmung aller Beteiligten eingeholt haben.  </p>
         <br>
         <h3 class="text-gray-100 text-xl">
-            Anonymisierung der Mails
+            Pseudonymisierung der Mails
         </h3>
-    <p class="text-gray-100">Die E-Mails werden automatisch anonymisiert. Dazu nutzen wir ein entsprechendes Tool, 
-        welches wir im vergangenen Jahr an hunderten Test-E-Mails überprüft haben. Durch die Anonymisierung werden alle persönlichen Daten wie Namen, 
+    <p class="text-gray-100">Die E-Mails werden automatisch pseudonymisiert. Dazu nutzen wir ein entsprechendes Tool, 
+        welches wir im vergangenen Jahr an hunderten Test-E-Mails überprüft haben. Durch die Pseudonymisierung werden alle persönlichen Daten wie Namen, 
         Telefonnummer oder Adressen aus dem E-Mails herausgestrichen und durch Platzhalter wie Name für Sabine Mustermann ersetzt. 
         </p>
         <br>
