@@ -10,16 +10,20 @@ services:
     depends_on:
       - mailcom
   mailcom:
-    build: .
-    command: pnpm run start
+    image: iulusoy/donation-webserver-frontend:latest
     ports:
-      - '3000:3000'
+      - '8000:3000'
     expose:
       - '3000'
-    volumes:
-      - ./src/app/frontend:/app
+      - '3306'
+    depends_on:
+      - db
+    env_file:
+      - db.env
+    environment:
+      - ORIGIN=https://localhost:8443
   db: 
-    image: mysql:9.0.1
+    image: mysql:9.2.0
     restart: always
     env_file:
       - db.env
