@@ -1,10 +1,6 @@
-# donation-webserver
-Webserver for email donation
+# Donation-Webserver
+This is the webserver for email donation.
 
-# Install [mysql-client](https://github.com/PyMySQL/mysqlclient) dependencies
-
-```
-sudo apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
+*This project is currently under development!*
 
 
-```

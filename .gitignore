@@ -163,4 +163,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-!/src/app/frontend/src/lib/
+!/src/frontend/src/lib/
+/src/frontend/node_modules
+/src/frontend/.svelte-kit
+/src/frontend/build
