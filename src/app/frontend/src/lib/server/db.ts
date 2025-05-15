@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-let db; 
+let db: ReturnType<typeof drizzle.mock> | ReturnType<typeof drizzle>;
 
 if (process.env.BUILD_MODE === 'true') {
     console.log('Skipping database connection during build');
@@ -25,4 +25,5 @@ if (process.env.BUILD_MODE === 'true') {
     db = drizzle(connection);
 }
 
-export { db };
+const exportedDb = db;
+export { exportedDb as db };

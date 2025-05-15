@@ -5,7 +5,6 @@
   let countryModal: boolean = $state(false);
   let forwardEmailModal: boolean = $state(false);
   let disclosureModal: boolean = $state(false);
-	const { data } = $props();
 
   let gender: number = $state(0);
   let age: number = $state(0);

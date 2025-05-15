@@ -1,23 +1,10 @@
 import { db } from '$lib/server/db';
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions } from './$types';
 import { donationsTable } from '$lib/server/schema';
 export const prerender = false;
 
 
 console.log('process.env.BUILD_MODE', process.env.BUILD_MODE);
-
-// export const load: PageServerLoad = async () => {
-//     if (process.env.BUILD_MODE === 'true') {
-//         console.log('Skipping database connection during build');
-//         return { users: [] };
-//     }
-//     const users = await db.select().from(donationsTable);
-//     console.log('Getting all users from the database: ', users);
-// 
-//     return {
-//         users
-//     };
-// };
 
 
 export const actions: Actions = {
