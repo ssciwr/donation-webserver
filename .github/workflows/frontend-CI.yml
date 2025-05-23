@@ -29,20 +29,21 @@ jobs:
           with:
             node-version: 22
             cache: 'pnpm'
+            cache-dependency-path: 'src/frontend/pnpm-lock.yaml'
   
         - name: Install dependencies
           run: |
-            cd src/app/frontend 
+            cd src/frontend 
             pnpm install
         - name: run basic tests typescript
           run: |
-            cd src/app/frontend
+            cd src/frontend
             pnpm install
             pnpm run test:unit
 
         - name: Install Playwright Browsers and run tests
           run: |
-            cd src/app/frontend
+            cd src/frontend
             # pnpm install playwright
             pnpm exec playwright install --with-deps
             pnpm test

@@ -4,7 +4,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
 WORKDIR /app
-COPY src/app/frontend /app
+COPY src/frontend /app
 
 FROM base AS prod-deps
 RUN yes | pnpm install --prod --frozen-lockfile
