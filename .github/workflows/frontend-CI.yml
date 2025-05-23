@@ -32,17 +32,17 @@ jobs:
   
         - name: Install dependencies
           run: |
-            cd src/app/frontend 
+            cd src/frontend 
             pnpm install
         - name: run basic tests typescript
           run: |
-            cd src/app/frontend
+            cd src/frontend
             pnpm install
             pnpm run test:unit
 
         - name: Install Playwright Browsers and run tests
           run: |
-            cd src/app/frontend
+            cd src/frontend
             # pnpm install playwright
             pnpm exec playwright install --with-deps
             pnpm test
