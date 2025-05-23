@@ -1,6 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { fail } from '@sveltejs/kit';
-import type { Actions, RequestEvent } from '@sveltejs/kit';
+import type { Actions, RequestEvent, fail } from '@sveltejs/kit';
 export const prerender = false;
 import { sendMessage } from '../../lib/server/contact';
 type Data = {
