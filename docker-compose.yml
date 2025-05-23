@@ -18,8 +18,6 @@ services:
       - '3000'
     depends_on:
       - db
-    links:
-      - db
     environment:
       - ORIGIN=https://localhost:8443
       - BUILD_MODE=false
