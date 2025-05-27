@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { pushState } from '$app/navigation';
-	import { page } from '$app/state';
   import { Button, Modal, Label, Radio, Input, Checkbox} from 'flowbite-svelte'
   import Map from '$lib/world_map_benhodgson_markedup-svg-worldmap.svelte'
+
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
   let forwardEmailModal: boolean = $state(false);
@@ -12,15 +11,8 @@
   let age: number = $state(0);
   let lang: number = $state(0);
   let email: string = $state('');
-  let country: string = $state('');
   let cc: string = $state('');
   let accept_disclosure: boolean = $state(false);
-
-  function showModal() {
-		pushState('', {
-			showModal: true
-		});
-	}
 
   let check_disclosure = () => {
     if (accept_disclosure) {
@@ -116,6 +108,7 @@
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       Ausgewähltes Land: {cc}</h3>
     <Button type="submit" class="w-full1" >Weiter</Button>
+    <Button class="w-full1" on:click={() => (formModal = true, countryModal = false)}>Zurück</Button>
   </form>
 </Modal>
 
@@ -143,6 +136,8 @@
       <Button type="submit" class="w-full1">Einreichen</Button>
     {:else}
       <Button class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
+      <Button class="w-full1" on:click={() => (countryModal = true, forwardEmailModal = false)}>Zurück</Button>
+
     {/if}
   </form>
 </Modal>
