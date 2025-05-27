@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Modal, Label, Radio, Input, Checkbox} from 'flowbite-svelte'
+  import { Button, Modal, Label, Radio, Input, Checkbox, Blockquote, P } from 'flowbite-svelte'
   import Map from '$lib/world_map_benhodgson_markedup-svg-worldmap.svelte'
 
   let formModal: boolean = $state(false);
@@ -32,13 +32,12 @@
 
 <Button on:click={() => (formModal = true)}>Datenspende</Button>
 
-<Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
+<Modal bind:open={formModal} size="md" autoclose={false} class="w-full" title="Metadaten">
   <form class="flex flex-col space-y-6" action="/donation" 
   onsubmit={() => {
     countryModal = true; // Open the next modal
     formModal = false; // Close the current modal
   }}>
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Collect metadata</h3>
     <p class="mb-4 font-semibold text-gray-900 dark:text-white">Geschlecht</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
           <li class="flex items-center">
@@ -90,11 +89,14 @@
             <Radio name="lang" class="p-3" bind:group={lang} value=0>Keine Angabe</Radio>
           </li>
         </ul>
-        <Button type="submit" class="w-full1">Weiter</Button>
+        <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
+          <Button type="submit" class="w-full1">Weiter</Button>
+          <Button class="w-full1" color=alternative on:click={() => (formModal = false)}>Abbrechen</Button>
+        </div>
   </form>
 </Modal>
 
-<Modal bind:open={countryModal} size="xs" autoclose={false} class="w-full">
+<Modal bind:open={countryModal} size="md" autoclose={false} class="w-full" title="Metadaten">
   <form class="flex flex-col space-y-6" action="/donation"
     onsubmit={() => {
     forwardEmailModal = true; // Open the next modal
@@ -107,12 +109,14 @@
     <!-- still missing the country selection -->
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       Ausgewähltes Land: {cc}</h3>
-    <Button type="submit" class="w-full1" >Weiter</Button>
-    <Button class="w-full1" on:click={() => (formModal = true, countryModal = false)}>Zurück</Button>
+    <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
+      <Button type="submit" class="w-full1" >Weiter</Button>
+      <Button class="w-full1" color="alternative" on:click={() => (formModal = true, countryModal = false)}>Zurück</Button>
+    </div>
   </form>
 </Modal>
 
-<Modal bind:open={forwardEmailModal} size="xs" autoclose={false} class="w-full">
+<Modal bind:open={forwardEmailModal} size="md" autoclose={false} class="w-full" title="Metadaten">
   <form class="flex flex-col space-y-6" action="/donation" method="POST">
     <Label class="space-y-2">
         <span>Ihre Email Adresse von der Sie spenden:</span>
@@ -131,18 +135,22 @@
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       Um Ihre Emails zu spenden,
       leiten Sie diese bitte an folgende Adresse weiter: <br>
-      mailcom-donation@rose.uni-heidelberg.de
+      <Blockquote bg class="bg-gray-200 my-4 p-4 rounded" italic={false}>
+        <P size="lg" height="relaxed">mailcom-donation@rose.uni-heidelberg.de</P>
+      </Blockquote>
+      
     </h3>
       <Button type="submit" class="w-full1">Einreichen</Button>
     {:else}
-      <Button class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
-      <Button class="w-full1" on:click={() => (countryModal = true, forwardEmailModal = false)}>Zurück</Button>
-
+      <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
+        <Button class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
+        <Button class="w-full1" color="alternative" on:click={() => (countryModal = true, forwardEmailModal = false)}>Zurück</Button>
+      </div>
     {/if}
   </form>
 </Modal>
 
-<Modal bind:open={disclosureModal} size="xs" autoclose={false} class="w-full">
+<Modal bind:open={disclosureModal} size="md" autoclose={false} class="w-full" title="Einwilligungserklärung">
   <h1 class="text-base leading-relaxed text-black">Information und Einwilligungserklärung zum wissenschaftlichen Forschungsvorhaben 
       "Schreiben nach der Briefkultur: MailCom"</h1>
     <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Information zum wissenschaftlichen Forschungsvorhaben</h3>
@@ -294,8 +302,18 @@
       </div>
       </form>
     <svelte:fragment slot="footer">
+      <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
       <Button on:click={() => check_disclosure()}>Ich akzeptiere und reiche meine Daten ein</Button>
       <Button color="alternative" on:click={() => reject_disclosure()}>Ablehnen</Button>
+      </div>
     </svelte:fragment>
 </Modal>
 
+<style>
+.quote-bq {
+		background-color: #d51e1e;
+		border: 2px solid #1b1d1c;
+		color: #252525;
+		padding: 0.8rem;
+	}
+  </style>
