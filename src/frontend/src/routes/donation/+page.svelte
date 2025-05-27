@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { pushState } from '$app/navigation';
+	import { page } from '$app/state';
   import { Button, Modal, Label, Radio, Input, Checkbox} from 'flowbite-svelte'
-  import Map from '$lib/Map2.svelte'
+  import Map from '$lib/world_map_benhodgson_markedup-svg-worldmap.svelte'
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
   let forwardEmailModal: boolean = $state(false);
@@ -11,7 +13,14 @@
   let lang: number = $state(0);
   let email: string = $state('');
   let country: string = $state('');
+  let cc: string = $state('');
   let accept_disclosure: boolean = $state(false);
+
+  function showModal() {
+		pushState('', {
+			showModal: true
+		});
+	}
 
   let check_disclosure = () => {
     if (accept_disclosure) {
@@ -102,8 +111,10 @@
     <Label class="space-y-2">
       <span>Wo haben Sie die meisten Nachrichten verfasst?</span>
     </Label>
-    <Map /> 
+    <Map bind:cc/> 
     <!-- still missing the country selection -->
+    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+      Ausgewähltes Land: {cc}</h3>
     <Button type="submit" class="w-full1" >Weiter</Button>
   </form>
 </Modal>
@@ -122,6 +133,7 @@
     <input type="hidden" name="gender" value={gender} />
     <input type="hidden" name="age" value={age} />
     <input type="hidden" name="lang" value={lang} />
+    <input type="hidden" name="country" value={cc} />
     {#if accept_disclosure}
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       Um Ihre Emails zu spenden,

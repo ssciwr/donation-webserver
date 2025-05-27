@@ -6,6 +6,7 @@ export const donationsTable = mysqlTable('donations', {
   age: int(),
   lang: int(),
   email: text(),
+  country: text(),
 });
 
 export const newsletterTable = mysqlTable('newsletter', {
