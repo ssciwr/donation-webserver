@@ -8,8 +8,8 @@ const config = {
   theme: {
     extend: {
       colors: {
-        primary: colors.stone,
-        secondary: colors.blue,
+        primary: colors.red,
+        secondary: colors.slate,
       },
     },
   },

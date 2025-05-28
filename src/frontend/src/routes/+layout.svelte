@@ -1,6 +1,6 @@
 <script lang='ts'>
   import "../app.postcss"
-  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Footer, FooterBrand, FooterCopyright, FooterLinkGroup, FooterLink, Button } from 'flowbite-svelte'
+  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Footer, FooterBrand, FooterCopyright, FooterLinkGroup, FooterLink, Button, DarkMode } from 'flowbite-svelte'
   import { goto } from '$app/navigation';
   function gotoDonate() {
     goto('/donation');
@@ -20,6 +20,8 @@
   <NavHamburger  />
   <div class="flex md:order-2">
     <Button size="sm" on:click={gotoDonate} >Datenspende</Button>
+  <DarkMode />
+
   </div>
   <NavUl>
     <NavLi href="/">Home</NavLi>
@@ -33,7 +35,7 @@
 
   {@render children()}
 
-<Footer footerType="logo" class='p-8'>
+<Footer footerType="logo" class='w-full border-t'>
   <div class="sm:flex sm:items-center sm:justify-between">
     <FooterBrand
       href="https://www.uni-heidelberg.de/en"
@@ -42,14 +44,14 @@
       name="Romanisches Seminar"
     />
 
-    <FooterLinkGroup ulClass="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
+    <FooterLinkGroup ulClass="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400 p-0 my-0">
       <FooterLink href="/">About</FooterLink>
       <FooterLink href="/">Privacy Policy</FooterLink>
       <FooterLink href="/contact">Contact</FooterLink>
       <FooterLink href="/impressum">Impressum</FooterLink>
     </FooterLinkGroup>
   </div>
-  <hr class="my-6" />
-  <FooterCopyright href="/" by="UHEI™" />
+  <hr class="my-2 sm:mx-auto" />
+  <FooterCopyright href="/" by="UHEI™" class="text-xs py-2 my-0"/>
 </Footer>
 
