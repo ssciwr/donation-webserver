@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Button, Modal, Label, Radio, Input, Checkbox, Blockquote, P } from 'flowbite-svelte'
   import Map from '$lib/world_map_benhodgson_markedup-svg-worldmap.svelte'
-  export const prerender = false;
 
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
@@ -40,7 +39,7 @@
 
 
 <Modal bind:open={formModal} size="md" autoclose={false} class="w-full" title="Metadaten">
-  <form class="flex flex-col space-y-6" action="/donation" 
+  <form class="flex flex-col space-y-6"
   onsubmit={() => {
     countryModal = true; // Open the next modal
     formModal = false; // Close the current modal
@@ -97,14 +96,14 @@
           </li>
         </ul>
         <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-          <Button type="submit" class="w-full1">Weiter</Button>
-          <Button class="w-full1" color=alternative on:click={() => (formModal = false)}>Abbrechen</Button>
+          <Button type="submit" >Weiter</Button>
+          <Button color=alternative on:click={() => (formModal = false)}>Abbrechen</Button>
         </div>
   </form>
 </Modal>
 
 <Modal bind:open={countryModal} size="md" autoclose={false} class="w-full" title="Metadaten">
-  <form class="flex flex-col space-y-6" action="/donation"
+  <form class="flex flex-col space-y-6"
     onsubmit={() => {
     forwardEmailModal = true; // Open the next modal
     countryModal = false; // Close the current modal
@@ -113,18 +112,17 @@
       <span>Wo haben Sie die meisten Nachrichten verfasst?</span>
     </Label>
     <Map bind:cc/> 
-    <!-- still missing the country selection -->
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       Ausgewähltes Land: {cc}</h3>
     <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-      <Button type="submit" class="w-full1" >Weiter</Button>
-      <Button class="w-full1" color="alternative" on:click={() => (formModal = true, countryModal = false)}>Zurück</Button>
+      <Button type="submit" >Weiter</Button>
+      <Button color="alternative" on:click={() => (formModal = true, countryModal = false)}>Zurück</Button>
     </div>
   </form>
 </Modal>
 
 <Modal bind:open={forwardEmailModal} size="md" autoclose={false} class="w-full" title="Metadaten">
-  <form class="flex flex-col space-y-6" action="/donation" method="POST">
+  <form class="flex flex-col space-y-6" action="?/donate" method="POST">
     <Label class="space-y-2">
         <span>Ihre Email Adresse von der Sie spenden:</span>
       <Input type="email" name="email" bind:value={email} placeholder="name@company.com" required />
@@ -147,11 +145,11 @@
       </Blockquote>
       
     </h3>
-      <Button type="submit" class="w-full1">Einreichen</Button>
+      <Button type="submit">Einreichen</Button>
     {:else}
       <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-        <Button class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
-        <Button class="w-full1" color="alternative" on:click={() => (countryModal = true, forwardEmailModal = false)}>Zurück</Button>
+        <Button on:click={() => (disclosureModal = true)}>Weiter</Button>
+        <Button color="alternative" on:click={() => (countryModal = true, forwardEmailModal = false)}>Zurück</Button>
       </div>
     {/if}
   </form>
@@ -301,7 +299,7 @@
       mailcom@rose.uni-heidelberg.de.
     </p>
       
-      <form class="flex flex-col space-y-6" action="/donation">
+      <form class="flex flex-col space-y-6">
       <div class="flex items-start">
         <Checkbox required bind:checked={accept_disclosure}>
           Ich habe die Informationen zum Datenschutz gelesen und stimme der Aufzeichnung und Verarbeitung meiner Daten zu. </Checkbox>
