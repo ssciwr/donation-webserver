@@ -5,7 +5,7 @@
   function gotoDonate() {
     goto('/donation');
   }
-  let { children } = $props();
+
 </script>
 
 
@@ -32,8 +32,7 @@
   </NavUl>
 </Navbar>
 
-
-  {@render children()}
+<slot />
 
 <Footer footerType="logo" class='w-full border-t'>
   <div class="sm:flex sm:items-center sm:justify-between">

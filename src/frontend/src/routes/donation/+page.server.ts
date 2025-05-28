@@ -1,11 +1,14 @@
 import { db } from '$lib/server/db';
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import { donationsTable } from '$lib/server/schema';
 export const prerender = false;
 
 
 console.log('process.env.BUILD_MODE', process.env.BUILD_MODE);
 
+export const load: PageServerLoad = async () => {
+  return {};
+};
 
 export const actions: Actions = {
     default: async ({ request }) => {
@@ -28,5 +31,6 @@ export const actions: Actions = {
             email,
             country
         });
+    return { success: true, message: 'Donation recorded successfully' };
     }
 };

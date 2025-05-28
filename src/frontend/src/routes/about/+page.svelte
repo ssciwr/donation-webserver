@@ -11,7 +11,7 @@
 <main class='p-8 mb-auto'>
 <div class="flex justify-center flex-col p-8 mb-auto">
 
-    <h1 class="mb-4 text-4xl font-extrabold text-center leading-none tracking-tight md:text-5xl lg:text-6xl dark:text-white">Projektbeschreibung</h1>
+    <h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">Projektbeschreibung</h1>
     <p> Auch wenn die E-Mail nun schon seit Jahrzehnten als persönliches oder auch als professionelles Kommunikationsmittel benutzt wird, 
         gibt es nur relativ wenige linguistische Arbeiten, die ihren Sprachgebrauch genauer analysieren. Ein wesentlicher Grund für die 
         überschaubare Anzahl an umfassenden linguistischen Studien, liegt in der mangelnden Datenbasis. Um E-Mails analysieren zu können, 

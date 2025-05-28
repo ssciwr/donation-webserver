@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button, Modal, Label, Radio, Input, Checkbox, Blockquote, P } from 'flowbite-svelte'
   import Map from '$lib/world_map_benhodgson_markedup-svg-worldmap.svelte'
+  export const prerender = false;
 
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
@@ -30,7 +31,13 @@
   };
 </script>
 
+<div class="flex justify-center items-center flex-col p-8 mb-auto">
+
+    <h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">Hier kannst du deine Emails spenden!</h1>
+      
 <Button on:click={() => (formModal = true)}>Datenspende</Button>
+</div>
+
 
 <Modal bind:open={formModal} size="md" autoclose={false} class="w-full" title="Metadaten">
   <form class="flex flex-col space-y-6" action="/donation" 
@@ -308,12 +315,3 @@
       </div>
     </svelte:fragment>
 </Modal>
-
-<style>
-.quote-bq {
-		background-color: #d51e1e;
-		border: 2px solid #1b1d1c;
-		color: #252525;
-		padding: 0.8rem;
-	}
-  </style>
