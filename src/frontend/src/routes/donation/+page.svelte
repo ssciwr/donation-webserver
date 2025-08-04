@@ -223,8 +223,8 @@
       Projektdaten, d.h. die im Rahmen des wissenschaftlichen Forschungsvorhabens produzierten Informationen 
       zu Ihrer Person, wie insbesondere:  </p> 
       <ul class="list-disc ps-5 dark:text-gray-400 text-gray-400">
-        <li>Die von Ihnen durch das Weiterleiten an die Spende-Adresse gespendeten E-Mails  
-        <li>Fragebogendaten zu Ihrer Person (Alter, Geschlecht, sprach-geographische Daten) 
+        <li>Die von Ihnen durch das Weiterleiten an die Spende-Adresse gespendeten E-Mails </li> 
+        <li>Fragebogendaten zu Ihrer Person (Alter, Geschlecht, sprach-geographische Daten) </li>
       </ul>
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
       Die Projektdaten können auch besondere Kategorien personenbezogener Daten beinhalten wie beispielsweise 
@@ -264,15 +264,15 @@
       Die Teilnahme an dem wissenschaftlichen Forschungsvorhaben ist freiwillig; sollten Sie nicht teilnehmen, 
       entstehen Ihnen keine Nachteile. Sie haben jederzeit die Möglichkeit die folgenden Rechte geltend zu machen:</p> 
       <ul class="list-disc ps-5 dark:text-gray-400 text-gray-400">
-        <li>Recht auf Auskunft über die von Ihnen verarbeiteten personenbezogenen Daten (Art. 15 DSGVO), 
+        <li>Recht auf Auskunft über die von Ihnen verarbeiteten personenbezogenen Daten (Art. 15 DSGVO), </li>
       
-        <li>Recht auf Berichtigung Sie betreffender unrichtiger personenbezogener Daten (Art. 16 DSGVO), 
+        <li>Recht auf Berichtigung Sie betreffender unrichtiger personenbezogener Daten (Art. 16 DSGVO), </li>
       
-        <li>Recht auf Löschung Sie betreffender personenbezogener Daten (Art. 17 DSGVO), 
+        <li>Recht auf Löschung Sie betreffender personenbezogener Daten (Art. 17 DSGVO), </li>
       
-        <li>Recht auf Einschränkung der Verarbeitung Sie betreffender personenbezogener Daten (Art. 18 DSGVO), 
+        <li>Recht auf Einschränkung der Verarbeitung Sie betreffender personenbezogener Daten (Art. 18 DSGVO), </li>
       
-        <li>Recht auf Widerspruch gegen die Verarbeitung Sie betreffender personenbezogener Daten (Art. 21 DSGVO), 
+        <li>Recht auf Widerspruch gegen die Verarbeitung Sie betreffender personenbezogener Daten (Art. 21 DSGVO). </li>
       </ul>
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
       Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer 

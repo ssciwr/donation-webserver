@@ -13,7 +13,11 @@
 
 
 </script>
-
+ <a href="/donation">
+    <Button class="w-40" type="button">
+      Emails spenden
+    </Button>
+  </a>
 <div class="flex justify-center items-center flex-col p-8 mb-auto">
 <h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">Projekt MailCom</h1>
 
