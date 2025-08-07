@@ -1,15 +1,9 @@
 <script lang='ts'>
-  import "../app.postcss"
+  import '../app.css';
   import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Footer, FooterBrand, FooterCopyright, FooterLinkGroup, FooterLink, Button, DarkMode } from 'flowbite-svelte'
-  import { goto } from '$app/navigation';
-  function gotoDonate() {
-    goto('/donation');
-  }
-
 </script>
 
-
-<Navbar fluid>
+<Navbar fluid={true}>
   <NavBrand href="/">
     <img
       src="/images/Logo_oben_links.svg"
@@ -17,14 +11,9 @@
       alt="Mailcom Logo"
     />
   </NavBrand>
-  <NavHamburger  />
-  <div class="flex md:order-2">
-    <Button size="sm" on:click={gotoDonate} >Datenspende</Button>
-  <DarkMode />
-
-  </div>
+  <NavHamburger/>
   <NavUl>
-    <NavLi href="/">Home</NavLi>
+    <NavLi class="text-red-900" href="/">Home</NavLi>
     <NavLi href="/tutorial">Tutorial</NavLi>
     <NavLi href="/about">Information</NavLi>
     <NavLi href="/faq">FAQ</NavLi>
@@ -34,23 +23,28 @@
 
 <slot />
 
-<Footer footerType="logo" class='w-full border-t'>
+<Footer footerType="logo">
   <div class="sm:flex sm:items-center sm:justify-between">
-    <FooterBrand
-      href="https://www.uni-heidelberg.de/en"
-      src="/images/Logoleiste_SSC_4c.png"
+  <div class="flex items-center gap-3 py-0 my-0">
+  <a href="https://www.uni-heidelberg.de/en" class="flex items-center">
+    <img 
+      src="/images/Logoleiste_SSC_4c.png" 
       alt="Romanisches Seminar Logo"
-      name="Romanisches Seminar"
+      class="max-h-12 w-auto"
     />
-
-    <FooterLinkGroup ulClass="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400 p-0 my-0">
-      <FooterLink href="/">About</FooterLink>
-      <FooterLink href="/">Privacy Policy</FooterLink>
+  </a>
+  <a href="https://www.uni-heidelberg.de/rose/" class="flex items-center">
+    <span class="text-primary-800 text-sm sm:text-base md:text-lg lg:text-xl max-w-xs whitespace-nowrap font-bold">Romanisches Seminar</span>
+  </a>
+</div>
+    <FooterLinkGroup class="flex flex-wrap items-center gap-6 mb-2 text-sm text-gray-500 sm:mb-0 dark:text-gray-400 p-0 my-0">
+      <FooterLink href="/about">About</FooterLink>
+      <FooterLink href="https://www.uni-heidelberg.de/en/privacy-statement">Privacy Policy</FooterLink>
       <FooterLink href="/contact">Contact</FooterLink>
-      <FooterLink href="/impressum">Impressum</FooterLink>
+      <FooterLink href="https://www.uni-heidelberg.de/en/imprint">Imprint</FooterLink>
     </FooterLinkGroup>
-  </div>
-  <hr class="my-2 sm:mx-auto" />
-  <FooterCopyright href="/" by="UHEI™" class="text-xs py-2 my-0"/>
+    </div>
+  <hr class="my-0 border-primary-900 sm:mx-auto my-1 dark:border-gray-700" />
+  <FooterCopyright href="/" by="UHEI™" class="text-xs py-0 my-0"/>
 </Footer>
 
