@@ -35,10 +35,15 @@ jobs:
           run: |
             cd src/frontend 
             pnpm install
+            
+        - name: Generate SvelteKit files
+          run: |
+            cd src/frontend
+            pnpm svelte-kit sync
+            
         - name: run basic tests typescript
           run: |
             cd src/frontend
-            pnpm install
             pnpm run test:unit
 
         - name: Install Playwright Browsers and run tests

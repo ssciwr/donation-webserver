@@ -36,7 +36,7 @@
         <a href="/blog" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/blog') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">Blog</a>
       </div>
       
-      <Button class="px-4 py-2 rounded-lg bg-orange-100 text-primary-800 mr-2" href="/donation">
+      <Button class="px-4 py-2 rounded-lg bg-custom-100 text-primary-800 mr-2" href="/donation">
         Datenspende
       </Button>
       
@@ -92,7 +92,7 @@
     />
   </a>
   <a href="https://www.uni-heidelberg.de/rose/" class="flex items-center">
-    <span class="text-primary-800 text-sm sm:text-base md:text-lg lg:text-xl max-w-xs whitespace-nowrap font-bold">Romanisches Seminar</span>
+    <span class="text-primary-900 text-sm sm:text-base md:text-lg lg:text-xl max-w-xs whitespace-nowrap font-bold">Romanisches Seminar</span>
   </a>
 </div>
     <FooterLinkGroup class="flex flex-wrap items-center gap-6 mb-2 text-sm text-gray-500 sm:mb-0 dark:text-gray-400 p-0 my-0">
