@@ -2,6 +2,8 @@
   import '../app.css';
   import { page } from '$app/stores';
   import { Footer, FooterCopyright, FooterLinkGroup, FooterLink, Button } from 'flowbite-svelte'
+  import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
+  import { t } from '$lib/i18n';
   
   let isMenuOpen = false;
   
@@ -29,15 +31,15 @@
       <!-- Desktop navigation links -->
       <div class="hidden lg:flex lg:items-center lg:space-x-8 lg:mr-6">
         <a href="/" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname === '/' ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">Home</a>
-        <a href="/tutorial" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/tutorial') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">Tutorial</a>
-        <a href="/about" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/about') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">Information</a>
-        <a href="/team" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/team') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">Team</a>
-        <a href="/faq" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/faq') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">FAQ</a>
-        <a href="/blog" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/blog') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">Blog</a>
+        <a href="/tutorial" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/tutorial') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.tutorial}</a>
+        <a href="/about" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/about') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.about}</a>
+        <a href="/team" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/team') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.team}</a>
+        <a href="/faq" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/faq') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.faq}</a>
+        <a href="/blog" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/blog') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.blog}</a>
       </div>
       
       <Button class="px-4 py-2 rounded-lg bg-custom-100 text-primary-800 mr-2" href="/donation">
-        Datenspende
+        {$t.nav.donation}
       </Button>
       
       <!-- Custom hamburger button -->
@@ -51,6 +53,9 @@
           <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
         </svg>
       </button>
+      
+      <!-- Language switcher - moved to very right -->
+      <LanguageSwitcher class="ml-2" />
     </div>
     
     <!-- Mobile menu dropdown - only shows on mobile -->
@@ -60,19 +65,19 @@
           <a href="/" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname === '/' ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">Home</a>
         </li>
         <li>
-          <a href="/tutorial" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/tutorial') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">Tutorial</a>
+          <a href="/tutorial" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/tutorial') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.tutorial}</a>
         </li>
         <li>
-          <a href="/about" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/about') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">Information</a>
+          <a href="/about" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/about') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.about}</a>
         </li>
         <li>
-          <a href="/team" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/team') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">Team</a>
+          <a href="/team" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/team') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.team}</a>
         </li>
         <li>
-          <a href="/faq" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/faq') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">FAQ</a>
+          <a href="/faq" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/faq') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.faq}</a>
         </li>
         <li>
-          <a href="/blog" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/blog') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">Blog</a>
+          <a href="/blog" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/blog') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.blog}</a>
         </li>
       </ul>
     </div>
@@ -96,9 +101,9 @@
   </a>
 </div>
     <FooterLinkGroup class="flex flex-wrap items-center gap-6 mb-2 text-sm text-gray-500 sm:mb-0 dark:text-gray-400 p-0 my-0">
-      <FooterLink href="/about">About</FooterLink>
+      <FooterLink href="/about">{$t.nav.about}</FooterLink>
       <FooterLink href="https://www.uni-heidelberg.de/en/privacy-statement">Privacy Policy</FooterLink>
-      <FooterLink href="/contact">Contact</FooterLink>
+      <FooterLink href="/contact">{$t.nav.contact}</FooterLink>
       <FooterLink href="https://www.uni-heidelberg.de/en/imprint">Imprint</FooterLink>
     </FooterLinkGroup>
     </div>
