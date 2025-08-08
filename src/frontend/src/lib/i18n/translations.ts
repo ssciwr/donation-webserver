@@ -41,7 +41,7 @@ export const translations = {
     },
     donation: {
       title: 'Datenspende',
-      content: 'Helfen Sie uns, indem Sie Ihre Email-Daten für Forschungszwecke spenden...'
+      buttonText: 'Spenden Sie Ihre Emails für Forschungszwecke',
     },
     tutorial: {
       title: 'Tutorial',
@@ -174,7 +174,7 @@ export const translations = {
     },
     donation: {
       title: 'Don de Données',
-      content: 'Aidez-nous en donnant vos données d\'email à des fins de recherche...'
+      buttonText: 'Aidez-nous en donnant vos données d\'email à des fins de recherche!'
     },
     tutorial: {
       title: 'Tutoriel',

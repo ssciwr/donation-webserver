@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Button, Modal, Label, Radio, Input, Checkbox, Blockquote, P } from 'flowbite-svelte'
+  import { t } from '$lib/i18n';
   import Map from '$lib/world_map_benhodgson_markedup-svg-worldmap.svelte'
 
   let formModal: boolean = $state(false);
@@ -30,13 +31,15 @@
   };
 </script>
 
-<div class="flex justify-center items-center flex-col p-8 mb-auto">
-
-    <h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">Hier kannst du deine Emails spenden!</h1>
-      
-<Button on:click={() => (formModal = true)}>Datenspende</Button>
+<main class='p-8 mb-auto'>
+<div class="flex justify-center flex-col p-8 mb-auto rounded-lg" style="background-color: rgba(254, 242, 242, 0.6);">
+<h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">{$t.donation.title}</h1>
+<br>
+<div class="flex justify-center">
+<Button class="px-4 py-2 w-auto bg-primary-900" onclick={() => (formModal = true)}>{$t.donation.buttonText}</Button>
 </div>
-
+</div>
+</main>
 
 <Modal bind:open={formModal} size="md" autoclose={false} class="w-full" title="Metadaten">
   <form class="flex flex-col space-y-6"
@@ -282,7 +285,7 @@
       für die Zukunft zu widerrufen (Art. 7 Absatz 3 DSGVO). In diesem Fall müssen alle personenbezogenen Daten 
       entweder gelöscht oder pseudonymisiert werden. 
       
-      Ihre Rechte sind grundsätzlich schriftlich bei dem zur Datenverarbeitung Verantwortlichen geltend zu machen. 
+      Ihre Rechte sind grundsätzlich schriftlich bei dem zur Datenverarbeitung Verantwortlichen geltend zu machen. </p>
       <h3 class="text-base leading-relaxed text-black dark:text-gray-400">
       Wer ist für das wissenschaftliche Forschungsvorhaben und der damit verbundenen Datenverarbeitung verantwortlich? 
       An wen kann ich mich bei weiteren Fragen wenden? </h3>
