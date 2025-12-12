@@ -2,6 +2,7 @@
   import { Button, Modal, Label, Radio, Input, Checkbox, Blockquote, P } from 'flowbite-svelte'
   import { t } from '$lib/i18n';
   import Map from '$lib/world_map_benhodgson_markedup-svg-worldmap.svelte'
+  import { enhance } from '$app/forms';
 
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
@@ -20,14 +21,15 @@
       forwardEmailModal = true; // Open the next modal
       disclosureModal = false; // Close the current modal
     } else {
-      alert('Bitte bestaetigen Sie die Einwilligungserklaerung um fortzufahren.');
+      alert('Bitte bestätigen Sie die Einwilligungserklärung um fortzufahren.');
     }
   };
 
   let reject_disclosure = () => {
-      alert('Sie haben die Einwilligungserklaerung abgelehnt. Ihre Daten werden nicht gespeichert.');
+      alert('Sie haben die Einwilligungserklärung abgelehnt. Ihre Daten werden nicht gespeichert.');
       forwardEmailModal = false; // Open the next modal
       disclosureModal = false; // Close the current modal
+      accept_disclosure = false;
   };
 </script>
 
@@ -42,75 +44,67 @@
 </main>
 
 <Modal bind:open={formModal} size="md" autoclose={false} class="w-full" title="Metadaten">
-  <form class="flex flex-col space-y-6"
-  onsubmit={() => {
-    countryModal = true; // Open the next modal
-    formModal = false; // Close the current modal
-  }}>
+  <div class="flex flex-col space-y-6">
     <p class="mb-4 font-semibold text-gray-900 dark:text-white">Geschlecht</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
           <li class="flex items-center">
-            <Radio name="gender" class="p-3" bind:group={gender} value="1">m</Radio>
+            <Radio name="gender" class="p-3" bind:group={gender} value={1}>m</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="gender" class="p-3" bind:group={gender} value="2">f</Radio>
+            <Radio name="gender" class="p-3" bind:group={gender} value={2}>f</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="gender" class="p-3" bind:group={gender} value=3>d</Radio>
+            <Radio name="gender" class="p-3" bind:group={gender} value={3}>d</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="gender" class="p-3" bind:group={gender} value=0>Keine Angabe</Radio>
+            <Radio name="gender" class="p-3" bind:group={gender} value={0}>Keine Angabe</Radio>
           </li>
         </ul>
         <p class="mb-4 font-semibold text-gray-900 dark:text-white">Altersschritte</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value="1">&lt;20</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={1}>&lt;20</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value="2">21-30</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={2}>21-30</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=3>31-40</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={3}>31-40</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=4>41-50</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={4}>41-50</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=5>51-60</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={5}>51-60</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=6>&gt;60</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={6}>&gt;60</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=0>Keine Angabe</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={0}>Keine Angabe</Radio>
           </li>
         </ul>
         <p class="mb-4 font-semibold text-gray-900 dark:text-white">Ist die Sprache, in der Sie schreiben, Ihre Muttersprache?</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
           <li class="flex items-center">
-            <Radio name="lang" class="p-3" bind:group={lang} value=1>Ja</Radio>
+            <Radio name="lang" class="p-3" bind:group={lang} value={1}>Ja</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="lang" class="p-3" bind:group={lang} value=2>Nein</Radio>
+            <Radio name="lang" class="p-3" bind:group={lang} value={2}>Nein</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="lang" class="p-3" bind:group={lang} value=0>Keine Angabe</Radio>
+            <Radio name="lang" class="p-3" bind:group={lang} value={0}>Keine Angabe</Radio>
           </li>
         </ul>
         <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-          <Button type="submit" >Weiter</Button>
-          <Button color=alternative on:click={() => (formModal = false)}>Abbrechen</Button>
+          <Button onclick={() => {countryModal = true; formModal = false;}}>Weiter</Button>
+          <Button color="alternative" onclick={() => (formModal = false)}>Abbrechen</Button>
         </div>
-  </form>
+  </div>
 </Modal>
 
 <Modal bind:open={countryModal} size="md" autoclose={false} class="w-full" title="Metadaten">
-  <form class="flex flex-col space-y-6"
-    onsubmit={() => {
-    forwardEmailModal = true; // Open the next modal
-    countryModal = false; // Close the current modal
-    }}>
+  <div class="flex flex-col space-y-6">
     <Label class="space-y-2">
       <span>Wo haben Sie die meisten Nachrichten verfasst?</span>
     </Label>
@@ -118,16 +112,21 @@
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       Ausgewähltes Land: {cc}</h3>
     <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-      <Button type="submit" >Weiter</Button>
-      <Button color="alternative" on:click={() => (formModal = true, countryModal = false)}>Zurück</Button>
+      <Button onclick={() => {forwardEmailModal = true; countryModal = false;}} >Weiter</Button>
+      <Button color="alternative" onclick={() => (formModal = true, countryModal = false)}>Zurück</Button>
     </div>
-  </form>
+  </div>
 </Modal>
 
 <Modal bind:open={forwardEmailModal} size="md" autoclose={false} class="w-full" title="Metadaten">
-  <form class="flex flex-col space-y-6" action="?/donate" method="POST">
+  <form action="?/donate" method="POST" use:enhance class="flex flex-col space-y-6">
+    <input type="hidden" name="gender" value={gender} />
+    <input type="hidden" name="age" value={age} />
+    <input type="hidden" name="lang" value={lang} />
+    <input type="hidden" name="country" value={cc} />
+    
     <Label class="space-y-2">
-        <span>Ihre Email Adresse von der Sie spenden:</span>
+      <span>Ihre Email Adresse von der Sie spenden:</span>
       <Input type="email" name="email" bind:value={email} placeholder="name@company.com" required />
     </Label>
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
@@ -135,24 +134,19 @@
       einem späteren Zeitpunkt widerrufen möchten,
       nutzen Sie bitte die ID, die Sie in der Bestätigungsemail erhalten haben.
     </h3>
-    <input type="hidden" name="gender" value={gender} />
-    <input type="hidden" name="age" value={age} />
-    <input type="hidden" name="lang" value={lang} />
-    <input type="hidden" name="country" value={cc} />
     {#if accept_disclosure}
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+      <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       Um Ihre Emails zu spenden,
       leiten Sie diese bitte an folgende Adresse weiter: <br>
       <Blockquote bg class="bg-gray-200 my-4 p-4 rounded" italic={false}>
         <P size="lg" height="relaxed">mailcom-donation@rose.uni-heidelberg.de</P>
       </Blockquote>
-      
-    </h3>
+      </h3>
       <Button type="submit">Einreichen</Button>
     {:else}
       <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-        <Button on:click={() => (disclosureModal = true)}>Weiter</Button>
-        <Button color="alternative" on:click={() => (countryModal = true, forwardEmailModal = false)}>Zurück</Button>
+        <Button type="button" onclick={() => (disclosureModal = true)}>Weiter</Button>
+        <Button type="button" color="alternative" onclick={() => (countryModal = true, forwardEmailModal = false)}>Zurück</Button>
       </div>
     {/if}
   </form>
@@ -309,10 +303,8 @@
           <!-- Ich habe die <a href="/about" class="text-blue-600 dark:text-blue-500 hover:underline">Informationen zum Datenschutz</a> gelesen und stimme der Aufzeichnung und Verarbeitung meiner Daten zu. </Checkbox> -->
       </div>
       </form>
-    <svelte:fragment slot="footer">
       <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-      <Button on:click={() => check_disclosure()}>Ich akzeptiere und reiche meine Daten ein</Button>
-      <Button color="alternative" on:click={() => reject_disclosure()}>Ablehnen</Button>
+        <Button onclick={() => check_disclosure()}>Ich akzeptiere und reiche meine Daten ein</Button>
+        <Button color="alternative" onclick={() => reject_disclosure()}>Ablehnen</Button>
       </div>
-    </svelte:fragment>
 </Modal>
