@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+@source "../node_modules/flowbite-svelte";
+
+@custom-variant dark (&:where(.dark, .dark *));
+      /* colors: { */
+        /* primary: colors.red, */
+        /* secondary: colors.slate, */
+      /* } */
+@theme {
+  --font-script: Great Vibes, cursive;
+  --color-primary-50: #FDF2F2;
+  --color-primary-100: #FDE8E8;
+  --color-primary-200: #FBD5D5;
+  --color-primary-300: #F8B4B4;
+  --color-primary-400: #F98080;
+  --color-primary-500: #F05252;
+  --color-primary-600: #E02424;
+  --color-primary-700: #C81E1E;
+  --color-primary-800: #9B1C1C;
+  --color-primary-900: #590d08;
+  --color-custom-100: #cbbd9c;
+}
+
+body {
+  background-image: url("/images/Alle_Hintergrundbilder.svg");
+  background-size: 80%;
+  background-repeat: repeat;
+  background-color: #590d08; /* is on the ppt, is color-red-900 #82181a; #fffbeb is another less straining option; */
+  /* cbbd9c is the background on card and button */
+}

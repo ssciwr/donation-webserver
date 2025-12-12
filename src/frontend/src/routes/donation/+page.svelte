@@ -1,6 +1,9 @@
 <script lang="ts">
-  import { Button, Modal, Label, Radio, Input, Checkbox} from 'flowbite-svelte'
-  import Map from '$lib/Map2.svelte'
+  import { Button, Modal, Label, Radio, Input, Checkbox, Blockquote, P } from 'flowbite-svelte'
+  import { t } from '$lib/i18n';
+  import Map from '$lib/world_map_benhodgson_markedup-svg-worldmap.svelte'
+  import { enhance } from '$app/forms';
+
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
   let forwardEmailModal: boolean = $state(false);
@@ -10,7 +13,7 @@
   let age: number = $state(0);
   let lang: number = $state(0);
   let email: string = $state('');
-  let country: string = $state('');
+  let cc: string = $state('');
   let accept_disclosure: boolean = $state(false);
 
   let check_disclosure = () => {
@@ -18,100 +21,112 @@
       forwardEmailModal = true; // Open the next modal
       disclosureModal = false; // Close the current modal
     } else {
-      alert('Bitte bestaetigen Sie die Einwilligungserklaerung um fortzufahren.');
+      alert('Bitte bestätigen Sie die Einwilligungserklärung um fortzufahren.');
     }
   };
 
   let reject_disclosure = () => {
-      alert('Sie haben die Einwilligungserklaerung abgelehnt. Ihre Daten werden nicht gespeichert.');
+      alert('Sie haben die Einwilligungserklärung abgelehnt. Ihre Daten werden nicht gespeichert.');
       forwardEmailModal = false; // Open the next modal
       disclosureModal = false; // Close the current modal
+      accept_disclosure = false;
   };
 </script>
 
-<Button on:click={() => (formModal = true)}>Datenspende</Button>
+<main class='p-8 mb-auto'>
+<div class="flex justify-center flex-col p-8 mb-auto rounded-lg" style="background-color: rgba(254, 242, 242, 0.6);">
+<h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">{$t.donation.title}</h1>
+<br>
+<div class="flex justify-center">
+<Button class="px-4 py-2 w-auto bg-primary-900" onclick={() => (formModal = true)}>{$t.donation.buttonText}</Button>
+</div>
+</div>
+</main>
 
-<Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
-  <form class="flex flex-col space-y-6" action="/donation" 
-  onsubmit={() => {
-    countryModal = true; // Open the next modal
-    formModal = false; // Close the current modal
-  }}>
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Collect metadata</h3>
+<Modal bind:open={formModal} size="md" autoclose={false} class="w-full" title="Metadaten">
+  <div class="flex flex-col space-y-6">
     <p class="mb-4 font-semibold text-gray-900 dark:text-white">Geschlecht</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
           <li class="flex items-center">
-            <Radio name="gender" class="p-3" bind:group={gender} value="1">m</Radio>
+            <Radio name="gender" class="p-3" bind:group={gender} value={1}>m</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="gender" class="p-3" bind:group={gender} value="2">f</Radio>
+            <Radio name="gender" class="p-3" bind:group={gender} value={2}>f</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="gender" class="p-3" bind:group={gender} value=3>d</Radio>
+            <Radio name="gender" class="p-3" bind:group={gender} value={3}>d</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="gender" class="p-3" bind:group={gender} value=0>Keine Angabe</Radio>
+            <Radio name="gender" class="p-3" bind:group={gender} value={0}>Keine Angabe</Radio>
           </li>
         </ul>
         <p class="mb-4 font-semibold text-gray-900 dark:text-white">Altersschritte</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value="1">&lt;20</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={1}>&lt;20</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value="2">21-30</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={2}>21-30</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=3>31-40</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={3}>31-40</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=4>41-50</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={4}>41-50</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=5>51-60</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={5}>51-60</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=6>&gt;60</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={6}>&gt;60</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="age" class="p-3" bind:group={age} value=0>Keine Angabe</Radio>
+            <Radio name="age" class="p-3" bind:group={age} value={0}>Keine Angabe</Radio>
           </li>
         </ul>
         <p class="mb-4 font-semibold text-gray-900 dark:text-white">Ist die Sprache, in der Sie schreiben, Ihre Muttersprache?</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
           <li class="flex items-center">
-            <Radio name="lang" class="p-3" bind:group={lang} value=1>Ja</Radio>
+            <Radio name="lang" class="p-3" bind:group={lang} value={1}>Ja</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="lang" class="p-3" bind:group={lang} value=2>Nein</Radio>
+            <Radio name="lang" class="p-3" bind:group={lang} value={2}>Nein</Radio>
           </li>
           <li class="flex items-center">
-            <Radio name="lang" class="p-3" bind:group={lang} value=0>Keine Angabe</Radio>
+            <Radio name="lang" class="p-3" bind:group={lang} value={0}>Keine Angabe</Radio>
           </li>
         </ul>
-        <Button type="submit" class="w-full1">Weiter</Button>
-  </form>
+        <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
+          <Button onclick={() => {countryModal = true; formModal = false;}}>Weiter</Button>
+          <Button color="alternative" onclick={() => (formModal = false)}>Abbrechen</Button>
+        </div>
+  </div>
 </Modal>
 
-<Modal bind:open={countryModal} size="xs" autoclose={false} class="w-full">
-  <form class="flex flex-col space-y-6" action="/donation"
-    onsubmit={() => {
-    forwardEmailModal = true; // Open the next modal
-    countryModal = false; // Close the current modal
-    }}>
+<Modal bind:open={countryModal} size="md" autoclose={false} class="w-full" title="Metadaten">
+  <div class="flex flex-col space-y-6">
     <Label class="space-y-2">
       <span>Wo haben Sie die meisten Nachrichten verfasst?</span>
     </Label>
-    <Map /> 
-    <!-- still missing the country selection -->
-    <Button type="submit" class="w-full1" >Weiter</Button>
-  </form>
+    <Map bind:cc/> 
+    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+      Ausgewähltes Land: {cc}</h3>
+    <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
+      <Button onclick={() => {forwardEmailModal = true; countryModal = false;}} >Weiter</Button>
+      <Button color="alternative" onclick={() => (formModal = true, countryModal = false)}>Zurück</Button>
+    </div>
+  </div>
 </Modal>
 
-<Modal bind:open={forwardEmailModal} size="xs" autoclose={false} class="w-full">
-  <form class="flex flex-col space-y-6" action="/donation" method="POST">
+<Modal bind:open={forwardEmailModal} size="md" autoclose={false} class="w-full" title="Metadaten">
+  <form action="?/donate" method="POST" use:enhance class="flex flex-col space-y-6">
+    <input type="hidden" name="gender" value={gender} />
+    <input type="hidden" name="age" value={age} />
+    <input type="hidden" name="lang" value={lang} />
+    <input type="hidden" name="country" value={cc} />
+    
     <Label class="space-y-2">
-        <span>Ihre Email Adresse von der Sie spenden:</span>
+      <span>Ihre Email Adresse von der Sie spenden:</span>
       <Input type="email" name="email" bind:value={email} placeholder="name@company.com" required />
     </Label>
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
@@ -119,23 +134,25 @@
       einem späteren Zeitpunkt widerrufen möchten,
       nutzen Sie bitte die ID, die Sie in der Bestätigungsemail erhalten haben.
     </h3>
-    <input type="hidden" name="gender" value={gender} />
-    <input type="hidden" name="age" value={age} />
-    <input type="hidden" name="lang" value={lang} />
     {#if accept_disclosure}
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+      <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       Um Ihre Emails zu spenden,
       leiten Sie diese bitte an folgende Adresse weiter: <br>
-      mailcom-donation@rose.uni-heidelberg.de
-    </h3>
-      <Button type="submit" class="w-full1">Einreichen</Button>
+      <Blockquote bg class="bg-gray-200 my-4 p-4 rounded" italic={false}>
+        <P size="lg" height="relaxed">mailcom-donation@rose.uni-heidelberg.de</P>
+      </Blockquote>
+      </h3>
+      <Button type="submit">Einreichen</Button>
     {:else}
-      <Button class="w-full1" on:click={() => (disclosureModal = true)}>Weiter</Button>
+      <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
+        <Button type="button" onclick={() => (disclosureModal = true)}>Weiter</Button>
+        <Button type="button" color="alternative" onclick={() => (countryModal = true, forwardEmailModal = false)}>Zurück</Button>
+      </div>
     {/if}
   </form>
 </Modal>
 
-<Modal bind:open={disclosureModal} size="xs" autoclose={false} class="w-full">
+<Modal bind:open={disclosureModal} size="md" autoclose={false} class="w-full" title="Einwilligungserklärung">
   <h1 class="text-base leading-relaxed text-black">Information und Einwilligungserklärung zum wissenschaftlichen Forschungsvorhaben 
       "Schreiben nach der Briefkultur: MailCom"</h1>
     <h3 class="text-base leading-relaxed text-black dark:text-gray-400">Information zum wissenschaftlichen Forschungsvorhaben</h3>
@@ -203,8 +220,8 @@
       Projektdaten, d.h. die im Rahmen des wissenschaftlichen Forschungsvorhabens produzierten Informationen 
       zu Ihrer Person, wie insbesondere:  </p> 
       <ul class="list-disc ps-5 dark:text-gray-400 text-gray-400">
-        <li>Die von Ihnen durch das Weiterleiten an die Spende-Adresse gespendeten E-Mails  
-        <li>Fragebogendaten zu Ihrer Person (Alter, Geschlecht, sprach-geographische Daten) 
+        <li>Die von Ihnen durch das Weiterleiten an die Spende-Adresse gespendeten E-Mails </li> 
+        <li>Fragebogendaten zu Ihrer Person (Alter, Geschlecht, sprach-geographische Daten) </li>
       </ul>
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
       Die Projektdaten können auch besondere Kategorien personenbezogener Daten beinhalten wie beispielsweise 
@@ -244,15 +261,15 @@
       Die Teilnahme an dem wissenschaftlichen Forschungsvorhaben ist freiwillig; sollten Sie nicht teilnehmen, 
       entstehen Ihnen keine Nachteile. Sie haben jederzeit die Möglichkeit die folgenden Rechte geltend zu machen:</p> 
       <ul class="list-disc ps-5 dark:text-gray-400 text-gray-400">
-        <li>Recht auf Auskunft über die von Ihnen verarbeiteten personenbezogenen Daten (Art. 15 DSGVO), 
+        <li>Recht auf Auskunft über die von Ihnen verarbeiteten personenbezogenen Daten (Art. 15 DSGVO), </li>
       
-        <li>Recht auf Berichtigung Sie betreffender unrichtiger personenbezogener Daten (Art. 16 DSGVO), 
+        <li>Recht auf Berichtigung Sie betreffender unrichtiger personenbezogener Daten (Art. 16 DSGVO), </li>
       
-        <li>Recht auf Löschung Sie betreffender personenbezogener Daten (Art. 17 DSGVO), 
+        <li>Recht auf Löschung Sie betreffender personenbezogener Daten (Art. 17 DSGVO), </li>
       
-        <li>Recht auf Einschränkung der Verarbeitung Sie betreffender personenbezogener Daten (Art. 18 DSGVO), 
+        <li>Recht auf Einschränkung der Verarbeitung Sie betreffender personenbezogener Daten (Art. 18 DSGVO), </li>
       
-        <li>Recht auf Widerspruch gegen die Verarbeitung Sie betreffender personenbezogener Daten (Art. 21 DSGVO), 
+        <li>Recht auf Widerspruch gegen die Verarbeitung Sie betreffender personenbezogener Daten (Art. 21 DSGVO). </li>
       </ul>
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
       Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer 
@@ -262,7 +279,7 @@
       für die Zukunft zu widerrufen (Art. 7 Absatz 3 DSGVO). In diesem Fall müssen alle personenbezogenen Daten 
       entweder gelöscht oder pseudonymisiert werden. 
       
-      Ihre Rechte sind grundsätzlich schriftlich bei dem zur Datenverarbeitung Verantwortlichen geltend zu machen. 
+      Ihre Rechte sind grundsätzlich schriftlich bei dem zur Datenverarbeitung Verantwortlichen geltend zu machen. </p>
       <h3 class="text-base leading-relaxed text-black dark:text-gray-400">
       Wer ist für das wissenschaftliche Forschungsvorhaben und der damit verbundenen Datenverarbeitung verantwortlich? 
       An wen kann ich mich bei weiteren Fragen wenden? </h3>
@@ -279,16 +296,15 @@
       mailcom@rose.uni-heidelberg.de.
     </p>
       
-      <form class="flex flex-col space-y-6" action="/donation">
+      <form class="flex flex-col space-y-6">
       <div class="flex items-start">
         <Checkbox required bind:checked={accept_disclosure}>
           Ich habe die Informationen zum Datenschutz gelesen und stimme der Aufzeichnung und Verarbeitung meiner Daten zu. </Checkbox>
           <!-- Ich habe die <a href="/about" class="text-blue-600 dark:text-blue-500 hover:underline">Informationen zum Datenschutz</a> gelesen und stimme der Aufzeichnung und Verarbeitung meiner Daten zu. </Checkbox> -->
       </div>
       </form>
-    <svelte:fragment slot="footer">
-      <Button on:click={() => check_disclosure()}>Ich akzeptiere und reiche meine Daten ein</Button>
-      <Button color="alternative" on:click={() => reject_disclosure()}>Ablehnen</Button>
-    </svelte:fragment>
+      <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
+        <Button onclick={() => check_disclosure()}>Ich akzeptiere und reiche meine Daten ein</Button>
+        <Button color="alternative" onclick={() => reject_disclosure()}>Ablehnen</Button>
+      </div>
 </Modal>
-
