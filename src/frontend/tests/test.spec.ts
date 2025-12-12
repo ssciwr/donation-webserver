@@ -1,6 +1,13 @@
-import { expect, test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test('index page has expected h1', async ({ page }) => {
-	await page.goto('/');
-	await expect(page.getByRole('heading', { name: 'Projekt MailCom' })).toBeVisible();
+test('home page shows a card', async ({ page }) => {
+  await page.goto('/');
+  // Preferred: use a stable test id
+  const card = page.getByTestId('card');
+  await expect(card).toBeVisible();
+
+  // If you don’t have a test id, fallback to a selector:
+  // await expect(page.locator('.card')).toBeVisible();
+  // or a role/name if it’s an article/card component:
+  // await expect(page.getByRole('article')).toBeVisible();
 });

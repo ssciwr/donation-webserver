@@ -26,8 +26,6 @@ export const actions: Actions = {
         const lang = Number(data.get('lang'));
         const email = String(data.get('email'));
         const country = String(data.get('country'));
-        console.log('Getting gender ', gender);
-        console.log('Getting country ', country);
         await db.insert(donationsTable).values({
             gender,
             age,
