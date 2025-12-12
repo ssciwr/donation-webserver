@@ -5,12 +5,12 @@ services:
       - '8080:80'
       - '8443:443'
     volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro
-      - ./nginx/keys/:/etc/nginx/ssl/:ro
+      - ./src/nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./src/nginx/keys/:/etc/nginx/ssl/:ro
     depends_on:
       - mailcom
   mailcom:
-    image: iulusoy/donation-webserver-frontend:latest
+    image: iulusoy/donation-webserver:latest
     # image: donation-webserver
     ports:
       - '3000:3000'
