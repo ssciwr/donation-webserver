@@ -23,6 +23,7 @@
 		"gh-pages": "npm run build && npx gh-pages -d build"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.57.0",
 		"@sveltejs/adapter-auto": "^6.0.1",
 		"@sveltejs/kit": "^2.27.0",
 		"@sveltejs/vite-plugin-svelte": "^6.1.0",
