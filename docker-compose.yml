@@ -33,6 +33,8 @@ services:
       - '3306'
     volumes:
       - my-db:/var/lib/mysql
+    sysctls:
+      - net.ipv4.tcp_timestamps=0
 
 volumes:
   my-db:
