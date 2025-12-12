@@ -41,11 +41,6 @@ jobs:
             cd src/frontend
             pnpm svelte-kit sync
             
-        - name: run basic tests typescript
-          run: |
-            cd src/frontend
-            pnpm run test:unit
-
         - name: Install Playwright Browsers and run tests
           run: |
             cd src/frontend

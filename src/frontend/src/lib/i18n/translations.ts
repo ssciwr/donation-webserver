@@ -99,7 +99,7 @@ export const translations = {
         },
         q9: {
           question: 'Wie werden die E-Mails pseudonymisiert?',
-          answer: 'Die E-Mails werden zunächst automatisch pseudonymisiert. Dazu nutzen wir ein entsprechendes Tool (mailcom), welches wir im vergangenen Jahr an hunderten Test-E-Mails überprüft haben. Durch die Pseudonymisierung werden alle persönlichen Daten wie Namen, Telefonnummer oder Adressen aus deN E-Mails herausgestrichen und durch Platzhalter wie Name für Sabine Mustermann ersetzt. Im Anschluss werden die pseudonymisierten E-Mails noch einmal von geschulten studentischen Hilfskräften des Projektes durchsucht und gegebenenfalls komplett pseudonymisiert, so dass nur vollständig pseudonymisierte E-Mails von uns in die Analysen einbezogen werden.',
+          answer: 'Die E-Mails werden zunächst automatisch pseudonymisiert. Dazu nutzen wir ein entsprechendes Tool (mailcom), welches wir im vergangenen Jahr an hunderten Test-E-Mails überprüft haben. Durch die Pseudonymisierung werden alle persönlichen Daten wie Namen, Telefonnummer oder Adressen aus den E-Mails herausgestrichen und durch Platzhalter wie Name für Sabine Mustermann ersetzt. Im Anschluss werden die pseudonymisierten E-Mails noch einmal von geschulten studentischen Hilfskräften des Projektes durchsucht und gegebenenfalls komplett pseudonymisiert, so dass nur vollständig pseudonymisierte E-Mails von uns in die Analysen einbezogen werden.',
           linkText: 'Tool (mailcom)'
         },
         q10: {
