@@ -10,7 +10,7 @@ services:
     depends_on:
       - mailcom
   mailcom:
-    image: iulusoy/donation-webserver:latest
+    image: iulusoy/donation-webserver-frontend:latest
     # image: donation-webserver
     ports:
       - '3000:3000'
