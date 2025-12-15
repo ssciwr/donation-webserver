@@ -62,14 +62,14 @@ export function _(key: string, lang?: Language): string {
           result = result[fallbackKey];
         } else {
           console.warn(`Translation key "${key}" not found in language "${language}" or fallback "de"`);
-          return key; // Return the key itself if not found
+          return `[Missing translation: ${key}]`; // Return explicit fallback if not found
         }
       }
       break;
     }
   }
   
-  return typeof result === 'string' ? result : key;
+  return typeof result === 'string' ? result : `[Missing translation: ${key}]`;
 }
 
 // Export type for Language
