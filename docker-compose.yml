@@ -11,13 +11,13 @@ services:
       - mailcom
   mailcom:
     image: iulusoy/donation-webserver-frontend:latest
-    # image: donation-webserver
-    ports:
-      - '3000:3000'
+    env_file:
+      - .env
     expose:
       - '3000'
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - ORIGIN=https://localhost:8443
       - BUILD_MODE=false
@@ -25,16 +25,19 @@ services:
     image: mysql:9.2.0
     restart: always
     env_file:
-      - db.env
+      - .env
     command: --pid-file /var/lib/mysql/mysqld.pid
-    ports:
-      - '3306:3306'
     expose:
       - '3306'
     volumes:
       - my-db:/var/lib/mysql
     sysctls:
       - net.ipv4.tcp_timestamps=0
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   my-db:
