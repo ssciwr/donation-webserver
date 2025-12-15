@@ -1,7 +1,12 @@
 import { defineConfig } from "drizzle-kit";
 import { config } from "dotenv";
 
-config({ path: ".env" }); 
+// Try to load db.env if it exists, but don't fail if it doesn't
+try {
+  config({ path: ".env" });
+} catch (e) {
+  // Use env vars from docker-compose instead
+}
 
 export default defineConfig({
   dialect: 'mysql',

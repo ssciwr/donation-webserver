@@ -23,6 +23,5 @@ COPY --from=build /app/dist /app/dist
 COPY --from=build /app/package.json /app/package.json
 COPY --from=build /app/drizzle.config.ts /app/drizzle.config.ts
 COPY --from=build /app/src/lib/server/schema.ts /app/src/lib/server/schema.ts
-COPY src/frontend/.env /app/.env
 EXPOSE 8000
 CMD ["pnpm", "start"]
