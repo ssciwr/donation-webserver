@@ -313,4 +313,3 @@
         <Button color="alternative" onclick={() => reject_disclosure()}>Ablehnen</Button>
       </div>
 </Modal>
-
