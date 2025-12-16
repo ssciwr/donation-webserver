@@ -2,7 +2,7 @@ services:
   nginx:
     image: nginx
     ports:
-      - '8080:80'
+      - '80:80'
       - '8443:443'
     volumes:
       - ./src/nginx/conf/:/etc/nginx/conf.d/:ro
@@ -19,7 +19,6 @@ services:
       db:
         condition: service_healthy
     environment:
-      - ORIGIN=https://localhost:8443
       - BUILD_MODE=false
   db:
     image: mysql:9.2.0
