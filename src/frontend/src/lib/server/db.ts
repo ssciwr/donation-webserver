@@ -13,16 +13,19 @@ if (process.env.BUILD_MODE === 'true') {
     db = drizzle.mock();
     console.log('Mock database connection created');
 } else {
-// we will use client connections since we do not expect many concurrent connections
-    // and connection also does not need to be maintained for long
-    const connection = await mysql.createConnection({
+    // Use a pool instead of a single connection
+    // Pool handles reconnection automatically
+    const pool = mysql.createPool({
         host: process.env.MYSQL_HOST,
         port: process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT) : 3306,
         user: process.env.MYSQL_USER,
         password: process.env.MYSQL_PASSWORD,
         database: process.env.MYSQL_DATABASE,
+        waitForConnections: true,
+        connectionLimit: 5,
+        queueLimit: 0,
     });
-    db = drizzle(connection);
+    db = drizzle(pool);
 }
 
 const exportedDb = db;
