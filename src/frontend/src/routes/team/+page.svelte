@@ -7,6 +7,10 @@
 	
 	<h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">{$t.team.title}</h1>
 	<p class="text-center text-gray-700 mt-4">{$t.team.description}</p>
+	
+	<div class="flex justify-center mt-8">
+		<img src="/images/Teamfoto_bearbeitet_V1.jpg" alt="MailCom research team" class="max-w-full h-auto rounded-lg shadow-lg" />
+	</div>
 
 </div>
 </main>
