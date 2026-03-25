@@ -2,13 +2,15 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
 	webServer: {
-		// command: 'pnpm run build && pnpm run preview',
-		// running the tests in dev to avoid db connection issues
-		command: 'pnpm run dev',
-		port: 5173,
-		reuseExistingServer:true
+		// Tier 1: run the real production build, but skip DB calls via BUILD_MODE=true
+		command: 'BUILD_MODE=true PORT=3000 pnpm run build && BUILD_MODE=true PORT=3000 node dist',
+		port: 3000,
+		reuseExistingServer: false
 	},
-	testDir: './tests'
+	testDir: './tests',
+	use: {
+		baseURL: 'http://localhost:3000'
+	}
 };
 
 export default config;

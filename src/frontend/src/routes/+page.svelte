@@ -3,7 +3,7 @@
   import { t } from '$lib/i18n';
 </script>
 
-<div class="flex justify-center items-center flex-col p-8 mb-auto">
+<div data-testid="page-home" class="flex justify-center items-center flex-col p-8 mb-auto">
 
 <div data-testid="card"  class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 w-full max-w-7xl">
   <Card class="max-w-[500px] min-w-[300px] p-1 bg-custom-100 border-primary-900" href="/about" img="/images/pexels-suzyhazelwood-1768060.jpg">
