@@ -163,7 +163,28 @@ export const translations = {
     },
     team: {
       title: 'Unser Team',
-      description: 'Lernen Sie die Menschen hinter unserem Projekt kennen. Unser engagiertes Team arbeitet daran, Anonymisierung zugänglich und verständlich zu machen.'
+      researchTeam: 'Forschungsgruppe',
+      researchTeamSubHeading1: 'Wissenschaftliche Mitarbeitende/Doktoranden',
+      phDStudent1: 'Laura Gärtner',
+      phDStudent1Description: 'Für ihre Promotion arbeitet Laura Gärtner mit einer Sammlung von Daten aus sozialen Medien, Webseiten und Printmedien, die sie mittels computergestützter Textanalyse und NLP-Verfahren auswertet. Im Mailcom-Projekt vermittelt sie zwischen informatischen Methoden und sprachwissenschaftliche Fragestellungen.', 
+      phDStudent1LinkText: 'Laura Gärtner',
+      researchTeamSubHeading2: 'Studentische Hilfskräfte',
+      studentAssistant1: 'Pia Lorenz (2024-2025)',
+      studentAssistant2: 'Valentin Höpfl (2023-2024)',
+      studentAssistant3: 'Valerie Hanfling (seit 2025)',
+      researchTeamSubHeading3: 'Projektleitung',
+      teamLead: 'Prof. Dr. Sybille Große',
+      teamLeadDescription: 'Sybille Große ist seit 2011 Professorin für Romanische Sprachwissenschaft an der Universität Heidelberg. Ihre Forschungsschwerpunkte liegen im Bereich der historischen Soziolinguistik sowie Pragmatik, der Sprachvariation, dem Sprachkontakt und dem Sprachwandel verschiedener romanischer Sprachen. Ein besonderes Interesse hat sie zudem an Fragen der Sprachnormierung und Standardisierung des Französischen und an sprachlich-kommunikativen Aspekten der Briefkommunikation. Im mailcom-Projekt führt sie diese beiden Forschungsperspektiven zusammen. ',
+      teamLeadLinkText: 'Prof. Dr. Sybille Große',
+      rSETeam: 'Kooperation mit dem Scientific Software Center der Universität Heidelberg',
+      rSETeam1: 'Dr. Inga Ulusoy',
+      rSETeam2: 'Dr. Kim Tuyen Le',
+      rSELinkText: 'Scientific Software Center',
+      fundingInfo: 'Unterstützt durch das Field of Focus 3 und das HCDH (Förderungsperiode 2024/2025).',
+      publications: 'Publikationen',
+      publication1: 'Bothe, Laura/Große, Sybille (2023): „Datensammlung in der Romanistik – Eine Analyse von Normierung und Standardisierung in E-Mails“, in: Vincent Heuveline, Nina Bisheh und Philipp Kling (Hg.): E-Science-Tage 2023. Empower Your Research – Preserve Your Data. Heidelberg: heiBOOKS, 132-139.',
+      publication2: 'Le, Kim Tuyen/Gärtner, Laura/Fleischle, Felix/Schoeller, Thore/Große, Sybille/Ulusoy, Inga (2026): "mailcom: Pseudonymization Tool for Textual Data", submitted to SoftwareX.',
+      dOIText: 'DOI'
     },
     faq: {
       title: 'Häufig gestellte Fragen',
@@ -187,8 +208,8 @@ export const translations = {
         },
         q5: {
           question: 'Wie kann ich E-Mails spenden?',
-          answer: 'Klicken Sie hier, um nähere Informationen zum Ablauf der Spende zu erhalten.',
-          linkText: 'Ablauf der Spende'
+          answer: 'um nähere Informationen zum Ablauf der Spende zu erhalten.',
+          linkText: 'Klicken Sie hier,'
         },
         q6: {
           question: 'Was ist das Ziel des Forschungsprojektes?',
@@ -196,8 +217,8 @@ export const translations = {
         },
         q7: {
           question: 'Wer arbeitet im Forschungsprojekt zu den E-Mails?',
-          answer: 'Das Projekt ist ein linguistisches Projekt an der Universität Heidelberg. Nur von der Projektleitung autorisierte Personen dürfen am Forschungsprojekt teilnehmen. Für mehr Informationen zum Team, klicken Sie hier.',
-          linkText: 'Team'
+          answer: 'Das Projekt ist ein linguistisches Projekt an der Universität Heidelberg. Nur von der Projektleitung autorisierte Personen dürfen am Forschungsprojekt teilnehmen. Für mehr Informationen zum Team, ',
+          linkText: 'klicken Sie hier.'
         },
         q8: {
           question: 'Wie wird mit den Daten gearbeitet?',
@@ -205,8 +226,9 @@ export const translations = {
         },
         q9: {
           question: 'Wie werden die E-Mails pseudonymisiert?',
-          answer: 'Die E-Mails werden zunächst automatisch pseudonymisiert. Dazu nutzen wir ein entsprechendes Tool (mailcom), welches wir im vergangenen Jahr an hunderten Test-E-Mails überprüft haben. Durch die Pseudonymisierung werden alle persönlichen Daten wie Namen, Telefonnummer oder Adressen aus den E-Mails herausgestrichen und durch Platzhalter wie Name für Sabine Mustermann ersetzt. Im Anschluss werden die pseudonymisierten E-Mails noch einmal von geschulten studentischen Hilfskräften des Projektes durchsucht und gegebenenfalls komplett pseudonymisiert, so dass nur vollständig pseudonymisierte E-Mails von uns in die Analysen einbezogen werden.',
-          linkText: 'Tool (mailcom)'
+          answer1: 'Die E-Mails werden zunächst automatisch pseudonymisiert. Dazu nutzen wir ein entsprechendes',
+          answer2: 'welches wir im vergangenen Jahr an hunderten Test-E-Mails überprüft haben. Durch die Pseudonymisierung werden alle persönlichen Daten wie Namen, Telefonnummer oder Adressen aus den E-Mails herausgestrichen und durch Platzhalter wie Name für Sabine Mustermann ersetzt. Im Anschluss werden die pseudonymisierten E-Mails noch einmal von geschulten studentischen Hilfskräften des Projektes durchsucht und gegebenenfalls komplett pseudonymisiert, so dass nur vollständig pseudonymisierte E-Mails von uns in die Analysen einbezogen werden.',
+          linkText: 'Tool (mailcom),'
         },
         q10: {
           question: 'Wo werden meine E-Mails gespeichert?',
@@ -220,8 +242,9 @@ export const translations = {
         },
         q12: {
           question: 'Wie / Wo werden die Daten gegebenenfalls veröffentlicht?',
-          answer: 'Die E-Mails werden von uns wissenschaftlich ausgewertet. Die daraus entstehenden Forschungsergebnisse werden in Fachpublikationen veröffentlicht. In diesen werden in Auszügen Einzelbeispiele aus dem E-Mail-Korpus zur Illustration wissenschaftlicher Aussagen in pseudonymisierter Form veröffentlicht. Falls Sie mehr über unsere Forschungsergebnisse wissen möchten, können Sie sich hier zu unserem Newsletter anmelden.',
-          linkText: 'Newsletter'
+          answer1: 'Die E-Mails werden von uns wissenschaftlich ausgewertet. Die daraus entstehenden Forschungsergebnisse werden in Fachpublikationen veröffentlicht. In diesen werden in Auszügen Einzelbeispiele aus dem E-Mail-Korpus zur Illustration wissenschaftlicher Aussagen in pseudonymisierter Form veröffentlicht. Falls Sie mehr über unsere Forschungsergebnisse wissen möchten, können Sie sich hier zu unserem',
+          linkText: 'Newsletter',
+          answer2: 'anmelden.',
         },
         q13: {
           question: 'Wie kann ich meine Emails spenden?',
@@ -229,7 +252,7 @@ export const translations = {
         },
         q14: {
           question: 'Was muss ich beim Spenden meiner Emails beachten?',
-          answer: 'Sie werden in der Datenspende darum gebeten, die Emails die Sie spenden möchten, an eine Spender-Adresse weiterzuleiten. Bitte leiten Sie keine zu großen Anhänge weiter (>10 MB)'
+          answer: 'Sie werden in der Datenspende darum gebeten, die Emails die Sie spenden möchten, an eine Spender-Adresse weiterzuleiten. Bitte leiten Sie keine zu großen Anhänge weiter (>10 MB).'
         },
         q15: {
           question: 'Welche technischen Voraussetzungen benötige ich, um E-Mails spenden zu können?',
@@ -402,7 +425,28 @@ export const translations = {
     },
     team: {
       title: 'Notre Équipe',
-      description: 'Découvrez les personnes qui se cachent derrière notre projet. Notre équipe s\'engage à rendre l\'anonymisation accessible et compréhensible.'
+      researchTeam: 'Groupe de recherche',
+      researchTeamSubHeading1: 'Personnel scientifique / doctorants',
+      phDStudent1: 'Laura Gärtner',
+      phDStudent1Description: 'Pour sa thèse, Laura Gärtner travaille avec un corpus de données provenant des réseaux sociaux, de sites web et de médias imprimés, qu’elle explore à l’aide de méthodes informatiques d‘analyse de texte et de techniques de programmation neuro-linguistique (PNL). Dans le projet « Mailcom », elle fait le lien entre les méthodes informatiques et les questions de linguistique.', 
+      phDStudent1LinkText: 'Laura Gärtner',
+      researchTeamSubHeading2: 'Assistants étudiants',
+      studentAssistant1: 'Pia Lorenz (2024-2025)',
+      studentAssistant2: 'Valentin Höpfl (2023-2024)',
+      studentAssistant3: 'Valerie Hanfling (depuis 2025)',
+      researchTeamSubHeading3: 'Direction du projet',
+      teamLead: 'Prof. Dr. Sybille Große',
+      teamLeadDescription: 'Sybille Große est professeure de linguistique romane à l’Université de Heidelberg depuis 2011. Ses axes de recherche portent sur la sociolinguistique historique ainsi que la pragmatique, la variation linguistique, le contact de langues et le changement linguistique de différentes langues romanes. Elle s’intéresse tout particulièrement aux questions de normalisation et de standardisation du français ainsi qu’aux aspects linguistiques et communicatifs de la correspondance épistolaire. Dans le projet « Mailcom », elle réunit ces deux perspectives de recherche.',
+      teamLeadLinkText: 'Prof. Dr. Sybille Große',
+      rSETeam: 'Coopération avec le Scientific Software Center de l’Université de Heidelberg',
+      rSETeam1: 'Dr. Inga Ulusoy',
+      rSETeam2: 'Dr. Kim Tuyen Le',
+      rSELinkText: 'Scientific Software Center',
+      fundingInfo: 'Soutenue par le Field of Focus 3 et le HCDH (période de financement 2024/2025).',
+      publications: 'Publications',
+      publication1: 'Bothe, Laura/Große, Sybille (2023): „Datensammlung in der Romanistik – Eine Analyse von Normierung und Standardisierung in E-Mails“, in: Vincent Heuveline, Nina Bisheh und Philipp Kling (Hg.): E-Science-Tage 2023. Empower Your Research – Preserve Your Data. Heidelberg: heiBOOKS, 132-139.',
+      publication2: 'Le, Kim Tuyen/Gärtner, Laura/Fleischle, Felix/Schoeller, Thore/Große, Sybille/Ulusoy, Inga (2026): "mailcom: Pseudonymization Tool for Textual Data", submitted to SoftwareX.',
+      dOIText: 'DOI'
     },
     faq: {
       title: 'FAQ – Questions fréquemment posées',
@@ -426,8 +470,8 @@ export const translations = {
         },
         q5: {
           question: 'Comment puis-je faire don de mes e-mails ?',
-          answer: 'Cliquez ici pour obtenir plus d\'informations sur le processus de don.',
-          linkText: 'ici'
+          answer: 'pour obtenir plus d\'informations sur le processus de don.',
+          linkText: 'Cliquez ici'
         },
         q6: {
           question: 'Quel est l\'objectif de ce projet de recherche ?',
@@ -435,8 +479,8 @@ export const translations = {
         },
         q7: {
           question: 'Qui est-ce qui travaille dans ce projet de recherche sur les e-mails ?',
-          answer: 'Ce projet de linguistique est mené par une équipe de l\'Université de Heidelberg. Seules les personnes autorisées par la direction du projet peuvent y participer. Pour plus d\'informations sur l\'équipe, cliquez ici.',
-          linkText: 'ici'
+          answer: 'Ce projet de linguistique est mené par une équipe de l\'Université de Heidelberg. Seules les personnes autorisées par la direction du projet peuvent y participer. Pour plus d\'informations sur l\'équipe,',
+          linkText: 'cliquez ici.'
         },
         q8: {
           question: 'Comment les données sont-elles traitées ?',
@@ -444,7 +488,8 @@ export const translations = {
         },
         q9: {
           question: 'Comment les e-mails sont-ils anonymisés ?',
-          answer: 'Les e-mails sont anonymisés automatiquement. Nous utilisons pour cela un outil dont nous avons vérifié l\'efficacité l\'année dernière sur des centaines de mails tests. Grâce à l\'anonymisation, toutes les données personnelles telles que le nom, le numéro de téléphone ou l\'adresse sont supprimées des e-mails et remplacées par des caractères de substitution – l\'emplacement du nom sera par exemple remplacé par Jean Dupont. Ensuite, ces e-mails anonymisés automatiquement sont à nouveau examinés par des étudiant·e·s assistant·e·s formé·e·s au projet. Cela garantit que seuls les e-mails entièrement anonymisés seront pris en compte dans nos analyses.',
+          answer1: 'Les e-mails sont anonymisés automatiquement. Nous utilisons pour cela un',
+          answer2: 'dont nous avons vérifié l\'efficacité l\'année dernière sur des centaines de mails tests. Grâce à l\'anonymisation, toutes les données personnelles telles que le nom, le numéro de téléphone ou l\'adresse sont supprimées des e-mails et remplacées par des caractères de substitution – l\'emplacement du nom sera par exemple remplacé par Jean Dupont. Ensuite, ces e-mails anonymisés automatiquement sont à nouveau examinés par des étudiant·e·s assistant·e·s formé·e·s au projet. Cela garantit que seuls les e-mails entièrement anonymisés seront pris en compte dans nos analyses.',
           linkText: 'outil (mailcom)'
         },
         q10: {
@@ -459,8 +504,9 @@ export const translations = {
         },
         q12: {
           question: 'Comment et où les données sont-elles éventuellement publiées ?',
-          answer: 'Les e-mails sont analysés scientifiquement par nos soins. Les résultats de recherche qui en découlent sont diffusés dans des publications spécialisées. Dans ces dernières, des exemples isolés, tirés du corpus des e-mails, sont publiés sous une forme anonymisée, afin d\'illustrer des thèses scientifiques. Si vous souhaitez en savoir plus sur les résultats de nos recherches, vous pouvez vous abonner à notre newsletter ici.',
-          linkText: 'ici'
+          answer1: 'Les e-mails sont analysés scientifiquement par nos soins. Les résultats de recherche qui en découlent sont diffusés dans des publications spécialisées. Dans ces dernières, des exemples isolés, tirés du corpus des e-mails, sont publiés sous une forme anonymisée, afin d\'illustrer des thèses scientifiques. Si vous souhaitez en savoir plus sur les résultats de nos recherches, vous pouvez vous abonner à',
+          answer2: 'ici.',
+          linkText: 'notre newsletter'
         },
         q13: {
           question: 'Comment procéder au don de mes e-mails ?',

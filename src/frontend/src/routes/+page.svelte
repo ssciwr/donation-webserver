@@ -7,25 +7,25 @@
 
 <div data-testid="card"  class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 w-full max-w-7xl">
   <Card class="max-w-[500px] min-w-[300px] p-1 bg-custom-100 border-primary-900" href="/about" img="/images/pexels-suzyhazelwood-1768060.jpg">
-    <div class="m-1">
+    <div class="m-1 absolute_position1">
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{$t.homepage.emailCommunication.title}</h5>
       <p class="mb-3 leading-tight font-normal text-gray-700 dark:text-gray-400">{$t.homepage.emailCommunication.description}</p>
     </div>
   </Card>
   <Card class="max-w-[500px] min-w-[300px] p-1 bg-custom-100 border-primary-900" href="/donation" img="/images/Alle_Hintergrundbilder.svg">
-    <div class="m-6">
+    <div class="m-1 absolute_position2">
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{$t.homepage.dataSpende.title}</h5>
       <p class="mb-3 leading-tight font-normal text-gray-700 dark:text-gray-400">{$t.homepage.dataSpende.description}</p>
     </div>
   </Card>
     <Card class="max-w-[500px] min-w-[300px] p-1 bg-custom-100 border-primary-900" href="/tutorial">
-    <div class="m-6">
+    <div class="m-1 absolute_position3" >
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{$t.homepage.tutorial.title}</h5>
       <p class="mb-3 leading-tight font-normal text-gray-700 dark:text-gray-400">{$t.homepage.tutorial.description}</p>
     </div>
   </Card>
-  <Card class="max-w-[500px] min-w-[300px] p-1 bg-custom-100 border-primary-900" href="/blog">
-    <div class="m-6">
+  <Card class="max-w-[500px] min-w-[300px] p-1 bg-custom-100 border-primary-900" href="/blog" img="/images/image011.jpg">
+    <div class="m-1 absolute_position4">
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{$t.homepage.blog.title}</h5>
       <p class="mb-3 leading-tight font-normal text-gray-700 dark:text-gray-400">{$t.homepage.blog.description}</p>
     </div>
@@ -34,3 +34,22 @@
 
 
 </div>
+
+<style>
+	.absolute_position1{
+		position: relative;
+		top: 0px;
+	}
+  .absolute_position2{
+		position: relative;
+		top: 50px;
+	}
+  .absolute_position3{
+		position: relative;
+		top: 165px;
+	}
+  .absolute_position4{
+		position: relative;
+		top: 0px;
+	}
+</style>

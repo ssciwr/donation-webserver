@@ -1,6 +1,5 @@
 <script lang="ts">
     import { Button } from 'flowbite-svelte'
-    import { goto } from '$app/navigation';
     import { t } from '$lib/i18n';
 </script>
 
