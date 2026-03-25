@@ -50,9 +50,9 @@
       </FaqItem>
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q5.question}{/snippet}
-        <p class="text-gray-700">{$t.faq.questions.q5.answer}
-        <a href="/tutorial" target="_blank" rel="noreferrer" 
+        <p class="text-gray-700"><a href="/tutorial" target="_blank" rel="noreferrer" 
           class="text-primary-900 hover:underline">{$t.faq.questions.q5.linkText}</a>
+        {$t.faq.questions.q5.answer}
         </p>
       </FaqItem>
       <FaqItem>
@@ -61,8 +61,8 @@
       </FaqItem>
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q7.question}{/snippet}
-        <p class="text-gray-700">{$t.faq.questions.q7.answer}</p>
-        <a href="/team" target="_blank" rel="noreferrer" class="text-primary-900 hover:underline">{$t.faq.questions.q7.linkText}</a>
+        <p class="text-gray-700">{$t.faq.questions.q7.answer}
+        <a href="/team" target="_blank" rel="noreferrer" class="text-primary-900 hover:underline">{$t.faq.questions.q7.linkText}</a></p>
       </FaqItem>
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q8.question}{/snippet}
@@ -70,10 +70,11 @@
       </FaqItem>
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q9.question}{/snippet}
-        <p class="text-gray-700 ">{$t.faq.questions.q9.answer}
-        </p>
+        <p class="text-gray-700 ">{$t.faq.questions.q9.answer1}
         <a href="https://github.com/ssciwr/mailcom" target="_blank" 
          rel="noreferrer" class="text-primary-900 hover:underline">{$t.faq.questions.q9.linkText}</a>
+        {$t.faq.questions.q9.answer2}
+        </p>
       </FaqItem>
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q10.question}{/snippet}
@@ -94,9 +95,11 @@
       </FaqItem>
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q12.question}{/snippet}
-        <p class="mb-2 text-gray-700 ">{$t.faq.questions.q12.answer}</p>
+        <p class="mb-2 text-gray-700 ">{$t.faq.questions.q12.answer1}
         <a href="/about" target="_blank" rel="noreferrer" 
         class="text-primary-900 hover:underline">{$t.faq.questions.q12.linkText}</a> 
+        {$t.faq.questions.q12.answer2}
+        </p>
       </FaqItem>
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q13.question}{/snippet}

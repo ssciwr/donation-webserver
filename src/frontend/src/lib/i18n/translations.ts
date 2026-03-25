@@ -208,8 +208,8 @@ export const translations = {
         },
         q5: {
           question: 'Wie kann ich E-Mails spenden?',
-          answer: 'Klicken Sie hier, um nähere Informationen zum Ablauf der Spende zu erhalten.',
-          linkText: 'Ablauf der Spende'
+          answer: 'um nähere Informationen zum Ablauf der Spende zu erhalten.',
+          linkText: 'Klicken Sie hier,'
         },
         q6: {
           question: 'Was ist das Ziel des Forschungsprojektes?',
@@ -217,8 +217,8 @@ export const translations = {
         },
         q7: {
           question: 'Wer arbeitet im Forschungsprojekt zu den E-Mails?',
-          answer: 'Das Projekt ist ein linguistisches Projekt an der Universität Heidelberg. Nur von der Projektleitung autorisierte Personen dürfen am Forschungsprojekt teilnehmen. Für mehr Informationen zum Team, klicken Sie hier.',
-          linkText: 'Team'
+          answer: 'Das Projekt ist ein linguistisches Projekt an der Universität Heidelberg. Nur von der Projektleitung autorisierte Personen dürfen am Forschungsprojekt teilnehmen. Für mehr Informationen zum Team, ',
+          linkText: 'klicken Sie hier.'
         },
         q8: {
           question: 'Wie wird mit den Daten gearbeitet?',
@@ -226,8 +226,9 @@ export const translations = {
         },
         q9: {
           question: 'Wie werden die E-Mails pseudonymisiert?',
-          answer: 'Die E-Mails werden zunächst automatisch pseudonymisiert. Dazu nutzen wir ein entsprechendes Tool (mailcom), welches wir im vergangenen Jahr an hunderten Test-E-Mails überprüft haben. Durch die Pseudonymisierung werden alle persönlichen Daten wie Namen, Telefonnummer oder Adressen aus den E-Mails herausgestrichen und durch Platzhalter wie Name für Sabine Mustermann ersetzt. Im Anschluss werden die pseudonymisierten E-Mails noch einmal von geschulten studentischen Hilfskräften des Projektes durchsucht und gegebenenfalls komplett pseudonymisiert, so dass nur vollständig pseudonymisierte E-Mails von uns in die Analysen einbezogen werden.',
-          linkText: 'Tool (mailcom)'
+          answer1: 'Die E-Mails werden zunächst automatisch pseudonymisiert. Dazu nutzen wir ein entsprechendes',
+          answer2: 'welches wir im vergangenen Jahr an hunderten Test-E-Mails überprüft haben. Durch die Pseudonymisierung werden alle persönlichen Daten wie Namen, Telefonnummer oder Adressen aus den E-Mails herausgestrichen und durch Platzhalter wie Name für Sabine Mustermann ersetzt. Im Anschluss werden die pseudonymisierten E-Mails noch einmal von geschulten studentischen Hilfskräften des Projektes durchsucht und gegebenenfalls komplett pseudonymisiert, so dass nur vollständig pseudonymisierte E-Mails von uns in die Analysen einbezogen werden.',
+          linkText: 'Tool (mailcom),'
         },
         q10: {
           question: 'Wo werden meine E-Mails gespeichert?',
@@ -241,8 +242,9 @@ export const translations = {
         },
         q12: {
           question: 'Wie / Wo werden die Daten gegebenenfalls veröffentlicht?',
-          answer: 'Die E-Mails werden von uns wissenschaftlich ausgewertet. Die daraus entstehenden Forschungsergebnisse werden in Fachpublikationen veröffentlicht. In diesen werden in Auszügen Einzelbeispiele aus dem E-Mail-Korpus zur Illustration wissenschaftlicher Aussagen in pseudonymisierter Form veröffentlicht. Falls Sie mehr über unsere Forschungsergebnisse wissen möchten, können Sie sich hier zu unserem Newsletter anmelden.',
-          linkText: 'Newsletter'
+          answer1: 'Die E-Mails werden von uns wissenschaftlich ausgewertet. Die daraus entstehenden Forschungsergebnisse werden in Fachpublikationen veröffentlicht. In diesen werden in Auszügen Einzelbeispiele aus dem E-Mail-Korpus zur Illustration wissenschaftlicher Aussagen in pseudonymisierter Form veröffentlicht. Falls Sie mehr über unsere Forschungsergebnisse wissen möchten, können Sie sich hier zu unserem',
+          linkText: 'Newsletter',
+          answer2: 'anmelden.',
         },
         q13: {
           question: 'Wie kann ich meine Emails spenden?',
@@ -250,7 +252,7 @@ export const translations = {
         },
         q14: {
           question: 'Was muss ich beim Spenden meiner Emails beachten?',
-          answer: 'Sie werden in der Datenspende darum gebeten, die Emails die Sie spenden möchten, an eine Spender-Adresse weiterzuleiten. Bitte leiten Sie keine zu großen Anhänge weiter (>10 MB)'
+          answer: 'Sie werden in der Datenspende darum gebeten, die Emails die Sie spenden möchten, an eine Spender-Adresse weiterzuleiten. Bitte leiten Sie keine zu großen Anhänge weiter (>10 MB).'
         },
         q15: {
           question: 'Welche technischen Voraussetzungen benötige ich, um E-Mails spenden zu können?',
@@ -468,8 +470,8 @@ export const translations = {
         },
         q5: {
           question: 'Comment puis-je faire don de mes e-mails ?',
-          answer: 'Cliquez ici pour obtenir plus d\'informations sur le processus de don.',
-          linkText: 'ici'
+          answer: 'pour obtenir plus d\'informations sur le processus de don.',
+          linkText: 'Cliquez ici'
         },
         q6: {
           question: 'Quel est l\'objectif de ce projet de recherche ?',
@@ -477,8 +479,8 @@ export const translations = {
         },
         q7: {
           question: 'Qui est-ce qui travaille dans ce projet de recherche sur les e-mails ?',
-          answer: 'Ce projet de linguistique est mené par une équipe de l\'Université de Heidelberg. Seules les personnes autorisées par la direction du projet peuvent y participer. Pour plus d\'informations sur l\'équipe, cliquez ici.',
-          linkText: 'ici'
+          answer: 'Ce projet de linguistique est mené par une équipe de l\'Université de Heidelberg. Seules les personnes autorisées par la direction du projet peuvent y participer. Pour plus d\'informations sur l\'équipe,',
+          linkText: 'cliquez ici.'
         },
         q8: {
           question: 'Comment les données sont-elles traitées ?',
@@ -486,7 +488,8 @@ export const translations = {
         },
         q9: {
           question: 'Comment les e-mails sont-ils anonymisés ?',
-          answer: 'Les e-mails sont anonymisés automatiquement. Nous utilisons pour cela un outil dont nous avons vérifié l\'efficacité l\'année dernière sur des centaines de mails tests. Grâce à l\'anonymisation, toutes les données personnelles telles que le nom, le numéro de téléphone ou l\'adresse sont supprimées des e-mails et remplacées par des caractères de substitution – l\'emplacement du nom sera par exemple remplacé par Jean Dupont. Ensuite, ces e-mails anonymisés automatiquement sont à nouveau examinés par des étudiant·e·s assistant·e·s formé·e·s au projet. Cela garantit que seuls les e-mails entièrement anonymisés seront pris en compte dans nos analyses.',
+          answer1: 'Les e-mails sont anonymisés automatiquement. Nous utilisons pour cela un',
+          answer2: 'dont nous avons vérifié l\'efficacité l\'année dernière sur des centaines de mails tests. Grâce à l\'anonymisation, toutes les données personnelles telles que le nom, le numéro de téléphone ou l\'adresse sont supprimées des e-mails et remplacées par des caractères de substitution – l\'emplacement du nom sera par exemple remplacé par Jean Dupont. Ensuite, ces e-mails anonymisés automatiquement sont à nouveau examinés par des étudiant·e·s assistant·e·s formé·e·s au projet. Cela garantit que seuls les e-mails entièrement anonymisés seront pris en compte dans nos analyses.',
           linkText: 'outil (mailcom)'
         },
         q10: {
@@ -501,8 +504,9 @@ export const translations = {
         },
         q12: {
           question: 'Comment et où les données sont-elles éventuellement publiées ?',
-          answer: 'Les e-mails sont analysés scientifiquement par nos soins. Les résultats de recherche qui en découlent sont diffusés dans des publications spécialisées. Dans ces dernières, des exemples isolés, tirés du corpus des e-mails, sont publiés sous une forme anonymisée, afin d\'illustrer des thèses scientifiques. Si vous souhaitez en savoir plus sur les résultats de nos recherches, vous pouvez vous abonner à notre newsletter ici.',
-          linkText: 'ici'
+          answer1: 'Les e-mails sont analysés scientifiquement par nos soins. Les résultats de recherche qui en découlent sont diffusés dans des publications spécialisées. Dans ces dernières, des exemples isolés, tirés du corpus des e-mails, sont publiés sous une forme anonymisée, afin d\'illustrer des thèses scientifiques. Si vous souhaitez en savoir plus sur les résultats de nos recherches, vous pouvez vous abonner à',
+          answer2: 'ici.',
+          linkText: 'notre newsletter'
         },
         q13: {
           question: 'Comment procéder au don de mes e-mails ?',
