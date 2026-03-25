@@ -3,9 +3,13 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 const config: PlaywrightTestConfig = {
 	webServer: {
 		// Tier 1: run the real production build, but skip DB calls via BUILD_MODE=true
-		command: 'BUILD_MODE=true PORT=3000 pnpm run build && BUILD_MODE=true PORT=3000 node dist',
-		port: 3000,
-		reuseExistingServer: false
+		command: 'pnpm run build && node dist',
+		url: 'http://localhost:3000',
+		reuseExistingServer: false,
+		env: {
+			BUILD_MODE: 'true',
+			PORT: '3000'
+		}
 	},
 	testDir: './tests',
 	use: {

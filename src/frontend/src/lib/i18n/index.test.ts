@@ -16,10 +16,12 @@ describe('i18n translation helper', () => {
 
 	it('returns a deterministic missing marker when the key does not exist', () => {
 		// `_()` logs a warning when falling back fails; keep test output clean.
-		vi.spyOn(console, 'warn').mockImplementation(() => {});
+		const warnSpy = vi.spyOn(console, 'warn');
+		warnSpy.mockImplementation(() => {});
 		expect(_('homepage.does.not.exist.title', 'de')).toBe(
 			'[Missing translation: homepage.does.not.exist.title]'
 		);
+		warnSpy.mockRestore();
 	});
 });
 
