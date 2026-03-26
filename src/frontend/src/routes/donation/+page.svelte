@@ -33,18 +33,18 @@
   };
 </script>
 
-<main class='p-8 mb-auto'>
+<main class='p-8 mb-auto' data-testid="page-donation">
 <div class="flex justify-center flex-col p-8 mb-auto rounded-lg" style="background-color: rgba(254, 242, 242, 0.6);">
 <h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">{$t.donation.title}</h1>
 <br>
 <div class="flex justify-center">
-<Button class="px-4 py-2 w-auto bg-primary-900" onclick={() => (formModal = true)}>{$t.donation.buttonText}</Button>
+<Button class="px-4 py-2 w-auto bg-primary-900" data-testid="donation-open-form" onclick={() => (formModal = true)}>{$t.donation.buttonText}</Button>
 </div>
 </div>
 </main>
 
 <Modal bind:open={formModal} size="md" autoclose={false} class="w-full" title={$t.donation.modals.formModal.title}>
-  <div class="flex flex-col space-y-6">
+  <div data-testid="donation-form-modal" class="flex flex-col space-y-6">
     <p class="mb-4 font-semibold text-gray-900 dark:text-white">{$t.donation.modals.formModal.gender}</p>
         <ul class="flex flex-row space-x-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
           <li class="flex items-center">
@@ -97,14 +97,14 @@
           </li>
         </ul>
         <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-          <Button onclick={() => {countryModal = true; formModal = false;}}>{$t.donation.modals.formModal.buttons.next}</Button>
+          <Button data-testid="donation-form-next" onclick={() => {countryModal = true; formModal = false;}}>{$t.donation.modals.formModal.buttons.next}</Button>
           <Button color="alternative" onclick={() => (formModal = false)}>{$t.donation.modals.formModal.buttons.cancel}</Button>
         </div>
   </div>
 </Modal>
 
 <Modal bind:open={countryModal} size="md" autoclose={false} class="w-full" title={$t.donation.modals.countryModal.title}>
-  <div class="flex flex-col space-y-6">
+  <div data-testid="donation-country-modal" class="flex flex-col space-y-6">
     <Label class="space-y-2">
       <span>{$t.donation.modals.countryModal.label}</span>
     </Label>
@@ -112,14 +112,14 @@
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       {$t.donation.modals.countryModal.selectedCountry} {cc}</h3>
     <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-      <Button onclick={() => {forwardEmailModal = true; countryModal = false;}} >{$t.donation.modals.countryModal.buttons.next}</Button>
-      <Button color="alternative" onclick={() => (formModal = true, countryModal = false)}>{$t.donation.modals.countryModal.buttons.back}</Button>
+      <Button data-testid="donation-country-next" onclick={() => {forwardEmailModal = true; countryModal = false;}} >{$t.donation.modals.countryModal.buttons.next}</Button>
+      <Button data-testid="donation-country-back" color="alternative" onclick={() => (formModal = true, countryModal = false)}>{$t.donation.modals.countryModal.buttons.back}</Button>
     </div>
   </div>
 </Modal>
 
 <Modal bind:open={forwardEmailModal} size="md" autoclose={false} class="w-full" title={$t.donation.modals.forwardEmailModal.title}>
-  <form action="?/donate" method="POST" use:enhance class="flex flex-col space-y-6">
+  <form action="?/donate" method="POST" use:enhance data-testid="donation-forward-email-modal" class="flex flex-col space-y-6">
     <input type="hidden" name="gender" value={gender} />
     <input type="hidden" name="age" value={age} />
     <input type="hidden" name="lang" value={lang} />
@@ -139,11 +139,11 @@
         <P size="lg" height="relaxed">{$t.donation.modals.forwardEmailModal.donationEmail}</P>
       </Blockquote>
       </h3>
-      <Button type="submit">{$t.donation.modals.forwardEmailModal.buttons.submit}</Button>
+      <Button type="submit" data-testid="donation-submit">{$t.donation.modals.forwardEmailModal.buttons.submit}</Button>
     {:else}
       <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-        <Button type="button" onclick={() => (disclosureModal = true)}>{$t.donation.modals.forwardEmailModal.buttons.next}</Button>
-        <Button type="button" color="alternative" onclick={() => (countryModal = true, forwardEmailModal = false)}>{$t.donation.modals.forwardEmailModal.buttons.back}</Button>
+        <Button type="button" data-testid="donation-forward-next" onclick={() => (disclosureModal = true)}>{$t.donation.modals.forwardEmailModal.buttons.next}</Button>
+        <Button type="button" data-testid="donation-forward-back" color="alternative" onclick={() => (countryModal = true, forwardEmailModal = false)}>{$t.donation.modals.forwardEmailModal.buttons.back}</Button>
       </div>
     {/if}
   </form>
@@ -238,14 +238,14 @@
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
       {$t.donation.modals.disclosureModal.dataProtectionText}
     </p>
-      <form class="flex flex-col space-y-6">
+      <form class="flex flex-col space-y-6" data-testid="donation-disclosure-modal">
       <div class="flex items-start">
-        <Checkbox required bind:checked={accept_disclosure}>
+        <Checkbox required data-testid="donation-disclosure-checkbox" bind:checked={accept_disclosure}>
           {$t.donation.modals.disclosureModal.checkboxText}</Checkbox>
       </div>
       </form>
       <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-        <Button onclick={() => check_disclosure()}>{$t.donation.modals.disclosureModal.buttons.accept}</Button>
-        <Button color="alternative" onclick={() => reject_disclosure()}>{$t.donation.modals.disclosureModal.buttons.reject}</Button>
+        <Button data-testid="donation-disclosure-accept" onclick={() => check_disclosure()}>{$t.donation.modals.disclosureModal.buttons.accept}</Button>
+        <Button data-testid="donation-disclosure-reject" color="alternative" onclick={() => reject_disclosure()}>{$t.donation.modals.disclosureModal.buttons.reject}</Button>
       </div>
 </Modal>

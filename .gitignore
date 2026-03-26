@@ -167,3 +167,5 @@ cython_debug/
 /src/frontend/node_modules
 /src/frontend/.svelte-kit
 /src/frontend/build
+/src/frontend/coverage
+temp

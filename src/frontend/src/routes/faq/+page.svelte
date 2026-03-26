@@ -25,7 +25,7 @@
   }
 </style>
 
-<main class='p-8 mb-auto'>
+<main class='p-8 mb-auto' data-testid="page-faq">
 <div class="flex justify-center flex-col p-20 mb-auto rounded-lg gap-3" style="background-color: rgba(254, 242, 242, 0.6);">
 <Section name="faq">
   <h2 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">{$t.faq.title}</h2>
