@@ -8,7 +8,57 @@ dotenv.config();
 export const prerender = false;
 
 const hasHeaderControlChars = (value: string): boolean => /[\r\n]/.test(value);
-const isValidEmail = (value: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+const isAlphaNumeric = (char: string): boolean => {
+    const code = char.charCodeAt(0);
+    return (
+        (code >= 48 && code <= 57) ||
+        (code >= 65 && code <= 90) ||
+        (code >= 97 && code <= 122)
+    );
+};
+
+const isValidDomainChar = (char: string): boolean => isAlphaNumeric(char) || char === '-' || char === '.';
+
+const isValidEmail = (value: string): boolean => {
+    const atIndex = value.indexOf('@');
+    if (atIndex <= 0 || atIndex !== value.lastIndexOf('@') || atIndex >= value.length - 1) {
+        return false;
+    }
+
+    const localPart = value.slice(0, atIndex);
+    const domainPart = value.slice(atIndex + 1);
+
+    if (
+        localPart.startsWith('.') ||
+        localPart.endsWith('.') ||
+        domainPart.startsWith('.') ||
+        domainPart.endsWith('.') ||
+        !domainPart.includes('.') ||
+        localPart.includes('..') ||
+        domainPart.includes('..')
+    ) {
+        return false;
+    }
+
+    for (const char of value) {
+        if (char === '@') {
+            continue;
+        }
+
+        const code = char.charCodeAt(0);
+        if (code <= 32 || code === 127) {
+            return false;
+        }
+    }
+
+    for (const char of domainPart) {
+        if (!isValidDomainChar(char)) {
+            return false;
+        }
+    }
+
+    return true;
+};
 
 const MAX_NAME_LENGTH = 120;
 const MAX_EMAIL_LENGTH = 254;
@@ -101,7 +151,13 @@ export const actions: Actions = {
             return fail(500, { success: false, message: 'server_error' });
         }
 
-        const transporter = nodemailer.createTransport(smtpConfig.config);
+        const transporter = nodemailer.createTransport({
+            ...smtpConfig.config,
+            requireTLS: true,
+            tls: {
+                minVersion: 'TLSv1.2'
+            }
+        });
 
         try {
             await transporter.sendMail({
