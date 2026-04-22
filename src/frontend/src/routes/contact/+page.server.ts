@@ -1,4 +1,5 @@
 import type { Actions } from './$types';
+import { fail } from '@sveltejs/kit';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
@@ -45,7 +46,7 @@ const getSmtpConfig = () => {
 export const actions: Actions = {
     contact: async ({ request }) => {
         if (process.env.BUILD_MODE === 'true') {
-            return { success: false, message: 'Build mode: action skipped' };
+            return fail(500, { success: false, message: 'server_error' });
         }
 
         const data = await request.formData();
@@ -60,19 +61,19 @@ export const actions: Actions = {
         }
 
         if (!name || !email || !subject || !message) {
-            return { success: false, message: 'missing_fields' };
+            return fail(400, { success: false, message: 'missing_fields' });
         }
 
         const toEmail = process.env.CONTACT_TO_EMAIL;
         if (!toEmail) {
             console.error('CONTACT_TO_EMAIL not configured');
-            return { success: false, message: 'server_error' };
+            return fail(500, { success: false, message: 'server_error' });
         }
 
         const smtpConfig = getSmtpConfig();
         if (!smtpConfig.isValid) {
             console.error(`SMTP configuration error: ${smtpConfig.reason}`);
-            return { success: false, message: 'server_error' };
+            return fail(500, { success: false, message: 'server_error' });
         }
 
         const transporter = nodemailer.createTransport(smtpConfig.config);
@@ -88,7 +89,7 @@ export const actions: Actions = {
             return { success: true };
         } catch (err) {
             console.error('Failed to send contact email:', err);
-            return { success: false, message: 'send_failed' };
+            return fail(500, { success: false, message: 'send_failed' });
         }
     }
 };
