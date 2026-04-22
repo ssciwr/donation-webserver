@@ -6,15 +6,41 @@ dotenv.config();
 
 export const prerender = false;
 
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 587,
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
+const getSmtpConfig = () => {
+    const requiredVars = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS'] as const;
+    const missingVars = requiredVars.filter((name) => {
+        const value = process.env[name];
+        return !value || value.trim() === '';
+    });
+
+    if (missingVars.length > 0) {
+        return {
+            isValid: false as const,
+            reason: `Missing required SMTP env vars: ${missingVars.join(', ')}`
+        };
     }
-});
+
+    const smtpPort = Number.parseInt(process.env.SMTP_PORT as string, 10);
+    if (!Number.isFinite(smtpPort) || smtpPort <= 0) {
+        return {
+            isValid: false as const,
+            reason: `Invalid SMTP_PORT value: ${process.env.SMTP_PORT}`
+        };
+    }
+
+    return {
+        isValid: true as const,
+        config: {
+            host: process.env.SMTP_HOST as string,
+            port: smtpPort,
+            secure: process.env.SMTP_SECURE === 'true',
+            auth: {
+                user: process.env.SMTP_USER as string,
+                pass: process.env.SMTP_PASS as string
+            }
+        }
+    };
+};
 
 export const actions: Actions = {
     contact: async ({ request }) => {
@@ -42,6 +68,14 @@ export const actions: Actions = {
             console.error('CONTACT_TO_EMAIL not configured');
             return { success: false, message: 'server_error' };
         }
+
+        const smtpConfig = getSmtpConfig();
+        if (!smtpConfig.isValid) {
+            console.error(`SMTP configuration error: ${smtpConfig.reason}`);
+            return { success: false, message: 'server_error' };
+        }
+
+        const transporter = nodemailer.createTransport(smtpConfig.config);
 
         try {
             await transporter.sendMail({
