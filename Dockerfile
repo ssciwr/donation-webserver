@@ -1,7 +1,8 @@
 FROM node:22-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+ENV CI=true
+RUN npm install -g corepack@latest && corepack enable && corepack prepare pnpm@10.33.0 --activate
 WORKDIR /app
 COPY src/frontend/package.json src/frontend/pnpm-lock.yaml src/frontend/drizzle.config.ts  src/frontend/src/lib/server/schema.ts /app/
 
@@ -16,7 +17,7 @@ RUN BUILD_MODE=true pnpm run build
 FROM node:22-slim
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && corepack prepare pnpm@10.6.3 --activate
+RUN npm install -g corepack@latest && corepack enable && corepack prepare pnpm@10.33.0 --activate
 WORKDIR /app
 COPY --from=build /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist

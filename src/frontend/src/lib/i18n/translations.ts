@@ -159,7 +159,17 @@ export const translations = {
     },
     contact: {
       title: 'Kontakt',
-      description: 'Nehmen Sie Kontakt mit unserem Forschungsteam unter mailcom@rose.uni-heidelberg.de auf. Wir freuen uns auf Ihre Fragen und Anregungen.'
+      description: 'Nehmen Sie Kontakt mit unserem Forschungsteam unter mailcom@rose.uni-heidelberg.de auf. Wir freuen uns auf Ihre Fragen und Anregungen.',
+      form: {
+        name: 'Name',
+        email: 'E-Mail-Adresse',
+        subject: 'Betreff',
+        message: 'Nachricht',
+        send: 'Absenden',
+        sending: 'Wird gesendet...',
+        successMessage: 'Ihre Nachricht wurde erfolgreich gesendet. Vielen Dank!',
+        errorMessage: 'Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.'
+      }
     },
     team: {
       title: 'Unser Team',
@@ -421,7 +431,17 @@ export const translations = {
     },
     contact: {
       title: 'Contact',
-      description: 'Contactez notre équipe de recherche sous mailcom@rose.uni-heidelberg.de. Nous nous réjouissons de recevoir vos questions et suggestions.'
+      description: 'Contactez notre équipe de recherche sous mailcom@rose.uni-heidelberg.de. Nous nous réjouissons de recevoir vos questions et suggestions.',
+      form: {
+        name: 'Nom',
+        email: 'Adresse e-mail',
+        subject: 'Objet',
+        message: 'Message',
+        send: 'Envoyer',
+        sending: 'Envoi en cours...',
+        successMessage: 'Votre message a été envoyé avec succès. Merci !',
+        errorMessage: "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer."
+      }
     },
     team: {
       title: 'Notre Équipe',
