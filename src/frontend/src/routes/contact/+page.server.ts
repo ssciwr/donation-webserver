@@ -7,6 +7,14 @@ dotenv.config();
 
 export const prerender = false;
 
+const hasHeaderControlChars = (value: string): boolean => /[\r\n]/.test(value);
+const isValidEmail = (value: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+const MAX_NAME_LENGTH = 120;
+const MAX_EMAIL_LENGTH = 254;
+const MAX_SUBJECT_LENGTH = 200;
+const MAX_MESSAGE_LENGTH = 5000;
+
 const getSmtpConfig = () => {
     const requiredVars = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS'] as const;
     const missingVars = requiredVars.filter((name) => {
@@ -62,6 +70,23 @@ export const actions: Actions = {
 
         if (!name || !email || !subject || !message) {
             return fail(400, { success: false, message: 'missing_fields' });
+        }
+
+        if (hasHeaderControlChars(name) || hasHeaderControlChars(email) || hasHeaderControlChars(subject)) {
+            return fail(400, { success: false, message: 'invalid_fields' });
+        }
+
+        if (
+            name.length > MAX_NAME_LENGTH ||
+            email.length > MAX_EMAIL_LENGTH ||
+            subject.length > MAX_SUBJECT_LENGTH ||
+            message.length > MAX_MESSAGE_LENGTH
+        ) {
+            return fail(400, { success: false, message: 'invalid_fields' });
+        }
+
+        if (!isValidEmail(email)) {
+            return fail(400, { success: false, message: 'invalid_email' });
         }
 
         const toEmail = process.env.CONTACT_TO_EMAIL;
