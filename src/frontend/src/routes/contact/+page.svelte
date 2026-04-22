@@ -28,11 +28,15 @@
     onMount(() => {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
-            const draft = JSON.parse(saved);
-            name = draft.name ?? '';
-            email = draft.email ?? '';
-            subject = draft.subject ?? '';
-            message = draft.message ?? '';
+            try {
+                const draft = JSON.parse(saved);
+                name = draft.name ?? '';
+                email = draft.email ?? '';
+                subject = draft.subject ?? '';
+                message = draft.message ?? '';
+            } catch {
+                localStorage.removeItem(STORAGE_KEY);
+            }
         }
     });
 </script>
@@ -81,22 +85,22 @@
 
 		<Label class="space-y-2">
 			<span>{$t.contact.form.name}</span>
-			<Input type="text" name="name" required data-testid="contact-name" bind:value={name} oninput={saveDraft} />
+			<Input type="text" name="name" required data-testid="contact-name" bind:value={name} on:input={saveDraft} />
 		</Label>
 
 		<Label class="space-y-2">
 			<span>{$t.contact.form.email}</span>
-			<Input type="email" name="email" required placeholder="name@example.com" data-testid="contact-email" bind:value={email} oninput={saveDraft} />
+			<Input type="email" name="email" required placeholder="name@example.com" data-testid="contact-email" bind:value={email} on:input={saveDraft} />
 		</Label>
 
 		<Label class="space-y-2">
 			<span>{$t.contact.form.subject}</span>
-			<Input type="text" name="subject" required data-testid="contact-subject" bind:value={subject} oninput={saveDraft} />
+			<Input type="text" name="subject" required data-testid="contact-subject" bind:value={subject} on:input={saveDraft} />
 		</Label>
 
 		<Label class="space-y-2">
 			<span>{$t.contact.form.message}</span>
-			<Textarea name="message" rows={6} required data-testid="contact-message" bind:value={message} oninput={saveDraft} />
+			<Textarea name="message" rows={6} required data-testid="contact-message" bind:value={message} on:input={saveDraft} />
 		</Label>
 
 		<Button type="submit" class="bg-primary-900" disabled={submitting} data-testid="contact-submit">
