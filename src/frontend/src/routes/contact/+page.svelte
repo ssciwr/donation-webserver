@@ -68,8 +68,11 @@
 					formResult = result.data as { success: boolean; message?: string };
 					if (formResult?.success) {
 						clearDraft();
-						await update({ reset: true });
 					}
+					await update({ reset: !!formResult?.success });
+				} else if (result.type === 'failure') {
+					formResult = result.data as { success?: boolean; message?: string };
+					await update();
 				} else {
 					formResult = { success: false, message: 'send_failed' };
 				}
