@@ -31,6 +31,10 @@ vi.mock('dotenv', () => ({
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
+type FailResult = { status: number; data: { message: string } };
+type RollbackResult = { status: number; data: { message: string; donationId?: string } };
+type SuccessResult = { success: boolean; donationId: string };
+
 const buildRequest = (fields: Record<string, string>): Request => {
     const form = new FormData();
     for (const [key, value] of Object.entries(fields)) {
@@ -71,6 +75,11 @@ const loadAction = async () => {
     return mod.actions!.donate as (event: { request: Request }) => Promise<unknown>;
 };
 
+const loadDonateWithSmtp = async () => {
+    setSmtpEnv();
+    return loadAction();
+};
+
 describe('donate action', () => {
     beforeEach(() => {
         delete process.env.BUILD_MODE;
@@ -90,10 +99,7 @@ describe('donate action', () => {
     it('returns server_error fail when BUILD_MODE=true', async () => {
         process.env.BUILD_MODE = 'true';
         const donate = await loadAction();
-        const result = (await donate({ request: buildRequest(validFields) })) as {
-            status: number;
-            data: { message: string };
-        };
+        const result = (await donate({ request: buildRequest(validFields) })) as FailResult;
         expect(result.status).toBe(500);
         expect(result.data.message).toBe('server_error');
         expect(insert).not.toHaveBeenCalled();
@@ -101,8 +107,7 @@ describe('donate action', () => {
     });
 
     it('honeypot triggers silent success without insert or send', async () => {
-        setSmtpEnv();
-        const donate = await loadAction();
+        const donate = await loadDonateWithSmtp();
         const result = (await donate({
             request: buildRequest({ ...validFields, website: 'spam-bot' })
         })) as { success: boolean; donationId: string | null };
@@ -112,82 +117,47 @@ describe('donate action', () => {
         expect(sendMail).not.toHaveBeenCalled();
     });
 
-    it('rejects out-of-range numeric codes with invalid_fields', async () => {
-        setSmtpEnv();
-        const donate = await loadAction();
-        const result = (await donate({
-            request: buildRequest({ ...validFields, gender: '99' })
-        })) as { status: number; data: { message: string } };
-        expect(result.status).toBe(400);
-        expect(result.data.message).toBe('invalid_fields');
-        expect(insert).not.toHaveBeenCalled();
-    });
-
-    it('rejects malformed email with invalid_email', async () => {
-        setSmtpEnv();
-        const donate = await loadAction();
-        const result = (await donate({
-            request: buildRequest({ ...validFields, email: 'not-an-email' })
-        })) as { status: number; data: { message: string } };
-        expect(result.status).toBe(400);
-        expect(result.data.message).toBe('invalid_email');
-        expect(insert).not.toHaveBeenCalled();
-    });
-
-    it('rejects email containing CRLF with invalid_email', async () => {
-        setSmtpEnv();
-        const donate = await loadAction();
-        const result = (await donate({
-            request: buildRequest({ ...validFields, email: 'a@b.com\r\nBcc: x@y.com' })
-        })) as { status: number; data: { message: string } };
-        expect(result.status).toBe(400);
-        expect(result.data.message).toBe('invalid_email');
-    });
-
-    it('rejects non-2-letter country code with invalid_country', async () => {
-        setSmtpEnv();
-        const donate = await loadAction();
-        const result = (await donate({
-            request: buildRequest({ ...validFields, country: 'XYZ' })
-        })) as { status: number; data: { message: string } };
-        expect(result.status).toBe(400);
-        expect(result.data.message).toBe('invalid_country');
-    });
+    it.each([
+        [{ gender: '99' }, 'invalid_fields', 'rejects out-of-range numeric codes'],
+        [{ email: 'not-an-email' }, 'invalid_email', 'rejects malformed email'],
+        [{ email: 'a@b.com\r\nBcc: x@y.com' }, 'invalid_email', 'rejects email containing CRLF'],
+        [{ country: 'XYZ' }, 'invalid_country', 'rejects non-2-letter country code'],
+    ] as [Record<string, string>, string, string][])(
+        '%s with %s',
+        async (override, expectedMessage) => {
+            const donate = await loadDonateWithSmtp();
+            const result = (await donate({
+                request: buildRequest({ ...validFields, ...override })
+            })) as FailResult;
+            expect(result.status).toBe(400);
+            expect(result.data.message).toBe(expectedMessage);
+            expect(insert).not.toHaveBeenCalled();
+        }
+    );
 
     it('returns server_error when SMTP env vars are missing', async () => {
         const donate = await loadAction();
-        const result = (await donate({ request: buildRequest(validFields) })) as {
-            status: number;
-            data: { message: string };
-        };
+        const result = (await donate({ request: buildRequest(validFields) })) as FailResult;
         expect(result.status).toBe(500);
         expect(result.data.message).toBe('server_error');
         expect(insert).not.toHaveBeenCalled();
     });
 
     it('returns db_error when insert fails', async () => {
-        setSmtpEnv();
         insertReturningId.mockRejectedValueOnce(new Error('db down'));
-        const donate = await loadAction();
-        const result = (await donate({ request: buildRequest(validFields) })) as {
-            status: number;
-            data: { message: string };
-        };
+        const donate = await loadDonateWithSmtp();
+        const result = (await donate({ request: buildRequest(validFields) })) as FailResult;
         expect(result.status).toBe(500);
         expect(result.data.message).toBe('db_error');
         expect(sendMail).not.toHaveBeenCalled();
     });
 
     it('rolls back inserted row on email failure and omits donationId', async () => {
-        setSmtpEnv();
         insertReturningId.mockResolvedValueOnce([{ id: 42 }]);
         sendMail.mockRejectedValueOnce(new Error('smtp down'));
         deleteWhere.mockResolvedValueOnce(undefined);
-        const donate = await loadAction();
-        const result = (await donate({ request: buildRequest(validFields) })) as {
-            status: number;
-            data: { message: string; donationId?: unknown };
-        };
+        const donate = await loadDonateWithSmtp();
+        const result = (await donate({ request: buildRequest(validFields) })) as RollbackResult;
         expect(result.status).toBe(500);
         expect(result.data.message).toBe('send_failed');
         expect(result.data.donationId).toBeUndefined();
@@ -196,30 +166,22 @@ describe('donate action', () => {
     });
 
     it('surfaces donationId when rollback also fails', async () => {
-        setSmtpEnv();
         insertReturningId.mockResolvedValueOnce([{ id: 99 }]);
         sendMail.mockRejectedValueOnce(new Error('smtp down'));
         deleteWhere.mockRejectedValueOnce(new Error('db down'));
-        const donate = await loadAction();
-        const result = (await donate({ request: buildRequest(validFields) })) as {
-            status: number;
-            data: { message: string; donationId: string };
-        };
+        const donate = await loadDonateWithSmtp();
+        const result = (await donate({ request: buildRequest(validFields) })) as RollbackResult;
         expect(result.status).toBe(500);
         expect(result.data.message).toBe('send_failed');
         expect(result.data.donationId).toMatch(UUID_PATTERN);
     });
 
     it('inserts with uuid, sends email containing uuid and labels, returns uuid donationId', async () => {
-        setSmtpEnv();
         insertReturningId.mockResolvedValueOnce([{ id: 7 }]);
         sendMail.mockResolvedValueOnce({ accepted: ['donor@example.com'] });
 
-        const donate = await loadAction();
-        const result = (await donate({ request: buildRequest(validFields) })) as {
-            success: boolean;
-            donationId: string;
-        };
+        const donate = await loadDonateWithSmtp();
+        const result = (await donate({ request: buildRequest(validFields) })) as SuccessResult;
 
         expect(result.success).toBe(true);
         expect(result.donationId).toMatch(UUID_PATTERN);
