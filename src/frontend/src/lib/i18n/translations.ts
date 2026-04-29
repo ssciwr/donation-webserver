@@ -146,6 +146,12 @@ export const translations = {
         alerts: {
           confirmRequired: 'Bitte bestätigen Sie die Einwilligungserklärung um fortzufahren.',
           rejected: 'Sie haben die Einwilligungserklärung abgelehnt. Ihre Daten werden nicht gespeichert.',
+          successMessage: 'Ihre Spende wurde erfasst. Eine Bestätigungsemail mit Ihrer Spenden-ID wurde an Ihre Email-Adresse gesendet.',
+          errorMessage: 'Bei der Erfassung Ihrer Spende ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+          sendFailedMessage: 'Ihre Spende wurde mit der ID {id} erfasst, aber die Bestätigungsemail konnte nicht gesendet werden. Bitte notieren Sie diese ID.',
+          invalidFields: 'Bitte überprüfen Sie Ihre Eingaben.',
+          invalidEmail: 'Bitte geben Sie eine gültige Email-Adresse an.',
+          invalidCountry: 'Bitte wählen Sie ein gültiges Land aus.',
         },
       },
     },
@@ -418,6 +424,12 @@ export const translations = {
         alerts: {
           confirmRequired: 'Veuillez confirmer la déclaration de consentement pour continuer.',
           rejected: 'Vous avez refusé la déclaration de consentement. Vos données ne seront pas enregistrées.',
+          successMessage: 'Votre don a été enregistré. Un e-mail de confirmation contenant votre identifiant de don a été envoyé à votre adresse e-mail.',
+          errorMessage: 'Une erreur est survenue lors de l\'enregistrement de votre don. Veuillez réessayer.',
+          sendFailedMessage: 'Votre don a été enregistré avec l\'identifiant {id}, mais l\'e-mail de confirmation n\'a pas pu être envoyé. Veuillez noter cet identifiant.',
+          invalidFields: 'Veuillez vérifier vos saisies.',
+          invalidEmail: 'Veuillez fournir une adresse e-mail valide.',
+          invalidCountry: 'Veuillez sélectionner un pays valide.',
         },
       },
     },
@@ -547,3 +559,7 @@ export const translations = {
 
 export type Language = keyof typeof translations;
 export type TranslationKey = keyof typeof translations.de;
+
+type _Translatable<T> = { [K in keyof T]: T[K] extends string ? string : _Translatable<T[K]> };
+translations.fr satisfies _Translatable<typeof translations.de>;
+translations.de satisfies _Translatable<typeof translations.fr>;

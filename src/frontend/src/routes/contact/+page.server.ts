@@ -1,105 +1,18 @@
 import type { Actions } from './$types';
 import { fail } from '@sveltejs/kit';
-import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import {
+    createTransporter,
+    getSmtpConfig,
+    hasHeaderControlChars,
+    isValidEmail
+} from '$lib/server/email';
 
 export const prerender = false;
-
-const hasHeaderControlChars = (value: string): boolean => /[\r\n]/.test(value);
-const isAlphaNumeric = (char: string): boolean => {
-    const code = char.charCodeAt(0);
-    return (
-        (code >= 48 && code <= 57) ||
-        (code >= 65 && code <= 90) ||
-        (code >= 97 && code <= 122)
-    );
-};
-
-const isValidDomainChar = (char: string): boolean => isAlphaNumeric(char) || char === '-' || char === '.';
-
-const isValidEmail = (value: string): boolean => {
-    const atIndex = value.indexOf('@');
-    if (atIndex <= 0 || atIndex !== value.lastIndexOf('@') || atIndex >= value.length - 1) {
-        return false;
-    }
-
-    const localPart = value.slice(0, atIndex);
-    const domainPart = value.slice(atIndex + 1);
-
-    if (
-        localPart.startsWith('.') ||
-        localPart.endsWith('.') ||
-        domainPart.startsWith('.') ||
-        domainPart.endsWith('.') ||
-        !domainPart.includes('.') ||
-        localPart.includes('..') ||
-        domainPart.includes('..')
-    ) {
-        return false;
-    }
-
-    for (const char of value) {
-        if (char === '@') {
-            continue;
-        }
-
-        const code = char.charCodeAt(0);
-        if (code <= 32 || code === 127) {
-            return false;
-        }
-    }
-
-    for (const char of domainPart) {
-        if (!isValidDomainChar(char)) {
-            return false;
-        }
-    }
-
-    return true;
-};
 
 const MAX_NAME_LENGTH = 120;
 const MAX_EMAIL_LENGTH = 254;
 const MAX_SUBJECT_LENGTH = 200;
 const MAX_MESSAGE_LENGTH = 5000;
-
-const getSmtpConfig = () => {
-    const requiredVars = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS'] as const;
-    const missingVars = requiredVars.filter((name) => {
-        const value = process.env[name];
-        return !value || value.trim() === '';
-    });
-
-    if (missingVars.length > 0) {
-        return {
-            isValid: false as const,
-            reason: `Missing required SMTP env vars: ${missingVars.join(', ')}`
-        };
-    }
-
-    const smtpPort = Number.parseInt(process.env.SMTP_PORT as string, 10);
-    if (!Number.isFinite(smtpPort) || smtpPort <= 0) {
-        return {
-            isValid: false as const,
-            reason: `Invalid SMTP_PORT value: ${process.env.SMTP_PORT}`
-        };
-    }
-
-    return {
-        isValid: true as const,
-        config: {
-            host: process.env.SMTP_HOST as string,
-            port: smtpPort,
-            secure: process.env.SMTP_SECURE === 'true',
-            auth: {
-                user: process.env.SMTP_USER as string,
-                pass: process.env.SMTP_PASS as string
-            }
-        }
-    };
-};
 
 export const actions: Actions = {
     contact: async ({ request }) => {
@@ -151,17 +64,11 @@ export const actions: Actions = {
             return fail(500, { success: false, message: 'server_error' });
         }
 
-        const transporter = nodemailer.createTransport({
-            ...smtpConfig.config,
-            requireTLS: true,
-            tls: {
-                minVersion: 'TLSv1.2'
-            }
-        });
+        const transporter = createTransporter(smtpConfig.config);
 
         try {
             await transporter.sendMail({
-                from: `"${name}" <${process.env.SMTP_USER}>`,
+                from: { name, address: smtpConfig.user },
                 replyTo: email,
                 to: toEmail,
                 subject: `[Contact Form] ${subject}`,
