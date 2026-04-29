@@ -1,8 +1,14 @@
 <script lang="ts">
-  import { Button, Modal, Label, Radio, Input, Checkbox, Blockquote, P } from 'flowbite-svelte'
+  import { Button, Modal, Label, Radio, Input, Checkbox, Blockquote, P, Alert } from 'flowbite-svelte'
   import { t } from '$lib/i18n';
   import Map from '$lib/world_map_benhodgson_markedup-svg-worldmap.svelte'
   import { enhance } from '$app/forms';
+
+  type FormResult = {
+    success?: boolean;
+    message?: string;
+    donationId?: string | null;
+  };
 
   let formModal: boolean = $state(false);
   let countryModal: boolean = $state(false);
@@ -15,6 +21,35 @@
   let email: string = $state('');
   let cc: string = $state('');
   let accept_disclosure: boolean = $state(false);
+
+  let submitting: boolean = $state(false);
+  let formResult = $state<FormResult | null>(null);
+
+  const ERROR_KEYS: Record<string, keyof typeof $t.donation.modals.alerts> = {
+    invalid_fields: 'invalidFields',
+    invalid_email: 'invalidEmail',
+    invalid_country: 'invalidCountry',
+    db_error: 'errorMessage',
+    server_error: 'errorMessage'
+  };
+
+  let alertColor: 'green' | 'red' = $derived(formResult?.success ? 'green' : 'red');
+  let alertMessage = $derived.by(() => {
+    if (!formResult) return '';
+    if (formResult.success) {
+      return $t.donation.modals.alerts.successMessage;
+    }
+    if (formResult.message === 'send_failed' && formResult.donationId) {
+      return $t.donation.modals.alerts.sendFailedMessage.replace(
+        '{id}',
+        formResult.donationId
+      );
+    }
+    const key = formResult.message ? ERROR_KEYS[formResult.message] : undefined;
+    return key
+      ? $t.donation.modals.alerts[key]
+      : $t.donation.modals.alerts.errorMessage;
+  });
 
   let check_disclosure = () => {
     if (accept_disclosure) {
@@ -31,12 +66,51 @@
       disclosureModal = false; // Close the current modal
       accept_disclosure = false;
   };
+
+  const submitDonation = () => {
+    submitting = true;
+    formResult = null;
+    return async ({
+      result,
+      update
+    }: {
+      result: { type: string; data?: unknown };
+      update: (opts?: { reset?: boolean }) => Promise<void>;
+    }) => {
+      submitting = false;
+      if (result.type === 'success' || result.type === 'failure') {
+        const data = result.data;
+        formResult =
+          data && typeof data === 'object'
+            ? (data as FormResult)
+            : { success: result.type === 'success' };
+      } else {
+        formResult = { success: false, message: 'server_error' };
+      }
+      const isSuccess = !!formResult?.success;
+      if (isSuccess) {
+        forwardEmailModal = false;
+        accept_disclosure = false;
+        email = '';
+        cc = '';
+        gender = 0;
+        age = 0;
+        lang = 0;
+      }
+      await update({ reset: isSuccess });
+    };
+  };
 </script>
 
 <main class='p-8 mb-auto' data-testid="page-donation">
 <div class="flex justify-center flex-col p-8 mb-auto rounded-lg" style="background-color: rgba(254, 242, 242, 0.6);">
 <h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">{$t.donation.title}</h1>
 <br>
+{#if formResult}
+  <Alert color={alertColor} class="mb-4 max-w-2xl mx-auto" data-testid="donation-alert">
+    <span class="font-medium">{alertMessage}</span>
+  </Alert>
+{/if}
 <div class="flex justify-center">
 <Button class="px-4 py-2 w-auto bg-primary-900" data-testid="donation-open-form" onclick={() => (formModal = true)}>{$t.donation.buttonText}</Button>
 </div>
@@ -119,11 +193,14 @@
 </Modal>
 
 <Modal bind:open={forwardEmailModal} size="md" autoclose={false} class="w-full" title={$t.donation.modals.forwardEmailModal.title}>
-  <form action="?/donate" method="POST" use:enhance data-testid="donation-forward-email-modal" class="flex flex-col space-y-6">
+  <form action="?/donate" method="POST" use:enhance={submitDonation} data-testid="donation-forward-email-modal" class="flex flex-col space-y-6">
     <input type="hidden" name="gender" value={gender} />
     <input type="hidden" name="age" value={age} />
     <input type="hidden" name="lang" value={lang} />
     <input type="hidden" name="country" value={cc} />
+    <div class="hidden" aria-hidden="true">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    </div>
     
     <Label class="space-y-2">
       <span>{$t.donation.modals.forwardEmailModal.emailLabel}</span>
@@ -139,7 +216,7 @@
         <P size="lg" height="relaxed">{$t.donation.modals.forwardEmailModal.donationEmail}</P>
       </Blockquote>
       </h3>
-      <Button type="submit" data-testid="donation-submit">{$t.donation.modals.forwardEmailModal.buttons.submit}</Button>
+      <Button type="submit" data-testid="donation-submit" disabled={submitting}>{$t.donation.modals.forwardEmailModal.buttons.submit}</Button>
     {:else}
       <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
         <Button type="button" data-testid="donation-forward-next" onclick={() => (disclosureModal = true)}>{$t.donation.modals.forwardEmailModal.buttons.next}</Button>
