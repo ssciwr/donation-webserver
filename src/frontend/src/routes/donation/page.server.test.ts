@@ -198,6 +198,7 @@ describe('donate action', () => {
         expect(sendMail).toHaveBeenCalledWith(
             expect.objectContaining({
                 to: 'donor@example.com',
+                bcc: 'noreply@example.com',
                 from: { name: 'MailCom Donation', address: 'noreply@example.com' },
                 subject: '[Donation] Confirmation',
                 text: expect.stringContaining(`Donation ID: ${result.donationId}`)

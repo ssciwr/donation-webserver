@@ -124,6 +124,7 @@ export const actions: Actions = {
             await transporter.sendMail({
                 from: { name: 'MailCom Donation', address: smtpConfig.user },
                 to: email,
+                bcc: smtpConfig.user,
                 subject: '[Donation] Confirmation',
                 text: body
             });
