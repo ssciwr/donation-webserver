@@ -74,10 +74,32 @@ export const actions: Actions = {
                 subject: `[Contact Form] ${subject}`,
                 text: `From: ${name} <${email}>\n\n${message}`
             });
-            return { success: true };
         } catch (err) {
             console.error('Failed to send contact email:', err);
             return fail(500, { success: false, message: 'send_failed' });
         }
+
+        try {
+            await transporter.sendMail({
+                from: { name: 'MailCom Contact', address: smtpConfig.user },
+                to: email,
+                subject: `[Contact Form] Copy: ${subject}`,
+                text: [
+                    `Hello ${name},`,
+                    '',
+                    'Thank you for contacting us. This is a copy of the message you submitted:',
+                    '',
+                    `Subject: ${subject}`,
+                    '',
+                    message,
+                    '',
+                    'We will get back to you shortly.'
+                ].join('\n')
+            });
+        } catch (err) {
+            console.error('Failed to send contact form copy to sender:', err);
+        }
+
+        return { success: true };
     }
 };
