@@ -15,12 +15,15 @@
   let forwardEmailModal: boolean = $state(false);
   let disclosureModal: boolean = $state(false);
 
-  let gender: number = $state(0);
-  let age: number = $state(0);
-  let lang: number = $state(0);
+  let gender: number | null = $state(null);
+  let age: number | null = $state(null);
+  let lang: number | null = $state(null);
   let email: string = $state('');
   let cc: string = $state('');
   let accept_disclosure: boolean = $state(false);
+
+  let formStepValid = $derived(gender !== null && age !== null && lang !== null);
+  let countryStepValid = $derived(!!cc);
 
   let submitting: boolean = $state(false);
   let formResult = $state<FormResult | null>(null);
@@ -93,9 +96,9 @@
         accept_disclosure = false;
         email = '';
         cc = '';
-        gender = 0;
-        age = 0;
-        lang = 0;
+        gender = null;
+        age = null;
+        lang = null;
       }
       await update({ reset: isSuccess });
     };
@@ -171,7 +174,7 @@
           </li>
         </ul>
         <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-          <Button data-testid="donation-form-next" onclick={() => {countryModal = true; formModal = false;}}>{$t.donation.modals.formModal.buttons.next}</Button>
+          <Button data-testid="donation-form-next" disabled={!formStepValid} onclick={() => {countryModal = true; formModal = false;}}>{$t.donation.modals.formModal.buttons.next}</Button>
           <Button color="alternative" onclick={() => (formModal = false)}>{$t.donation.modals.formModal.buttons.cancel}</Button>
         </div>
   </div>
@@ -186,7 +189,7 @@
     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
       {$t.donation.modals.countryModal.selectedCountry} {cc}</h3>
     <div class="inline-grid grid-cols-2 grid-rows-1 gap-4">
-      <Button data-testid="donation-country-next" onclick={() => {forwardEmailModal = true; countryModal = false;}} >{$t.donation.modals.countryModal.buttons.next}</Button>
+      <Button data-testid="donation-country-next" disabled={!countryStepValid} onclick={() => {forwardEmailModal = true; countryModal = false;}} >{$t.donation.modals.countryModal.buttons.next}</Button>
       <Button data-testid="donation-country-back" color="alternative" onclick={() => (formModal = true, countryModal = false)}>{$t.donation.modals.countryModal.buttons.back}</Button>
     </div>
   </div>
