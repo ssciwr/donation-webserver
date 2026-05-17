@@ -10,7 +10,7 @@
 	<h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">{$t.team.title}</h1>
 	
 	<div class="flex justify-center mt-8">
-		<img src="/images/Teamfoto_bearbeitet_V1.jpg" alt="MailCom research team" class="max-w-full h-auto rounded-lg shadow-lg" />
+		<img src="/images/Teamfoto_bearbeitet_V1.jpg" alt="MailCom research team" class="max-w-sm w-full h-auto rounded-lg shadow-lg" />
 	</div>
 	<br>
 
