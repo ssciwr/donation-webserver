@@ -25,7 +25,7 @@ test('donation wizard flow (Tier 1, BUILD_MODE skips DB)', async ({ page }) => {
   // Next button disabled until a country is picked on the map
   const countryNext = page.getByTestId('donation-country-next');
   await expect(countryNext).toBeDisabled();
-  await page.locator('[cc="jp"]').first().dispatchEvent('focus');
+  await page.locator('[cc="jp"]').first().click();
   await expect(countryNext).toBeEnabled();
 
   // Step 2: country -> forward email

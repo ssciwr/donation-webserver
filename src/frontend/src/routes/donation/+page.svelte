@@ -22,8 +22,10 @@
   let cc: string = $state('');
   let accept_disclosure: boolean = $state(false);
 
+  const isValidCountryCode = (value: string) => /^[A-Za-z]{2}$/.test(value.trim());
+
   let formStepValid = $derived(gender !== null && age !== null && lang !== null);
-  let countryStepValid = $derived(!!cc);
+  let countryStepValid = $derived(isValidCountryCode(cc));
 
   let submitting: boolean = $state(false);
   let formResult = $state<FormResult | null>(null);
