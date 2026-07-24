@@ -49,17 +49,17 @@ export const t = derived(
 export function _(key: string, lang?: Language): string {
   const language = lang || 'de';
   const keys = key.split('.');
-  let result: any = translations[language];
+  let result: unknown = translations[language];
   
   for (const k of keys) {
     if (result && typeof result === 'object' && k in result) {
-      result = result[k];
+      result = (result as Record<string, unknown>)[k];
     } else {
       // Fallback to German if key not found
       result = translations.de;
       for (const fallbackKey of keys) {
         if (result && typeof result === 'object' && fallbackKey in result) {
-          result = result[fallbackKey];
+          result = (result as Record<string, unknown>)[fallbackKey];
         } else {
           console.warn(`Translation key "${key}" not found in language "${language}" or fallback "de"`);
           return `[Missing translation: ${key}]`; // Return explicit fallback if not found

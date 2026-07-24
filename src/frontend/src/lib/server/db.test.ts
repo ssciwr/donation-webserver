@@ -1,8 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 
-let drizzleImpl: any;
-let drizzleMockFn: any;
-let createPoolFn: any;
+let drizzleImpl: Mock | undefined;
+let drizzleMockFn: Mock | undefined;
+let createPoolFn: Mock | undefined;
 
 vi.mock('drizzle-orm/mysql2', () => {
 	drizzleImpl = vi.fn((pool: unknown) => ({ __realDb: true, pool }));
@@ -10,7 +10,9 @@ vi.mock('drizzle-orm/mysql2', () => {
 
 	// Important: keep `drizzle` as a normal function so we can attach a real `.mock()` method
 	// (Vitest's `vi.fn` already has a `.mock` getter used for call metadata).
-	const drizzle: any = (pool: unknown) => drizzleImpl(pool);
+	const drizzle = ((pool: unknown) => drizzleImpl?.(pool)) as ((pool: unknown) => unknown) & {
+		mock: Mock;
+	};
 	drizzle.mock = drizzleMockFn;
 
 	return { drizzle };
@@ -52,7 +54,7 @@ describe('db module BUILD_MODE branching', () => {
 		expect(mod.db).toEqual({ __realDb: true, pool: { __pool: true } });
 
 		expect(createPoolFn).toHaveBeenCalledTimes(1);
-		const poolArgs = createPoolFn.mock.calls[0][0] as Record<string, unknown>;
+		const poolArgs = createPoolFn!.mock.calls[0][0] as Record<string, unknown>;
 		expect(poolArgs.host).toBe('localhost');
 		expect(poolArgs.port).toBe(3307);
 		expect(poolArgs.user).toBe('user');
@@ -76,7 +78,7 @@ describe('db module BUILD_MODE branching', () => {
 		expect(mod.db).toEqual({ __realDb: true, pool: { __pool: true } });
 
 		expect(createPoolFn).toHaveBeenCalledTimes(1);
-		const poolArgs = createPoolFn.mock.calls[0][0] as Record<string, unknown>;
+		const poolArgs = createPoolFn!.mock.calls[0][0] as Record<string, unknown>;
 		expect(poolArgs.port).toBe(3306);
 	});
 });

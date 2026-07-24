@@ -21,7 +21,7 @@
     on:change={(e) => switchLanguage(e.target.value as Language)}
     value={$currentLanguage}
   >
-    {#each languages as lang}
+    {#each languages as lang (lang.code)}
       <option value={lang.code}>
         {lang.flag}
       </option>

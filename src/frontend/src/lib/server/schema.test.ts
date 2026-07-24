@@ -6,14 +6,14 @@ describe('database schema exports', () => {
 		// We don't assert Drizzle internals deeply; we just ensure the module executes
 		// and the expected column keys exist.
 		expect(Object.keys(donationsTable).length).toBeGreaterThan(0);
-		expect((donationsTable as any).donations).toBeUndefined();
-		expect((donationsTable as any).gender).toBeDefined();
-		expect((donationsTable as any).email).toBeDefined();
+		expect((donationsTable as unknown as Record<string, unknown>).donations).toBeUndefined();
+		expect((donationsTable as unknown as Record<string, unknown>).gender).toBeDefined();
+		expect((donationsTable as unknown as Record<string, unknown>).email).toBeDefined();
 	});
 
 	it('exports newsletterTable with expected columns', () => {
 		expect(Object.keys(newsletterTable).length).toBeGreaterThan(0);
-		expect((newsletterTable as any).email).toBeDefined();
+		expect((newsletterTable as unknown as Record<string, unknown>).email).toBeDefined();
 	});
 });
 

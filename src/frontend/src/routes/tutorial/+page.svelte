@@ -1,5 +1,6 @@
 <script lang="ts">
     import { t } from '$lib/i18n';
+    import { asset } from '$app/paths';
 </script>
 
 <main class='p-8 mb-auto' data-testid="page-tutorial">
@@ -16,7 +17,7 @@
 	>
 		<source src="/video/TutorielMailcom_final.mp4" type="video/mp4" />
 		{$t.tutorial.videoFallback}
-		<a href="/video/TutorielMailcom_final.mp4" class="text-primary-900 hover:underline">{$t.tutorial.videoDownloadLink}</a>
+		<a href={asset('/video/TutorielMailcom_final.mp4')} class="text-primary-900 hover:underline">{$t.tutorial.videoDownloadLink}</a>
 	</video>
 
 </div>

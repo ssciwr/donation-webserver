@@ -1,6 +1,7 @@
 <script lang="ts">
  import { Section, Faq, FaqItem } from "flowbite-svelte-blocks";
  import { t } from '$lib/i18n';
+ import { resolve } from '$app/paths';
 </script>
 
 <style>
@@ -50,7 +51,7 @@
       </FaqItem>
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q5.question}{/snippet}
-        <p class="text-gray-700"><a href="/tutorial" target="_blank" rel="noreferrer" 
+        <p class="text-gray-700"><a href={resolve('/tutorial')} target="_blank" rel="noreferrer"
           class="text-primary-900 hover:underline">{$t.faq.questions.q5.linkText}</a>
         {$t.faq.questions.q5.answer}
         </p>
@@ -62,7 +63,7 @@
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q7.question}{/snippet}
         <p class="text-gray-700">{$t.faq.questions.q7.answer}
-        <a href="/team" target="_blank" rel="noreferrer" class="text-primary-900 hover:underline">{$t.faq.questions.q7.linkText}</a></p>
+        <a href={resolve('/team')} target="_blank" rel="noreferrer" class="text-primary-900 hover:underline">{$t.faq.questions.q7.linkText}</a></p>
       </FaqItem>
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q8.question}{/snippet}
@@ -86,7 +87,7 @@
         {#snippet h3()}{$t.faq.questions.q11.question}{/snippet}
         <p class="mb-2 text-gray-700 ">{$t.faq.questions.q11.answer}</p>
         <ul class="list-disc ps-5 text-gray-700">
-          {#each $t.faq.questions.q11.listItems as item}
+          {#each $t.faq.questions.q11.listItems as item (item)}
             <li>{item}</li>
           {/each}
         </ul>
@@ -96,7 +97,7 @@
       <FaqItem>
         {#snippet h3()}{$t.faq.questions.q12.question}{/snippet}
         <p class="mb-2 text-gray-700 ">{$t.faq.questions.q12.answer1}
-        <a href="/about" target="_blank" rel="noreferrer" 
+        <a href={resolve('/about')} target="_blank" rel="noreferrer"
         class="text-primary-900 hover:underline">{$t.faq.questions.q12.linkText}</a> 
         {$t.faq.questions.q12.answer2}
         </p>

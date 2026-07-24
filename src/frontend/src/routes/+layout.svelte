@@ -1,6 +1,7 @@
 <script lang='ts'>
   import '../app.css';
   import { page } from '$app/stores';
+  import { resolve } from '$app/paths';
   import { Footer, FooterCopyright, FooterLinkGroup, FooterLink, Button } from 'flowbite-svelte'
   import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
   import { t } from '$lib/i18n';
@@ -23,7 +24,7 @@
 
 <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 relative">
   <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-    <a href="/" class="flex items-center">
+    <a href={resolve('/')} class="flex items-center">
       <img
         src="/images/Logo_oben_links.svg"
         class="max-w-md h-14"
@@ -34,12 +35,12 @@
     <div class="flex items-center lg:order-2">
       <!-- Desktop navigation links -->
       <div class="hidden lg:flex lg:items-center lg:space-x-8 lg:mr-6">
-        <a href="/" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname === '/' ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">Home</a>
-        <a href="/tutorial" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/tutorial') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.tutorial}</a>
-        <a href="/about" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/about') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.about}</a>
-        <a href="/team" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/team') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.team}</a>
-        <a href="/faq" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/faq') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.faq}</a>
-        <a href="/blog" on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/blog') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.blog}</a>
+        <a href={resolve('/')} on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname === '/' ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">Home</a>
+        <a href={resolve('/tutorial')} on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/tutorial') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.tutorial}</a>
+        <a href={resolve('/about')} on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/about') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.about}</a>
+        <a href={resolve('/team')} on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/team') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.team}</a>
+        <a href={resolve('/faq')} on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/faq') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.faq}</a>
+        <a href={resolve('/blog')} on:click={closeMenu} class="lg:px-3 lg:py-2 {$page.url.pathname.startsWith('/blog') ? 'bg-red-900 text-white lg:rounded' : 'text-red-900 hover:text-red-700'}">{$t.nav.blog}</a>
       </div>
       
       <Button class="px-4 py-2 rounded-lg bg-custom-100 text-primary-800 mr-2" href="/donation">
@@ -66,22 +67,22 @@
     <div class="w-full lg:hidden {isMenuOpen ? 'block' : 'hidden'}" class:absolute={isMenuOpen} class:top-full={isMenuOpen} class:left-0={isMenuOpen} class:right-0={isMenuOpen} class:bg-white={isMenuOpen} class:border={isMenuOpen} class:border-gray-200={isMenuOpen} class:shadow-lg={isMenuOpen} class:z-50={isMenuOpen}>
       <ul class="flex flex-col mt-4 font-medium p-4">
         <li>
-          <a href="/" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname === '/' ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">Home</a>
+          <a href={resolve('/')} on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname === '/' ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">Home</a>
         </li>
         <li>
-          <a href="/tutorial" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/tutorial') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.tutorial}</a>
+          <a href={resolve('/tutorial')} on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/tutorial') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.tutorial}</a>
         </li>
         <li>
-          <a href="/about" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/about') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.about}</a>
+          <a href={resolve('/about')} on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/about') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.about}</a>
         </li>
         <li>
-          <a href="/team" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/team') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.team}</a>
+          <a href={resolve('/team')} on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/team') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.team}</a>
         </li>
         <li>
-          <a href="/faq" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/faq') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.faq}</a>
+          <a href={resolve('/faq')} on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/faq') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.faq}</a>
         </li>
         <li>
-          <a href="/blog" on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/blog') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.blog}</a>
+          <a href={resolve('/blog')} on:click={closeMenu} class="block py-2 pr-4 pl-3 rounded {$page.url.pathname.startsWith('/blog') ? 'bg-red-900 text-white' : 'text-red-900 hover:bg-gray-50'}">{$t.nav.blog}</a>
         </li>
       </ul>
     </div>
