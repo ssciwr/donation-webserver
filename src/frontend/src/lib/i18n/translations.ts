@@ -157,7 +157,9 @@ export const translations = {
     },
     tutorial: {
       title: 'Tutorial',
-      description: 'Lernen Sie Schritt für Schritt, wie Sie an unserem Email-Forschungsprojekt teilnehmen können. Hier finden Sie bald ein ausführliches Erklärvideo.'
+      description: 'Lernen Sie Schritt für Schritt, wie Sie an unserem Email-Forschungsprojekt teilnehmen können.',
+      videoFallback: 'Ihr Browser unterstützt das Videoformat nicht.',
+      videoDownloadLink: 'Video herunterladen'
     },
     blog: {
       title: 'Blog',
@@ -435,7 +437,9 @@ export const translations = {
     },
     tutorial: {
       title: 'Tutoriel',
-      description: 'Apprenez pas à pas comment participer à notre projet de recherche sur les e-mails. Ici, vous trouverez bientôt une vidéo explicative détaillée.'
+      description: 'Apprenez pas à pas comment participer à notre projet de recherche sur les e-mails.',
+      videoFallback: 'Votre navigateur ne prend pas en charge le format vidéo.',
+      videoDownloadLink: 'Télécharger la vidéo'
     },
     blog: {
       title: 'Blog',

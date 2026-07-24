@@ -8,5 +8,16 @@
 	<h1 class="mb-4 font-extrabold text-center leading-none tracking-tight text-4xl">{$t.tutorial.title}</h1>
 	<p class="text-center text-gray-700 mt-4">{$t.tutorial.description}</p>
 
+	<video
+		controls
+		preload="metadata"
+		poster="/images/tutorial-poster.jpg"
+		class="w-full max-w-3xl mx-auto rounded-lg shadow-lg mt-8"
+	>
+		<source src="/video/TutorielMailcom_final.mp4" type="video/mp4" />
+		{$t.tutorial.videoFallback}
+		<a href="/video/TutorielMailcom_final.mp4" class="text-primary-900 hover:underline">{$t.tutorial.videoDownloadLink}</a>
+	</video>
+
 </div>
 </main>
