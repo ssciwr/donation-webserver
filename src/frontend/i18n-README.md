@@ -36,24 +36,24 @@ This project now includes internationalization support with English and French t
 export const translations = {
   en: {
     nav: {
-      about: 'Information',
-      contact: 'Kontakt'
+      about: "Information",
+      contact: "Kontakt",
     },
     homepage: {
-      title: 'Willkommen',
-      subtitle: 'Dies ist unsere Webseite'
-    }
+      title: "Willkommen",
+      subtitle: "Dies ist unsere Webseite",
+    },
   },
   fr: {
     nav: {
-      about: 'À propos',
-      contact: 'Contact'
+      about: "À propos",
+      contact: "Contact",
     },
     homepage: {
-      title: 'Bienvenue',
-      subtitle: 'Ceci est notre site web'
-    }
-  }
+      title: "Bienvenue",
+      subtitle: "Ceci est notre site web",
+    },
+  },
 };
 ```
 
@@ -65,6 +65,7 @@ export const translations = {
 ## Language Support
 
 Currently supported languages:
+
 - German (de) - Default
 - Français (fr)
 

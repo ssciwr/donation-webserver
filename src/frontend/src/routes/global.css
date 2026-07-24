@@ -1,20 +1,20 @@
 body {
-    /* background-image: url("/images/Alle_Hintergrundbilder.svg"); */
-    /* background-size: 80%; */
-    /* background-repeat: repeat; */
-    background-color: #c6c1c1;
-   }
+  /* background-image: url("/images/Alle_Hintergrundbilder.svg"); */
+  /* background-size: 80%; */
+  /* background-repeat: repeat; */
+  background-color: #c6c1c1;
+}
 Button {
-   background-color: #590d08;
-   color: #590d08;
+  background-color: #590d08;
+  color: #590d08;
 }
 html {
-    overflow-y:scroll;
-    scroll-behavior: smooth;
-  }
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
 
 @media screen and (prefers-reduced-motion: reduce) {
-	html {
-		scroll-behavior: auto;
-	}
+  html {
+    scroll-behavior: auto;
+  }
 }

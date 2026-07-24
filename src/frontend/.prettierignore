@@ -1,0 +1,11 @@
+node_modules
+.svelte-kit
+dist
+build
+coverage
+test-results
+drizzle
+static
+package-lock.json
+pnpm-lock.yaml
+*.min.js
