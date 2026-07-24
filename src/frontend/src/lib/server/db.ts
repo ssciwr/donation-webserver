@@ -1,10 +1,12 @@
 import { drizzle } from "drizzle-orm/mysql2";
-import mysql from "mysql2/promise";
+import mysql, { type Pool } from "mysql2/promise";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-let db: ReturnType<typeof drizzle.mock> | ReturnType<typeof drizzle>;
+let db:
+  | ReturnType<typeof drizzle.mock>
+  | ReturnType<typeof drizzle<Record<string, never>, Pool>>;
 
 if (process.env.BUILD_MODE === "true") {
   console.log("Skipping database connection during build");
@@ -25,7 +27,7 @@ if (process.env.BUILD_MODE === "true") {
     connectionLimit: 5,
     queueLimit: 0,
   });
-  db = drizzle(pool);
+  db = drizzle<Record<string, never>, Pool>(pool);
 }
 
 const exportedDb = db;
