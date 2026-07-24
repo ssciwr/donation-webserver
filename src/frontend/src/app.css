@@ -24,7 +24,15 @@
   --color-custom-100: #cbbd9c;
 }
 
+html,
 body {
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-image: url("/images/Alle_Hintergrundbilder.svg");
   background-size: 80%;
   background-repeat: repeat;

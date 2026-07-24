@@ -89,7 +89,9 @@
   </div>
 </nav>
 
-<slot />
+<div class="flex-1">
+  <slot />
+</div>
 
 <Footer footerType="logo">
   <div class="sm:flex sm:items-center sm:justify-between">
