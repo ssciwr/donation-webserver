@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-24.04]  # Playwright 1.57 has no Chromium build for ubuntu-26.04
     steps:
         - name: Checkout
           uses: actions/checkout@v4

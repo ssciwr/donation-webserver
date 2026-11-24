@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/src/frontend"
+    schedule:
+      interval: "weekly"
+    # Only security updates; no routine version-update PRs.
+    open-pull-requests-limit: 0
+    ignore:
+      # SvelteKit 3 requires Vite 8 and vite-plugin-svelte 7; migrate manually.
+      - dependency-name: "@sveltejs/kit"
+        update-types: ["version-update:semver-major"]
